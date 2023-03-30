@@ -1,0 +1,110 @@
+version: '3'
+
+services:
+	mariadb:
+		build:
+			context: requirements/mariadb
+			dockerfile: Dockerfile
+		container_name: mariadb
+		restart: unless-stopped
+		env_file: .env
+		volumes:
+			- /home/fporto/data/mariadb/dbdata:/var/lib/mysql
+		networks:
+			- web-network
+
+
+
+	wordpress:
+		depends_on:
+			- mariadb
+		build:
+			context: requirements/wordpress/
+			dockerfile: Dockerfile
+		container_name: wordpress
+		restart: unless-stopped
+		env_file: .env
+		volumes:
+			- /home/fporto/data/website-root:/var/www/html
+		networks:
+			- web-network
+
+
+
+	nginx:
+		depends_on:
+			- wordpress
+		build:
+			context: requirements/nginx/
+			dockerfile: Dockerfile
+		container_name: nginx
+		restart: unless-stopped
+		volumes:
+			- /home/fporto/data/nginx/certbot-etc:/etc/letsencrypt
+			- /home/fporto/data/nginx/conf:/etc/nginx/conf.d
+			- /home/fporto/data/website-root:/var/www/html
+		ports:
+			- "80:80"
+			- "443:443"
+		networks:
+			- web-network
+
+	certbot:
+		depends_on:
+			- nginx
+		build:
+			context: requirements/nginx/tools/certbot
+			dockerfile: Dockerfile
+		container_name: certbot
+		env_file: .env
+		volumes:
+			- /home/fporto/data/nginx/certbot-etc:/etc/letsencrypt
+			- /home/fporto/data/website-root:/var/www/html
+		command: certonly --webroot --webroot-path=/var/www/html --email test@${DOMAIN_NAME} --agree-tos --no-eff-email --staging -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}
+
+
+
+	adminer:
+		depends_on:
+			- mariadb
+		build:
+			context: requirements/bonus/adminer
+			dockerfile: Dockerfile
+		container_name: adminer
+		restart: unless-stoped
+		ports:
+			- 8080:8080
+		networks:
+			- web-network
+
+
+
+	portainer:
+		build:
+			context: requirements/tools/portainer
+			dockerfile: Dockerfile
+		container_name: portainer
+		restart: unless-stoped
+		volumes:
+			- /var/run/docker.sock:/var/run/docker.sock
+			- /home/fporto/data/portainer/data:/data
+		ports:
+			- 9443:9443
+		network:
+			- web-network
+		command:
+			--sslcert /data/ssl/server.crt
+			--sslkey /data/ssl/server.key
+
+
+
+# volumes:
+# 	dbdata:
+# 	certbot-etc:
+# 	website-root:
+
+
+
+networks:
+	web-network:
+		driver: bridge
