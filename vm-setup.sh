@@ -160,7 +160,7 @@ printf "${GREEN} DONE\n${WHITE}"
 ############
 
 echo ""
-printf "${GREEN}Setting up UFW... ${WHITE}"
+printf "${GREEN}Setting up UFW...\n${WHITE}"
 
 # Install UFW
 echo -n "    + Installing"
