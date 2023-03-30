@@ -33,7 +33,7 @@ fi
 ##########
 
 echo
-echo $GREEN"Setting up Docker..."$WHITE
+printf "${GREEN}Setting up Docker... ${WHITE}"
 
 echo -n "  Updating system"
 
@@ -50,7 +50,7 @@ apt install \
 	-y \
 	1>/dev/null
 
-echo $GREEN" DONE"$WHITE
+printf "${GREEN} DONE ${WHITE}"
 
 
 echo -n "  Adding gpg key and docker repo to apt"
@@ -65,7 +65,7 @@ echo \
 	"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
 	tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-echo $GREEN" DONE"$WHITE
+printf "${GREEN} DONE ${WHITE}"
 
 
 # Install docker
@@ -80,23 +80,23 @@ apt install \
 	-y \
 	1>/dev/null
 
-echo $GREEN" DONE"$WHITE
+printf "${GREEN} DONE ${WHITE}"
 
 
 # Enable docker service and test installation
 echo -n "  Enabling docker service"
 systemctl enable docker.service
 systemctl enable containerd.service
-echo $GREEN" DONE"$WHITE
+printf "${GREEN} DONE ${WHITE}"
 
 echo -n "  Starting docker service"
 systemctl start docker.service
 systemctl start containerd.service
-echo $GREEN" DONE"$WHITE
+printf "${GREEN} DONE ${WHITE}"
 
 echo -n "  Tesing hello-world container"
 docker run hello-world
-echo $GREEN" DONE"$WHITE
+printf "${GREEN} DONE ${WHITE}"
 
 
 # Make sure non-root user doesn't require sudo to use docker
@@ -135,7 +135,7 @@ apt install \
 # Grant user sudo
 echo "$USER ALL=(ALL:ALL) ALL" > /etc/sudoers
 
-echo $GREEN" DONE"$WHITE
+printf "${GREEN} DONE ${WHITE}"
 
 
 
@@ -144,7 +144,7 @@ echo $GREEN" DONE"$WHITE
 ############
 
 echo
-echo $GREEN"Setting up UFW..."$WHITE
+printf "${GREEN}Setting up UFW... ${WHITE}"
 
 echo -n "  Installing"
 apt install ufw -y 1>/dev/null
@@ -162,8 +162,8 @@ echo -n $GREEN" DONE"$WHITE
 
 echo -n "  Reloading"
 ufw reload
-echo $GREEN" DONE"$WHITE
+printf "${GREEN} DONE ${WHITE}"
 
-echo $GREEN"DONE"$WHITE
+printf "${GREEN}DONE ${WHITE}"
 
 make
