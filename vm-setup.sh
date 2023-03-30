@@ -32,8 +32,8 @@ fi
 # Docker #
 ##########
 
-echo
-printf "${GREEN}Setting up Docker... ${WHITE}"
+echo ""
+printf "${GREEN}Setting up Docker...\n${WHITE}"
 
 echo -n "  Updating system"
 
@@ -50,7 +50,7 @@ apt install \
 	-y \
 	1>/dev/null
 
-printf "${GREEN} DONE ${WHITE}"
+printf "${GREEN} DONE\n${WHITE}"
 
 
 echo -n "  Adding gpg key and docker repo to apt"
@@ -65,7 +65,7 @@ echo \
 	"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
 	tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-printf "${GREEN} DONE ${WHITE}"
+printf "${GREEN} DONE\n${WHITE}"
 
 
 # Install docker
@@ -80,23 +80,23 @@ apt install \
 	-y \
 	1>/dev/null
 
-printf "${GREEN} DONE ${WHITE}"
+printf "${GREEN} DONE\n${WHITE}"
 
 
 # Enable docker service and test installation
 echo -n "  Enabling docker service"
 systemctl enable docker.service
 systemctl enable containerd.service
-printf "${GREEN} DONE ${WHITE}"
+printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "  Starting docker service"
 systemctl start docker.service
 systemctl start containerd.service
-printf "${GREEN} DONE ${WHITE}"
+printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "  Tesing hello-world container"
 docker run hello-world
-printf "${GREEN} DONE ${WHITE}"
+printf "${GREEN} DONE\n${WHITE}"
 
 
 # Make sure non-root user doesn't require sudo to use docker
@@ -120,7 +120,7 @@ chmod -R g+rwx $HOME/.docker
 # Utils #
 #########
 
-echo
+echo ""
 echo -n $GREEN"Setting up utils (sudo, nano, htop)..."$WHITE
 
 # Install nice-to-haves
@@ -138,7 +138,7 @@ chsh -s /bin/zsh $USER_NAME
 # Grant user sudo
 echo "$USER ALL=(ALL:ALL) ALL" > /etc/sudoers
 
-printf "${GREEN} DONE ${WHITE}"
+printf "${GREEN} DONE\n${WHITE}"
 
 
 
@@ -146,27 +146,27 @@ printf "${GREEN} DONE ${WHITE}"
 # Firewall #
 ############
 
-echo
+echo ""
 printf "${GREEN}Setting up UFW... ${WHITE}"
 
 echo -n "  Installing"
 apt install ufw -y 1>/dev/null
-echo -n $GREEN" DONE"$WHITE
+echo -n $GREEN" DONE\n"$WHITE
 
 echo -n "  Enabling"
 systemctl enable ufw.service
 systemctl start ufw.service
 ufw enable
-echo -n $GREEN" DONE"$WHITE
+echo -n $GREEN" DONE\n"$WHITE
 
 echo -n "  Adding rules"
 ufw allow 80,443,8080,9443/tcp
-echo -n $GREEN" DONE"$WHITE
+echo -n $GREEN" DONE\n"$WHITE
 
 echo -n "  Reloading"
 ufw reload
-printf "${GREEN} DONE ${WHITE}"
+printf "${GREEN} DONE\n${WHITE}"
 
-printf "${GREEN}DONE ${WHITE}"
+printf "${GREEN}DONE\n${WHITE}"
 
 make
