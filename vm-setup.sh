@@ -32,7 +32,7 @@ fi
 # Docker #
 ##########
 
-printf "${GREEN}Setting up Docker...\n${WHITE}"
+printf "${GREEN}\nSetting up Docker...\n${WHITE}"
 
 # Update
 echo -n "    + Updating system"
@@ -134,8 +134,7 @@ chmod -R g+rwx $HOME/.docker
 # Utils #
 #########
 
-echo ""
-echo -n $GREEN"Setting up utils (sudo, nano, htop)..."$WHITE
+printf "${GREEN}\nSetting up utils (sudo, nano, htop)...\n${WHITE}"
 
 # Install nice-to-haves
 apt-get install \
@@ -159,8 +158,7 @@ printf "${GREEN} DONE\n${WHITE}"
 # Firewall #
 ############
 
-echo ""
-printf "${GREEN}Setting up UFW...\n${WHITE}"
+printf "${GREEN}\nSetting up UFW...\n${WHITE}"
 
 # Install UFW
 echo -n "    + Installing"
