@@ -84,6 +84,7 @@ apt-get install \
 	docker-ce-cli \
 	containerd.io \
 	docker-buildx-plugin \
+	docker-compose \
 	docker-compose-plugin \
 	-y 1>/dev/null
 
@@ -140,6 +141,7 @@ printf "${GREEN}\nSetting up utils (sudo, nano, htop)...${WHITE}"
 apt-get install \
 	zsh \
 	sudo \
+	make \
 	nano \
 	htop \
 	-y 1>/dev/null
@@ -172,19 +174,19 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Enable firewall
-echo -n "    + Enabling"
+echo "    + Enabling"
 
 systemctl enable ufw.service > /dev/null
 systemctl start ufw.service > /dev/null
 ufw enable 1>/dev/null
 
-printf "${GREEN} DONE\n${WHITE}"
+printf "${GREEN}DONE\n${WHITE}"
 
 
 # Add rules
 echo -n "    + Adding rules"
 
-ufw allow 80,443,8080,9443/tcp
+ufw allow 80,443,8080,9443/tcp 2>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -192,7 +194,7 @@ printf "${GREEN} DONE\n${WHITE}"
 # Reload firewall
 echo -n "    + Reloading"
 
-ufw reload
+ufw reload 2>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
