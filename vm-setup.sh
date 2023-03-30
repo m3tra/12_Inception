@@ -66,12 +66,12 @@ docker run hello-world
 
 # Make sure non-root user doesn't require sudo to use docker
 groupadd docker
-usermod -aG docker $USER
+usermod -aG docker $USER_NAME
 su
 exit
 # su $USER_NAME
 
-chown $USER:$USER /home/$USER/.docker -R
+chown $USER_NAME:$USER_NAME /home/$USER_NAME/.docker -R
 chmod g+rwx $HOME/.docker -R
 
 
