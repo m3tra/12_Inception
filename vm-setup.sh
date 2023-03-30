@@ -114,7 +114,7 @@ printf "    + ${YELLOW}Tesing${WHITE} hello-world container"
 
 docker run hello-world
 
-printf "${GREEN}    DONE\n${WHITE}"
+printf "${GREEN}DONE\n${WHITE}"
 
 
 # Make sure non-root user doesn't require sudo to use docker
