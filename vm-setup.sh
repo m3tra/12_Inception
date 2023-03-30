@@ -124,9 +124,6 @@ printf "${GREEN}DONE\n${WHITE}"
 # fi
 groupadd docker 2>/dev/null
 usermod -aG docker $USER_NAME
-# su
-# exit
-su $USER_NAME
 
 chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/.docker
 chmod -R g+rwx $HOME/.docker
