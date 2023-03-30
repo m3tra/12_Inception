@@ -35,7 +35,7 @@ fi
 printf "${GREEN}Setting up Docker...\n${WHITE}"
 
 # Update
-echo -n "  Updating system"
+echo -n "    + Updating system"
 
 apt-get update && \
 apt-get upgrade -y 1>/dev/null
@@ -44,7 +44,7 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Install dependencies
-echo -n "  Installing dependencies"
+echo -n "    + Installing dependencies"
 
 apt-get install \
 	ca-certificates \
@@ -57,7 +57,7 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Add gpg key
-echo -n "  Adding gpg key to apt keyring"
+echo -n "    + Adding gpg key to apt keyring"
 
 mkdir -m 0755 -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg --yes
@@ -66,7 +66,7 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Add repository to apt
-echo -n "  Adding repository to sources"
+echo -n "    + Adding repository to sources"
 
 echo \
 	"deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
@@ -77,7 +77,7 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Install docker
-echo -n "  Installing docker"
+echo -n "    + Installing docker"
 
 apt-get update && \
 apt-get install \
@@ -93,29 +93,29 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Enable docker service
-echo -n "  Enabling docker service"
+echo -n "    + Enabling docker service"
 
-systemctl enable docker.service
-systemctl enable containerd.service
+systemctl enable docker.service && \
+systemctl enable containerd.service 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
 
 # Start docker service
-echo -n "  Starting docker service"
+echo -n "    + Starting docker service"
 
-systemctl start docker.service
-systemctl start containerd.service
+systemctl start docker.service && \
+systemctl start containerd.service 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
 
 # Test installation
-echo -n "  Tesing hello-world container"
+echo -n "    + Tesing hello-world container"
 
 docker run hello-world
 
-printf "${GREEN} DONE\n${WHITE}"
+printf "${GREEN}DONE\n${WHITE}"
 
 
 # Make sure non-root user doesn't require sudo to use docker
@@ -168,23 +168,36 @@ printf "${GREEN} DONE\n${WHITE}"
 echo ""
 printf "${GREEN}Setting up UFW... ${WHITE}"
 
-echo -n "  Installing"
+# Install UFW
+echo -n "    + Installing"
+
 apt-get install ufw -y 1>/dev/null
+
 echo -n $GREEN" DONE\n"$WHITE
 
-echo -n "  Enabling"
-systemctl enable ufw.service
-systemctl start ufw.service
-ufw enable
+# Enable firewall
+echo -n "    + Enabling"
+
+systemctl enable ufw.service && \
+systemctl start ufw.service && \
+ufw enable 1>/dev/null
+
 echo -n $GREEN" DONE\n"$WHITE
 
-echo -n "  Adding rules"
+# Add rules
+echo -n "    + Adding rules"
+
 ufw allow 80,443,8080,9443/tcp
+
 echo -n $GREEN" DONE\n"$WHITE
 
-echo -n "  Reloading"
+# Reload firewall
+echo -n "    + Reloading"
+
 ufw reload
+
 printf "${GREEN} DONE\n${WHITE}"
+
 
 printf "${GREEN}DONE\n${WHITE}"
 
