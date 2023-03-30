@@ -34,10 +34,14 @@ fi
 
 printf "${GREEN}Setting up Docker...\n${WHITE}"
 
+# Update
 echo -n "  Updating system"
 
 apt-get update && \
 apt-get upgrade -y 1>/dev/null
+
+printf "${GREEN} DONE\n${WHITE}"
+
 
 # Install dependencies
 echo -n "  Installing dependencies"
@@ -52,13 +56,18 @@ apt-get install \
 printf "${GREEN} DONE\n${WHITE}"
 
 
-echo -n "  Adding gpg key and docker repo to apt"
-
 # Add gpg key
+echo -n "  Adding gpg key to apt keyring"
+
 mkdir -m 0755 -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg --yes
 
+printf "${GREEN} DONE\n${WHITE}"
+
+
 # Add repository to apt
+echo -n "  Adding repository to sources"
+
 echo \
 	"deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
 	"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
@@ -69,6 +78,7 @@ printf "${GREEN} DONE\n${WHITE}"
 
 # Install docker
 echo -n "  Installing docker"
+
 apt-get update && \
 apt-get install \
 	docker-ce \
@@ -82,19 +92,29 @@ apt-get install \
 printf "${GREEN} DONE\n${WHITE}"
 
 
-# Enable docker service and test installation
+# Enable docker service
 echo -n "  Enabling docker service"
+
 systemctl enable docker.service
 systemctl enable containerd.service
+
 printf "${GREEN} DONE\n${WHITE}"
 
+
+# Start docker service
 echo -n "  Starting docker service"
+
 systemctl start docker.service
 systemctl start containerd.service
+
 printf "${GREEN} DONE\n${WHITE}"
 
+
+# Test installation
 echo -n "  Tesing hello-world container"
+
 docker run hello-world
+
 printf "${GREEN} DONE\n${WHITE}"
 
 
