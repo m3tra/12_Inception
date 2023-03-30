@@ -93,7 +93,7 @@ printf "${GREEN} DONE\n${WHITE}"
 # Enable docker service
 echo -n "    + Enabling docker service"
 
-systemctl enable docker.service && \
+systemctl enable docker.service > /dev/null
 systemctl enable containerd.service > /dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
@@ -102,8 +102,8 @@ printf "${GREEN} DONE\n${WHITE}"
 # Start docker service
 echo -n "    + Starting docker service"
 
-systemctl start docker.service && \
-systemctl start containerd.service 1>/dev/null
+systemctl start docker.service
+systemctl start containerd.service
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -175,8 +175,8 @@ echo -n $GREEN" DONE\n"$WHITE
 # Enable firewall
 echo -n "    + Enabling"
 
-systemctl enable ufw.service && \
-systemctl start ufw.service && \
+systemctl enable ufw.service
+systemctl start ufw.service
 ufw enable 1>/dev/null
 
 echo -n $GREEN" DONE\n"$WHITE
