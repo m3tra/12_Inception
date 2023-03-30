@@ -96,7 +96,7 @@ printf "${GREEN} DONE\n${WHITE}"
 echo -n "    + Enabling docker service"
 
 systemctl enable docker.service && \
-systemctl enable containerd.service 1>/dev/null
+systemctl enable containerd.service > /dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
