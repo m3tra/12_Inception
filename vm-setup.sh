@@ -38,7 +38,7 @@ printf "${GREEN}Setting up Docker...\n${WHITE}"
 echo -n "    + Updating system"
 
 apt-get update && \
-apt-get upgrade -y 1>/dev/null
+apt-get upgrade -y > /dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -50,8 +50,7 @@ apt-get install \
 	ca-certificates \
 	curl \
 	gnupg \
-	-y \
-	1>/dev/null
+	-y 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -79,15 +78,14 @@ printf "${GREEN} DONE\n${WHITE}"
 # Install docker
 echo -n "    + Installing docker"
 
-apt-get update && \
+apt-get update 1>/dev/null
 apt-get install \
 	docker-ce \
 	docker-ce-cli \
 	containerd.io \
 	docker-buildx-plugin \
 	docker-compose-plugin \
-	-y \
-	1>/dev/null
+	-y 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -148,8 +146,7 @@ apt-get install \
 	sudo \
 	nano \
 	htop \
-	-y \
-	1>/dev/null
+	-y 1>/dev/null
 
 chsh -s /bin/zsh $USER_NAME
 
