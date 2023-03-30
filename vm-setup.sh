@@ -93,8 +93,8 @@ printf "${GREEN} DONE\n${WHITE}"
 # Enable docker service
 echo -n "    + Enabling docker service"
 
-systemctl enable docker.service
-systemctl enable containerd.service
+systemctl enable docker.service > /dev/null
+systemctl enable containerd.service > /dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -134,7 +134,7 @@ chmod -R g+rwx $HOME/.docker
 # Utils #
 #########
 
-printf "${GREEN}\nSetting up utils (sudo, nano, htop)...\n${WHITE}"
+printf "${GREEN}\nSetting up utils (sudo, nano, htop)...${WHITE}"
 
 # Install nice-to-haves
 apt-get install \
@@ -165,16 +165,21 @@ echo -n "    + Installing"
 
 apt-get install ufw -y 1>/dev/null
 
+export PATH=$PATH:/usr/local/sbin
+
 printf "${GREEN} DONE\n${WHITE}"
+
+
 
 # Enable firewall
 echo -n "    + Enabling"
 
-systemctl enable ufw.service
-systemctl start ufw.service
+systemctl enable ufw.service > /dev/null
+systemctl start ufw.service > /dev/null
 ufw enable 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
+
 
 # Add rules
 echo -n "    + Adding rules"
@@ -182,6 +187,7 @@ echo -n "    + Adding rules"
 ufw allow 80,443,8080,9443/tcp
 
 printf "${GREEN} DONE\n${WHITE}"
+
 
 # Reload firewall
 echo -n "    + Reloading"
@@ -193,4 +199,6 @@ printf "${GREEN} DONE\n${WHITE}"
 
 printf "${GREEN}DONE\n${WHITE}"
 
+
+# Start containers
 make
