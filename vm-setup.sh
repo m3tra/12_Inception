@@ -8,6 +8,7 @@ fi
 apt update && apt upgrade -y
 
 
+
 ########
 # User #
 ########
@@ -20,6 +21,7 @@ if [[ USER_EXISTS -eq 0 ]]; then
 	adduser $USER_NAME
 	su $USER_NAME
 fi
+
 
 
 ##########
@@ -47,6 +49,7 @@ echo \
 	"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
 	tee /etc/apt/sources.list.d/docker.list > /dev/null
 
+apt update
 apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 
