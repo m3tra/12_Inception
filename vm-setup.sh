@@ -123,7 +123,7 @@ printf "${GREEN}DONE\n${WHITE}"
 # 	su $USER_NAME
 # fi
 groupadd docker 2>/dev/null
-usermod -aG docker $USER_NAME
+/usr/sbin/usermod -aG docker $USER_NAME
 
 chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/.docker
 chmod -R g+rwx $HOME/.docker
@@ -165,7 +165,7 @@ echo -n "    + Installing"
 
 apt-get install ufw -y 1>/dev/null
 
-# export PATH=$PATH:/usr/local/sbin
+# export PATH=$PATH:/usr/sbin
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -176,7 +176,7 @@ echo -n "    + Enabling"
 
 systemctl enable ufw.service > /dev/null
 systemctl start ufw.service > /dev/null
-/usr/local/sbin/ufw enable 1>/dev/null
+ufw enable 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -184,7 +184,7 @@ printf "${GREEN} DONE\n${WHITE}"
 # Add rules
 echo -n "    + Adding rules"
 
-/usr/local/sbin/ufw allow 80,443,8080,9443/tcp
+ufw allow 80,443,8080,9443/tcp
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -192,7 +192,7 @@ printf "${GREEN} DONE\n${WHITE}"
 # Reload firewall
 echo -n "    + Reloading"
 
-/usr/local/sbin/ufw reload
+ufw reload
 
 printf "${GREEN} DONE\n${WHITE}"
 
