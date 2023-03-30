@@ -167,7 +167,7 @@ echo -n "    + Installing"
 
 apt-get install ufw -y 1>/dev/null
 
-echo -n $GREEN" DONE\n"$WHITE
+printf "${GREEN} DONE\n${WHITE}"
 
 # Enable firewall
 echo -n "    + Enabling"
@@ -176,14 +176,14 @@ systemctl enable ufw.service
 systemctl start ufw.service
 ufw enable 1>/dev/null
 
-echo -n $GREEN" DONE\n"$WHITE
+printf "${GREEN} DONE\n${WHITE}"
 
 # Add rules
 echo -n "    + Adding rules"
 
 ufw allow 80,443,8080,9443/tcp
 
-echo -n $GREEN" DONE\n"$WHITE
+printf "${GREEN} DONE\n${WHITE}"
 
 # Reload firewall
 echo -n "    + Reloading"
