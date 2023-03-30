@@ -186,7 +186,7 @@ printf "${GREEN}DONE\n${WHITE}"
 # Add rules
 echo -n "    + Adding rules"
 
-ufw allow 80,443,8080,9443/tcp 2>/dev/null
+ufw allow 80,443,8080,9443/tcp 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -194,7 +194,7 @@ printf "${GREEN} DONE\n${WHITE}"
 # Reload firewall
 echo -n "    + Reloading"
 
-ufw reload 2>/dev/null
+ufw reload 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
