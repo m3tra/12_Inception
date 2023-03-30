@@ -37,7 +37,7 @@ printf "${GREEN}Setting up Docker...\n${WHITE}"
 # Update
 echo -n "    + Updating system"
 
-apt-get update && \
+apt-get update 1>/dev/null
 apt-get upgrade -y > /dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
