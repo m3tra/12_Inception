@@ -32,18 +32,17 @@ fi
 # Docker #
 ##########
 
-echo ""
 printf "${GREEN}Setting up Docker...\n${WHITE}"
 
 echo -n "  Updating system"
 
-apt update && \
-apt upgrade -y 1>/dev/null
+apt-get update && \
+apt-get upgrade -y 1>/dev/null
 
 # Install dependencies
 echo -n "  Installing dependencies"
 
-apt install \
+apt-get install \
 	ca-certificates \
 	curl \
 	gnupg \
@@ -57,7 +56,7 @@ echo -n "  Adding gpg key and docker repo to apt"
 
 # Add gpg key
 mkdir -m 0755 -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg --yes
 
 # Add repository to apt
 echo \
@@ -70,8 +69,8 @@ printf "${GREEN} DONE\n${WHITE}"
 
 # Install docker
 echo -n "  Installing docker"
-apt update && \
-apt install \
+apt-get update && \
+apt-get install \
 	docker-ce \
 	docker-ce-cli \
 	containerd.io \
@@ -124,7 +123,7 @@ echo ""
 echo -n $GREEN"Setting up utils (sudo, nano, htop)..."$WHITE
 
 # Install nice-to-haves
-apt install \
+apt-get install \
 	zsh \
 	sudo \
 	nano \
@@ -150,7 +149,7 @@ echo ""
 printf "${GREEN}Setting up UFW... ${WHITE}"
 
 echo -n "  Installing"
-apt install ufw -y 1>/dev/null
+apt-get install ufw -y 1>/dev/null
 echo -n $GREEN" DONE\n"$WHITE
 
 echo -n "  Enabling"
