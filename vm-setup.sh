@@ -114,7 +114,7 @@ printf "${YELLOW}    + Tesing hello-world container${WHITE}"
 
 docker run hello-world
 
-printf "${GREEN}DONE\n${WHITE}"
+printf "${GREEN}    DONE\n${WHITE}"
 
 
 # Make sure non-root user doesn't require sudo to use docker
@@ -180,7 +180,7 @@ systemctl enable ufw.service > /dev/null
 systemctl start ufw.service > /dev/null
 ufw enable 1>/dev/null
 
-printf "${GREEN}DONE\n${WHITE}"
+printf "${GREEN}    DONE\n${WHITE}"
 
 
 # Add rules
