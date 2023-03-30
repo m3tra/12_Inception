@@ -93,8 +93,8 @@ printf "${GREEN} DONE\n${WHITE}"
 # Enable docker service
 echo -n "    + Enabling docker service"
 
-systemctl enable docker.service > /dev/null
-systemctl enable containerd.service > /dev/null
+systemctl enable docker.service
+systemctl enable containerd.service
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -109,7 +109,7 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Test installation
-echo -n "    + Tesing hello-world container"
+printf "${YELLOW}    + Tesing hello-world container${WHITE}"
 
 docker run hello-world
 
