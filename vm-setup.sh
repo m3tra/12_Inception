@@ -38,7 +38,7 @@ printf "${GREEN}Setting up Docker...\n${WHITE}"
 echo -n "    + Updating system"
 
 apt-get update 1>/dev/null
-apt-get upgrade -y > /dev/null
+apt-get upgrade -y 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -93,8 +93,8 @@ printf "${GREEN} DONE\n${WHITE}"
 # Enable docker service
 echo -n "    + Enabling docker service"
 
-systemctl enable docker.service && \
-systemctl enable containerd.service > /dev/null
+systemctl enable docker.service 1>/dev/null
+systemctl enable containerd.service 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -152,7 +152,7 @@ chsh -s /bin/zsh $USER_NAME
 
 
 # Grant user sudo
-echo "$USER ALL=(ALL:ALL) ALL" > /etc/sudoers
+echo "$USER_NAME ALL=(ALL:ALL) ALL" > /etc/sudoers
 
 printf "${GREEN} DONE\n${WHITE}"
 
