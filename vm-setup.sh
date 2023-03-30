@@ -125,11 +125,14 @@ echo -n $GREEN"Setting up utils (sudo, nano, htop)..."$WHITE
 
 # Install nice-to-haves
 apt install \
+	zsh \
 	sudo \
 	nano \
 	htop \
 	-y \
 	1>/dev/null
+
+chsh -s /bin/zsh $USER_NAME
 
 
 # Grant user sudo
