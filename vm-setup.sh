@@ -14,7 +14,8 @@ apt update && apt upgrade -y
 
 read -p "Choose user: " USER_NAME
 
-if [[ $USER != $USER_NAME ]]; then
+if [[ (cat /etc/passwd | grep $USER_NAME | wc -l) -eq 0 ]]; then
+# if [[ $USER != $USER_NAME ]]; then
 	adduser $USER_NAME
 	su $USER_NAME
 fi
