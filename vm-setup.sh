@@ -165,7 +165,7 @@ echo -n "    + Installing"
 
 apt-get install ufw -y 1>/dev/null
 
-# export PATH=$PATH:/usr/sbin
+export PATH=$PATH:/usr/sbin
 
 printf "${GREEN} DONE\n${WHITE}"
 
