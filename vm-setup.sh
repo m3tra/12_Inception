@@ -91,12 +91,12 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Enable docker service
-echo -n "    + Enabling docker service"
+echo "    + Enabling docker service"
 
-systemctl enable docker.service > /dev/null
-systemctl enable containerd.service > /dev/null
+systemctl enable docker.service
+systemctl enable containerd.service
 
-printf "${GREEN} DONE\n${WHITE}"
+printf "${GREEN}    DONE\n${WHITE}"
 
 
 # Start docker service
@@ -165,7 +165,7 @@ echo -n "    + Installing"
 
 apt-get install ufw -y 1>/dev/null
 
-export PATH=$PATH:/usr/local/sbin
+# export PATH=$PATH:/usr/local/sbin
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -176,7 +176,7 @@ echo -n "    + Enabling"
 
 systemctl enable ufw.service > /dev/null
 systemctl start ufw.service > /dev/null
-ufw enable 1>/dev/null
+/usr/local/sbin/ufw enable 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -184,7 +184,7 @@ printf "${GREEN} DONE\n${WHITE}"
 # Add rules
 echo -n "    + Adding rules"
 
-ufw allow 80,443,8080,9443/tcp
+/usr/local/sbin/ufw allow 80,443,8080,9443/tcp
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -192,7 +192,7 @@ printf "${GREEN} DONE\n${WHITE}"
 # Reload firewall
 echo -n "    + Reloading"
 
-ufw reload
+/usr/local/sbin/ufw reload
 
 printf "${GREEN} DONE\n${WHITE}"
 
