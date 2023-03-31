@@ -1,7 +1,5 @@
 FROM portainer/base as production
 
-RUN docker build .
-
 COPY dist/docker /
 COPY dist/docker-compose /
 COPY dist/helm /
