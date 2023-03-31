@@ -32,7 +32,7 @@ WORKDIR /
 
 EXPOSE 8000
 EXPOSE 9000
-EXPOSE 9443
+# EXPOSE 9443
 
 LABEL io.portainer.server true
 
