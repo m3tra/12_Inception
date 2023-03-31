@@ -126,7 +126,7 @@ printf "${GREEN}DONE\n${WHITE}"
 groupadd docker 2>/dev/null
 /usr/sbin/usermod -aG docker $USER_NAME
 
-mkdir -m 770 /home/$USER_NAME/.docker
+mkdir -m 770 -p /home/$USER_NAME/.docker
 chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/.docker
 # chmod -R g+rwx /home/$USER_NAME/.docker
 
