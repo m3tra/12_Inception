@@ -131,7 +131,7 @@ RUN set -eux; \
 
 # VOLUME /var/www/html
 
-COPY --chown=www-data:www-data wp-config-docker.php /usr/src/wordpress/
+COPY --chown=www-data:www-data conf/wp-config-docker.php /usr/src/wordpress/
 
 EXPOSE 9000
 
