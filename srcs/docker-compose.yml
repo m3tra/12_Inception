@@ -81,7 +81,7 @@ services:
 
     portainer:
         build:
-            context: requirements/tools/portainer
+            context: requirements/bonus/portainer
             dockerfile: Dockerfile
         container_name: portainer
         restart: unless-stoped
