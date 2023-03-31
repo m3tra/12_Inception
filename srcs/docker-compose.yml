@@ -40,11 +40,11 @@ services:
         container_name: nginx
         restart: unless-stopped
         volumes:
-            - /home/fporto/data/nginx/certbot-etc:/etc/letsencrypt
-            - /home/fporto/data/nginx/conf:/etc/nginx/conf.d
-            - /home/fporto/data/website-root:/var/www/html
+            - /home/fporto/data/nginx/conf:/etc/nginx/conf.d:ro
+            - /home/fporto/data/website-root:/var/www/html:ro
+            - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:ro
         ports:
-            - "80:80"
+            # - "80:80"
             - "443:443"
         networks:
             - web-network
@@ -58,8 +58,8 @@ services:
         container_name: certbot
         env_file: .env
         volumes:
-            - /home/fporto/data/nginx/certbot-etc:/etc/letsencrypt
-            - /home/fporto/data/website-root:/var/www/html
+            - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:rw
+            - /home/fporto/data/website-root:/var/www/html:rw
         command: certonly --webroot --webroot-path=/var/www/html --email test@${DOMAIN_NAME} --agree-tos --no-eff-email --staging -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}
 
 
