@@ -99,10 +99,10 @@ RUN mkdir -p conf && \
 COPY conf/nginx.conf /etc/nginx/conf.d/
 
 # Check config
-RUN sudo nginx -t
+RUN nginx -t
 
 # Reload service
-RUN sudo systemctl reload nginx
+RUN rc-service nginx restart
 
 COPY tools/docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
