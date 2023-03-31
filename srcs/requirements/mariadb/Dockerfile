@@ -178,10 +178,10 @@ RUN set -ex; \
 VOLUME /var/lib/mysql
 
 COPY healthcheck.sh /usr/local/bin/
-COPY tools/docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh && \
+COPY tools/docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh && \
 	chmod +x /usr/local/bin/healthcheck.sh
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 3306
 CMD ["mariadbd"]
