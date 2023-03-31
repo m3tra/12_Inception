@@ -19,8 +19,7 @@ RUN mkdir -m 770 /data/ssl -p
 
 # 10-year valid self-signed certificate
 RUN openssl \
-	req -new \
-	-newkey rsa:4096 \
+	req -newkey rsa:4096 \
 	-days 3650 \
 	-nodes \
 	-x509 \
