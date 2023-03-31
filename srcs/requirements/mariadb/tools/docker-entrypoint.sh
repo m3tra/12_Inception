@@ -182,8 +182,8 @@ docker_create_db_directories() {
 }
 
 _mariadb_version() {
-        local mariaVersion="${MARIADB_VERSION##*:}"
-        mariaVersion="${mariaVersion%%[-+~]*}"
+		local mariaVersion="${MARIADB_VERSION##*:}"
+		mariaVersion="${mariaVersion%%[-+~]*}"
 	echo -n "${mariaVersion}-MariaDB"
 }
 
