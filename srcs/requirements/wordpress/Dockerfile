@@ -135,6 +135,8 @@ COPY --chown=www-data:www-data conf/wp-config-docker.php /usr/src/wordpress/
 
 EXPOSE 9000
 
-COPY tools/docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
+COPY tools/docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
 CMD ["php-fpm"]
