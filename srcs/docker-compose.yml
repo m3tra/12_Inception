@@ -90,6 +90,7 @@ services:
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - /home/fporto/data/portainer/data:/data
+            - /home/fporto/data/nginx/tools/certbot/conf:/data/ssl:ro
         ports:
             - 9443:9443
         networks:
