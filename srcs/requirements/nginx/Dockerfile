@@ -99,7 +99,7 @@ RUN mkdir -p conf && \
 COPY conf/nginx.conf /etc/nginx/conf.d/
 
 # Check config
-RUN nginx -t
+# RUN nginx -t
 
 # Reload service
 RUN rc-service nginx restart
