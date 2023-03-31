@@ -57,7 +57,7 @@ RUN	groupadd -r adminer \
 
 WORKDIR /var/www/html
 
-COPY	*.php /var/www/html/
+COPY	conf/*.php /var/www/html/
 
 ENV	ADMINER_VERSION 4.8.1
 ENV	ADMINER_DOWNLOAD_SHA256 2fd7e6d8f987b243ab1839249551f62adce19704c47d3d0c8dd9e57ea5b9c6b3
