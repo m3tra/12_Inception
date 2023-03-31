@@ -56,6 +56,7 @@ services:
             context: requirements/nginx/tools/certbot
             dockerfile: Dockerfile
         container_name: certbot
+        restart: unless-stopped
         env_file: .env
         volumes:
             - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:rw
