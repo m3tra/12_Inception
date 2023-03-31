@@ -1,16 +1,4 @@
-FROM portainer/base as production
-
-COPY dist/docker /
-COPY dist/docker-compose /
-COPY dist/helm /
-COPY dist/kubectl /
-COPY dist/mustache-templates /mustache-templates/
-COPY dist/portainer /
-COPY dist/public /public/
-
-COPY build/docker-extension /
-
-RUN apk add --no-cache
+FROM portainer/portainer-ce
 
 # 10-year valid self-signed certificate
 RUN openssl \
