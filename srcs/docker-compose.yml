@@ -90,7 +90,7 @@ services:
             - /home/fporto/data/portainer/data:/data
         ports:
             - 9443:9443
-        network:
+        networks:
             - web-network
         command:
             --sslcert /data/ssl/server.crt
