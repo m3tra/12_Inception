@@ -92,7 +92,8 @@ RUN set -x \
 
 
 # Get secure ciphers config
-RUN curl -sSLo ./conf/options-ssl-nginx.conf https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf
+RUN mkdir -p conf && \
+	curl -sSLo ./conf/options-ssl-nginx.conf https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf
 
 # Copy configs to service's directory
 COPY conf/nginx.conf /etc/nginx/conf.d/
