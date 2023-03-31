@@ -38,4 +38,4 @@ COPY conf/ /config
 EXPOSE 3306
 
 COPY tools/docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
