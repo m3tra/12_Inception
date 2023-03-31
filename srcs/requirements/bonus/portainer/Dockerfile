@@ -1,14 +1,19 @@
-FROM portainer/base as production
+# FROM portainer/base as production
 
-COPY dist/docker /
-COPY dist/docker-compose /
-COPY dist/helm /
-COPY dist/kubectl /
-COPY dist/mustache-templates /mustache-templates/
-COPY dist/portainer /
-COPY dist/public /public/
+# COPY dist/docker /
+# COPY dist/docker-compose /
+# COPY dist/helm /
+# COPY dist/kubectl /
+# COPY dist/mustache-templates /mustache-templates/
+# COPY dist/portainer /
+# COPY dist/public /public/
 
-COPY build/docker-extension /
+# COPY build/docker-extension /
+
+FROM portainer/portainer-ce:alpine
+
+RUN apk add --no-cache \
+	openssl
 
 # 10-year valid self-signed certificate
 RUN openssl \
@@ -29,4 +34,4 @@ EXPOSE 9443
 
 LABEL io.portainer.server true
 
-ENTRYPOINT ["/portainer-ce"]
+ENTRYPOINT ["/portainer"]
