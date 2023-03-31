@@ -181,7 +181,7 @@ COPY healthcheck.sh /usr/local/bin/
 COPY tools/docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh && \
 	chmod +x /usr/local/bin/healthcheck.sh
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 EXPOSE 3306
 CMD ["mariadbd"]
