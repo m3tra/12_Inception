@@ -15,16 +15,16 @@ FROM portainer/portainer-ce:alpine
 RUN apk add --no-cache \
 	openssl
 
-RUN mkdir /data/ssl -p
+# RUN mkdir /data/ssl -p
 
 # 10-year valid self-signed certificate
-RUN openssl \
-	req -newkey rsa:4096 \
-	-days 3650 \
-	-nodes \
-	-x509 \
-	-keyout /data/ssl/server.key \
-	-out /data/ssl/server.crt
+# RUN openssl \
+# 	req -newkey rsa:4096 \
+# 	-days 3650 \
+# 	-nodes \
+# 	-x509 \
+# 	-keyout /data/ssl/server.key \
+# 	-out /data/ssl/server.crt
 
 # VOLUME /data
 WORKDIR /
