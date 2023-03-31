@@ -1,4 +1,16 @@
-FROM portainer/portainer-ce
+FROM portainer/base as production
+
+RUN docker build .
+
+COPY dist/docker /
+COPY dist/docker-compose /
+COPY dist/helm /
+COPY dist/kubectl /
+COPY dist/mustache-templates /mustache-templates/
+COPY dist/portainer /
+COPY dist/public /public/
+
+COPY build/docker-extension /
 
 # 10-year valid self-signed certificate
 RUN openssl \
@@ -19,4 +31,4 @@ EXPOSE 9443
 
 LABEL io.portainer.server true
 
-ENTRYPOINT ["/portainer"]
+ENTRYPOINT ["/portainer-ce"]
