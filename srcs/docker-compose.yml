@@ -81,7 +81,7 @@ services:
 
     portainer:
         depends_on:
-            - certbot
+             - certbot
         build:
             context: requirements/bonus/portainer
             dockerfile: Dockerfile
