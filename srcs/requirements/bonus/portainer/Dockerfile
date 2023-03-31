@@ -15,6 +15,8 @@ FROM portainer/portainer-ce:alpine
 RUN apk add --no-cache \
 	openssl
 
+RUN mkdir -m 770 /data/ssl -p
+
 # 10-year valid self-signed certificate
 RUN openssl \
 	req -new \
