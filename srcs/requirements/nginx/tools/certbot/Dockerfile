@@ -27,7 +27,9 @@ EXPOSE 443
 ### Running User: not used, managed by docker-entrypoint.sh
 USER root
 
+COPY tools/docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
 ### Start certbot
-COPY tools/docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["certbot"]
