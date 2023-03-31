@@ -2,6 +2,10 @@ FROM alpine:3.17.0
 LABEL maintainer "DI GREGORIO Nicolas <ndigregorio@ndg-consulting.tech>"
 LABEL repository "https://github.com/digrouz/docker-certbot/blob/master/Dockerfile"
 
+ENV LANG=en_US.UTF-8 \
+	LANGUAGE=en_US.UTF-8 \
+	TERM=xterm
+
 ### Install Application
 RUN set -x && \
 	apk --no-cache upgrade && \
