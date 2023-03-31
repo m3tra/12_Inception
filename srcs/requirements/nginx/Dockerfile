@@ -104,5 +104,4 @@ COPY conf/nginx.conf /etc/nginx/conf.d/
 # Reload service
 # RUN /etc/init.d/nginx restart
 
-COPY tools/docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
+# CMD ["nginx", "-g", "daemon off;"]
