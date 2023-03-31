@@ -102,7 +102,7 @@ COPY conf/nginx.conf /etc/nginx/conf.d/
 # RUN nginx -t
 
 # Reload service
-RUN rc-service nginx restart
+RUN /etc/init.d/nginx restart
 
 COPY tools/docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
