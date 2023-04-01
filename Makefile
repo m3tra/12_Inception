@@ -18,7 +18,7 @@ clean:
 	docker images -qa | xargs docker rmi -f
 
 #	@docker volume rm $(docker volume ls -q) > /dev/null
-	docker volume ls -q | docker volume rm
+	docker volume ls -q | xargs docker volume rm
 
 #	@docker network rm $(docker network ls -q) > /dev/null
 	docker network ls -q | xargs docker network rm
