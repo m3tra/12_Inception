@@ -117,7 +117,7 @@ RUN mkdir -p /etc/nginx/ssl
 RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 	-out /etc/nginx/ssl/server.crt \
 	-keyout /etc/nginx/ssl/server.key \
-	-subj "/C=/ST=/L=/O=/OU=/CN=/"
+	-subj "/C=./ST=./L=./O=./OU=./CN=./"
 
 COPY ./conf/nginx.conf /etc/nginx/conf.d
 
