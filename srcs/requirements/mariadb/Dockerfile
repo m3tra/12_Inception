@@ -199,7 +199,13 @@
 FROM alpine:3.17
 
 RUN apk add --no-cache \
-	mariadb
+	mariadb \
+	mariadb-client
+
+RUN /etc/init.d/mariadb setup
+
+RUN rc-service mariadb start
+RUN rc-update add mariadb default
 
 #Allow to run the daemon of mysql
 # Purge and re-create /var/lib/mysql with appropriate ownership
