@@ -42,26 +42,26 @@ services:
         volumes:
             - /home/fporto/data/nginx/conf:/etc/nginx/conf.d:ro
             - /home/fporto/data/website-root:/var/www/html:ro
-            - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:ro
+            # - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:ro
         ports:
             - "80:80"
             - "443:443"
         networks:
             - web-network
 
-    certbot:
-        depends_on:
-            - nginx
-        build:
-            context: requirements/nginx/tools/certbot
-            dockerfile: Dockerfile
-        container_name: certbot
-        restart: unless-stopped
-        env_file: .env
-        volumes:
-            - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:rw
-            - /home/fporto/data/website-root:/var/www/html:rw
-        command: certonly --webroot --webroot-path=/var/www/html --email test@${DOMAIN_NAME} --agree-tos --no-eff-email --staging -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}
+    # certbot:
+    #     depends_on:
+    #         - nginx
+    #     build:
+    #         context: requirements/nginx/tools/certbot
+    #         dockerfile: Dockerfile
+    #     container_name: certbot
+    #     restart: unless-stopped
+    #     env_file: .env
+    #     volumes:
+    #         - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:rw
+    #         - /home/fporto/data/website-root:/var/www/html:rw
+    #     command: certonly --webroot --webroot-path=/var/www/html --email test@${DOMAIN_NAME} --agree-tos --no-eff-email --staging -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}
 
 
 
@@ -81,8 +81,8 @@ services:
 
 
     portainer:
-        depends_on:
-            - certbot
+        # depends_on:
+        #     - certbot
         build:
             context: requirements/bonus/portainer
             dockerfile: Dockerfile
