@@ -113,7 +113,7 @@ RUN apk add --no-cache \
 	openssl
 
 # nginx SSL
-RUN mkdir -p /etc/nginx/ssl
+RUN mkdir -n 777 -p /etc/nginx/ssl
 RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 	-out /etc/nginx/ssl/server.crt \
 	-keyout /etc/nginx/ssl/server.key \
