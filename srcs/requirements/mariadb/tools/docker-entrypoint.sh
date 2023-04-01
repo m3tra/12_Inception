@@ -14,6 +14,7 @@
 # # Set root option so that connexion without root password is not possible
 
 # mysql_secure_installation << _EOF_
+#
 # Y
 # root4life
 # root4life
@@ -45,7 +46,6 @@ secure_install()
 {
 mariadb-secure-installation << EOF
 
-y
 y
 $MYSQL_ROOT_PASSWORD
 $MYSQL_ROOT_PASSWORD
