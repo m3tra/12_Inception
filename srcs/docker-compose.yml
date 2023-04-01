@@ -34,6 +34,7 @@ services:
     nginx:
         depends_on:
             - wordpress
+            - adminer
         build:
             context: requirements/nginx/
             dockerfile: Dockerfile
@@ -44,7 +45,6 @@ services:
             - /home/fporto/data/website-root:/var/www/html:ro
             # - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:ro
         ports:
-            - "80:80"
             - "443:443"
         networks:
             - web-network
@@ -73,8 +73,8 @@ services:
             dockerfile: Dockerfile
         container_name: adminer
         restart: always
-        ports:
-            - 8080:8080
+        # ports:
+        #     - 8080:8080
         networks:
             - web-network
 
@@ -92,8 +92,8 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock
             - /home/fporto/data/portainer/data:/data
             # - /home/fporto/data/nginx/tools/certbot/conf:/data/ssl:ro
-        ports:
-            - 9443:9443
+        # ports:
+        #     - 9443:9443
         networks:
             - web-network
         command:
