@@ -202,7 +202,7 @@ RUN apk add --no-cache \
 	mariadb \
 	mariadb-client
 
-RUN /etc/init.d/mariadb setup
+RUN /etc/init.d/mysqld setup
 
 RUN rc-service mariadb start
 RUN rc-update add mariadb default
@@ -214,9 +214,9 @@ RUN mkdir -p /var/run/mysqld \
 	&& chown -R mysql:mysql /var/run/mysqld \
 	&& chmod 777 /var/run/mysqld
 
-#COPY		./conf/mysqld.conf ~/my.cnf
-#COPY		./conf/mysqld.conf /etc/mysql/my.cnf
-#COPY		./conf/mysqld.conf /etc/my.cnf
+# # COPY		./conf/mysqld.conf ~/my.cnf
+# # COPY		./conf/mysqld.conf /etc/mysql/my.cnf
+# # COPY		./conf/mysqld.conf /etc/my.cnf
 
 
 #Copy of the .sh and .sql in the /bin of the container to be able to run the program
