@@ -195,6 +195,12 @@ RUN apt-get update && \
 	mariadb-client \
 	&& rm -rf /var/lib/apt/lists/*
 
+
+FROM alpine:3.17
+
+RUN apk add --no-cache \
+	mariadb
+
 #Allow to run the daemon of mysql
 # Purge and re-create /var/lib/mysql with appropriate ownership
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
@@ -209,11 +215,11 @@ RUN mkdir -p /var/run/mysqld \
 
 #Copy of the .sh and .sql in the /bin of the container to be able to run the program
 # Give the right to execute + launch the .sh
-# COPY tools/docker-entrypoint.sh /
-# COPY conf/wordpress.sql /usr/local/bin/
-ADD https://github.com/MariaDB/mariadb-docker/blob/master/docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
-# RUN chmod +x /usr/local/bin/wordpress.sql
+COPY tools/docker-entrypoint.sh /
+COPY conf/wordpress.sql /usr/local/bin/
+# ADD https://github.com/MariaDB/mariadb-docker/blob/master/docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh && \
+	chmod +x /usr/local/bin/wordpress.sql
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
