@@ -110,7 +110,7 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Test installation
-printf "    + ${YELLOW}Tesing${WHITE} hello-world container"
+printf "    + ${YELLOW}Tesing${WHITE} hello-world container\n"
 
 docker run hello-world
 
