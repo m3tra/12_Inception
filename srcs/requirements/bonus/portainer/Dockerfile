@@ -16,8 +16,8 @@ RUN apk add --no-cache \
 	openssl
 
 # RUN mkdir -m 777 /data -p
-RUN chown -R root:root /data/ssl
 RUN mkdir -m 777 /data/ssl -p
+RUN chown -R root:root /data/ssl
 RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 	-out /data/ssl/server.crt \
 	-keyout /data/ssl/server.key \
