@@ -96,9 +96,9 @@ services:
         #     - 9443:9443
         networks:
             - web-network
-        command:
-            --sslcert /data/server.crt
-            --sslkey /data/server.key
+        # command:
+        #     --sslcert /data/server.crt
+        #     --sslkey /data/server.key
 
 
 
