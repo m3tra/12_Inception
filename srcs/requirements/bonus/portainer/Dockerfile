@@ -15,7 +15,7 @@ FROM portainer/portainer-ce:alpine
 RUN apk add --no-cache \
 	openssl
 
-RUN mkdir -m 777 /data
+# RUN mkdir -m 777 /data
 # RUN mkdir -p /data/ssl
 # RUN chmod 777 /data/ssl
 # RUN chown root:root /data/ssl
