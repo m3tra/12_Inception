@@ -15,13 +15,13 @@ FROM portainer/portainer-ce:alpine
 RUN apk add --no-cache \
 	openssl
 
-# RUN mkdir -m 777 /data -p
-RUN mkdir -p /data/ssl
-RUN chmod 777 /data/ssl
-RUN chown root:root /data/ssl
+RUN mkdir -m 777 /data
+# RUN mkdir -p /data/ssl
+# RUN chmod 777 /data/ssl
+# RUN chown root:root /data/ssl
 RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
-	-out /data/ssl/server.crt \
-	-keyout /data/ssl/server.key \
+	-out /data/server.crt \
+	-keyout /data/server.key \
 	-subj "/C=/ST=/L=/O=/OU=/CN=/"
 
 # 10-year valid self-signed certificate

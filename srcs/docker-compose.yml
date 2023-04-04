@@ -97,8 +97,8 @@ services:
         networks:
             - web-network
         command:
-            --sslcert /data/ssl/server.crt
-            --sslkey /data/ssl/server.key
+            --sslcert /data/server.crt
+            --sslkey /data/server.key
 
 
 
