@@ -24,6 +24,8 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 	-keyout /data/server.key \
 	-subj "/C=/ST=/L=/O=/OU=/CN=/"
 
+RUN chmod 777 /data/server.crt
+
 # 10-year valid self-signed certificate
 # RUN openssl \
 # 	req -newkey rsa:4096 \
