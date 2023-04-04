@@ -37,8 +37,8 @@ FROM portainer/portainer-ce:alpine
 # VOLUME /data
 WORKDIR /
 
-EXPOSE 8000
-EXPOSE 9000
+# EXPOSE 8000
+# EXPOSE 9000
 # EXPOSE 9443
 
 LABEL io.portainer.server true
