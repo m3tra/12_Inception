@@ -202,6 +202,12 @@ RUN apk add --no-cache \
 	mariadb \
 	mariadb-client
 
+# mysql_install_db
+
+RUN /etc/init.d/mariadb setup \
+	/etc/init.d/mariadb start \
+	mariadb-install-db \
+
 # RUN /etc/init.d/mysqld setup
 
 # RUN rc-service mariadb start
@@ -211,8 +217,8 @@ RUN apk add --no-cache \
 # Purge and re-create /var/lib/mysql with appropriate ownership
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
 RUN mkdir -p /var/run/mysqld \
-	&& chown -R mysql:mysql /var/run/mysqld \
 	&& chmod 777 /var/run/mysqld
+	# && chown -R mysql:mysql /var/run/mysqld \
 
 # # COPY		./conf/mysqld.conf ~/my.cnf
 # # COPY		./conf/mysqld.conf /etc/mysql/my.cnf

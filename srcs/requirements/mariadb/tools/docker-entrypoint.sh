@@ -47,6 +47,7 @@ secure_install()
 mariadb-secure-installation << EOF
 
 y
+y
 $MYSQL_ROOT_PASSWORD
 $MYSQL_ROOT_PASSWORD
 y
@@ -57,7 +58,7 @@ EOF
 
 # Add root user remote priviledges
 
-echo "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD'; FLUSH PRIVILEGES;" | mysql -uroot
+echo "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD'; FLUSH PRIVILEGES;" | mysql -u root
 echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE; GRANT ALL ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'; FLUSH PRIVILEGES;" | mysql -u root
 }
 
@@ -68,6 +69,6 @@ else
 	secure_install
 fi
 
-/etc/init.d/mysql stop
+# /etc/init.d/mariadb stop
 
-exec "$@"
+# exec "$@"
