@@ -13,21 +13,21 @@
 # This will be passed to all mysql clients
 # It has been reported that passwords should be enclosed with ticks/quotes
 # especially if they contain "#" chars...
-[client]
-host            = localhost
-user            = root
-password        = {$MYSQL_ROOT_PASSWORD}
-port            = 3306
-socket          = /var/run/mysqld/mysqld.sock
+# [client]
+# host            = localhost
+# user            = root
+# password        = {$MYSQL_ROOT_PASSWORD}
+# port            = 3306
+# socket          = /var/run/mysqld/mysqld.sock
 
-default-character-set = utf8mb4
+# default-character-set = utf8mb4
 
-[mysql_upgrade]
-host            = localhost
-user            = root
-password        = {$MYSQL_ROOT_PASSWORD}
-socket          = /var/run/mysqld/mysqld.sock
-basedir         = /usr
+# [mysql_upgrade]
+# host            = localhost
+# user            = root
+# password        = {$MYSQL_ROOT_PASSWORD}
+# socket          = /var/run/mysqld/mysqld.sock
+# basedir         = /usr
 
 # Here is entries for some specific programs
 # The following values assume you have at least 32M ram
