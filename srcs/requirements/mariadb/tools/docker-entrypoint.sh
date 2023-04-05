@@ -79,19 +79,35 @@
 
 
 
-set -e
+# set -e
 
-sed -i s/'{$MYSQL_DATABASE}'/$MYSQL_DATABASE/g /tmp/config.sql
-sed -i s/'{$MYSQL_USER}'/$MYSQL_USER/g /tmp/config.sql
-sed -i s/'{$MYSQL_PASSWORD}'/$MYSQL_PASSWORD/g /tmp/config.sql
-sed -i s/'{$MYSQL_ROOT_PASSWORD}'/$MYSQL_ROOT_PASSWORD/g /tmp/config.sql
+# sed -i s/'{$MYSQL_DATABASE}'/$MYSQL_DATABASE/g /tmp/config.sql
+# sed -i s/'{$MYSQL_USER}'/$MYSQL_USER/g /tmp/config.sql
+# sed -i s/'{$MYSQL_PASSWORD}'/$MYSQL_PASSWORD/g /tmp/config.sql
+# sed -i s/'{$MYSQL_ROOT_PASSWORD}'/$MYSQL_ROOT_PASSWORD/g /tmp/config.sql
 
-sed -i s/'{$MYSQL_ROOT_PASSWORD}'/$MYSQL_ROOT_PASSWORD/g /etc/mysql/debian.cnf
+# sed -i s/'{$MYSQL_ROOT_PASSWORD}'/$MYSQL_ROOT_PASSWORD/g /etc/mysql/debian.cnf
+
+# service mysql start
+# mariadb -uroot -p$MYSQL_ROOT_PASSWORD < /tmp/config.sql && sleep 1
+# service mysql stop
+
+# echo "*****Starting MariaDB Container*****"
+
+# exec "$@"
+
 
 service mysql start
-mariadb -uroot -p$MYSQL_ROOT_PASSWORD < /tmp/config.sql && sleep 1
+
+echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE ;" > db-config.sql
+echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ;" >> db-config.sql
+echo "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' ;" >> db-config.sql
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD' ;" >> db-config.sql
+echo "FLUSH PRIVILEGES;" >> db-config.sql
+
+mysql < db-config.sql
+
+# kill $(cat /var/run/mysqld/mysqld.pid)
 service mysql stop
 
-echo "*****Starting MariaDB Container*****"
-
-exec "$@"
+mysqld

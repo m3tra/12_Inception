@@ -217,8 +217,8 @@ RUN apt-get update && \
 # RUN mysql_install_db
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
-COPY conf/debian.cnf /etc/mysql/
-COPY conf/config.sql /tmp/
+# COPY conf/debian.cnf /etc/mysql/
+# COPY conf/config.sql /tmp/
 
 # RUN /etc/init.d/mysqld start
 # RUN mariadb-install-db
