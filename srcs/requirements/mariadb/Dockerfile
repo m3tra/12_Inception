@@ -220,10 +220,10 @@ COPY conf/custom.conf /etc/mysql/mariadb.conf.d/
 COPY conf/config.sql /tmp/
 
 # RUN /etc/init.d/mysqld start
-RUN service mysql start
 # RUN mariadb-install-db
-RUN mysql_install_db
-RUN service mysql stop
+# RUN service mysql start
+# RUN mysql_install_db
+# RUN service mysql stop
 # RUN /etc/init.d/mysqld stop
 
 # RUN /etc/init.d/mysqld setup
