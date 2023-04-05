@@ -219,7 +219,8 @@ COPY conf/custom.conf /etc/mysql/mariadb.conf.d/
 
 # RUN /etc/init.d/mysqld start
 RUN service mysql start
-RUN mariadb-install-db
+# RUN mariadb-install-db
+RUN mysql_install_db
 RUN service mysql stop
 # RUN /etc/init.d/mysqld stop
 

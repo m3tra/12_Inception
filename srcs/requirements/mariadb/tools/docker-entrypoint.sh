@@ -44,7 +44,7 @@
 
 secure_install()
 {
-mariadb-secure-installation << EOF
+mysql_secure_installation << EOF
 
 y
 y
