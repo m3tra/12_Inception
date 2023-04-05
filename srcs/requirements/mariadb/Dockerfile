@@ -223,7 +223,7 @@ RUN apk add --no-cache \
 # RUN /etc/init.d/mysqld start
 RUN mariadb-install-db
 RUN rc-update add mariadb
-RUN	rc-service mariadb start
+# RUN	rc-service mariadb start
 # RUN /etc/init.d/mysqld stop
 
 # RUN /etc/init.d/mysqld setup
