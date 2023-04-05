@@ -196,11 +196,26 @@
 # 	&& rm -rf /var/lib/apt/lists/*
 
 
+
+
+
+
+##########
+# ALPINE #
+##########
+
 FROM alpine:3.17
 
 RUN apk add --no-cache \
 	mariadb \
 	mariadb-client
+
+# FROM debian:buster
+
+# RUN apt-get update && \
+# 	apt-get install -y \
+# 		mariadb-server \
+# 		dumb-init
 
 # RUN mysql_install_db
 
@@ -217,8 +232,8 @@ RUN mariadb-install-db
 # Purge and re-create /var/lib/mysql with appropriate ownership
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
 RUN mkdir -p /var/run/mysqld \
-	touch /var/run/mysqld/mysqld.sock \
-	touch /var/run/mysqld/mysqld.pid \
+	&& touch /var/run/mysqld/mysqld.sock \
+	&& touch /var/run/mysqld/mysqld.pid \
 	&& chown -R mysql:mysql /var/run/mysqld \
 	&& chmod -R 777 /var/run/mysqld
 
