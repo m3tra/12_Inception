@@ -81,15 +81,15 @@
 
 set -e
 
-sed -i s/'{$MYSQL_DATABASE}'/$MYSQL_DATABASE/g /tmp/db-config.sql
-sed -i s/'{$MYSQL_USER}'/$MYSQL_USER/g /tmp/db-config.sql
-sed -i s/'{$MYSQL_PASSWORD}'/$MYSQL_PASSWORD/g /tmp/db-config.sql
-sed -i s/'{$MYSQL_ROOT_PASSWORD}'/$MYSQL_ROOT_PASSWORD/g /tmp/db-config.sql
+sed -i s/'{$MYSQL_DATABASE}'/$MYSQL_DATABASE/g /tmp/config.sql
+sed -i s/'{$MYSQL_USER}'/$MYSQL_USER/g /tmp/config.sql
+sed -i s/'{$MYSQL_PASSWORD}'/$MYSQL_PASSWORD/g /tmp/config.sql
+sed -i s/'{$MYSQL_ROOT_PASSWORD}'/$MYSQL_ROOT_PASSWORD/g /tmp/config.sql
 
 sed -i s/'{$MYSQL_ROOT_PASSWORD}'/$MYSQL_ROOT_PASSWORD/g /etc/mysql/mariadb.conf.d/custom.conf
 
 service mysql start
-mariadb -uroot -p$MYSQL_ROOT_PASSWORD < /tmp/db-config.sql && sleep 1
+mariadb -uroot -p$MYSQL_ROOT_PASSWORD < /tmp/config.sql && sleep 1
 service mysql stop
 
 echo "*****Starting MariaDB Container*****"
