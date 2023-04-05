@@ -204,9 +204,11 @@ RUN apk add --no-cache \
 
 # RUN mysql_install_db
 
-RUN /etc/init.d/mysqld start
+RUN service mysql start
+# RUN /etc/init.d/mysqld start
 RUN mariadb-install-db
-RUN /etc/init.d/mysqld stop
+RUN service mysql stop
+# RUN /etc/init.d/mysqld stop
 
 # RUN /etc/init.d/mysqld setup
 
