@@ -93,9 +93,9 @@ services:
             - /home/fporto/data/portainer/data:/data
             # - /home/fporto/data/nginx/tools/certbot/conf:/data/ssl:ro
         ports:
-            - 8000:8000
-            - 9000:9000
-            - 9443:9443
+            # - 8000:8000
+            # - 9000:9000
+            # - 9443:9443
         networks:
             - web-network
         # command:
