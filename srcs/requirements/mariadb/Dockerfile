@@ -216,7 +216,7 @@ RUN apt-get update && \
 
 # RUN mysql_install_db
 
-COPY conf/custom.conf /etc/mysql/mariadb.conf.d/
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY conf/config.sql /tmp/
 
 # RUN /etc/init.d/mysqld start
