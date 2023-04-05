@@ -86,7 +86,7 @@ sed -i s/'{$MYSQL_USER}'/$MYSQL_USER/g /tmp/config.sql
 sed -i s/'{$MYSQL_PASSWORD}'/$MYSQL_PASSWORD/g /tmp/config.sql
 sed -i s/'{$MYSQL_ROOT_PASSWORD}'/$MYSQL_ROOT_PASSWORD/g /tmp/config.sql
 
-sed -i s/'{$MYSQL_ROOT_PASSWORD}'/$MYSQL_ROOT_PASSWORD/g /etc/mysql/50-server.cnf
+sed -i s/'{$MYSQL_ROOT_PASSWORD}'/$MYSQL_ROOT_PASSWORD/g /etc/mysql/debian.cnf
 
 service mysql start
 mariadb -uroot -p$MYSQL_ROOT_PASSWORD < /tmp/config.sql && sleep 1
