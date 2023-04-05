@@ -188,28 +188,23 @@
 
 
 
-# FROM debian:buster
+FROM debian:buster
 
-# RUN apt-get update && \
-# 	apt-get install -y mariadb-server \
-# 	mariadb-client \
-# 	&& rm -rf /var/lib/apt/lists/*
-
-
-
-
-
+RUN apt-get update && \
+	apt-get install -y mariadb-server \
+	mariadb-client \
+	&& rm -rf /var/lib/apt/lists/*
 
 ##########
 # ALPINE #
 ##########
 
-FROM alpine:3.17
+# FROM alpine:3.17
 
-RUN apk add --no-cache \
-	openrc \
-	mariadb \
-	mariadb-client
+# RUN apk add --no-cache \
+# 	openrc \
+# 	mariadb \
+# 	mariadb-client
 
 # FROM debian:buster
 
@@ -220,11 +215,12 @@ RUN apk add --no-cache \
 
 # RUN mysql_install_db
 
+COPY conf/custom.conf /etc/mysql/mariadb.conf.d/
+
 # RUN /etc/init.d/mysqld start
-RUN rc-service mariadb restart
+RUN service mysql start
 RUN mariadb-install-db
-# RUN rc-service mariadb stop
-# RUN rc-update add mariadb
+RUN service mysql stop
 # RUN /etc/init.d/mysqld stop
 
 # RUN /etc/init.d/mysqld setup
@@ -245,7 +241,6 @@ RUN mariadb-install-db
 # # COPY		./conf/mysqld.conf /etc/mysql/my.cnf
 # # COPY		./conf/mysqld.conf /etc/my.cnf
 
-COPY conf/custom.conf /etc/mysql/mariadb.conf.d/
 
 
 #Copy of the .sh and .sql in the /bin of the container to be able to run the program
@@ -262,4 +257,4 @@ ENTRYPOINT [ "/docker-entrypoint.sh" ]
 EXPOSE 3306
 
 #Command to launch mariadb and enable the database to listen globally - also can be put on mysqldump.cnf file
-CMD ["mysqld", "--bind-address=0.0.0.0"]
+CMD ["mysqld"]
