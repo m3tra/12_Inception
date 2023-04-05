@@ -1,4 +1,4 @@
-# #!/bin/bash
+#!/bin/bash
 
 # wp core download --allow-root
 
@@ -18,7 +18,6 @@
 
 # chown -R www-data:www-data /var/www/html/wordpress
 
-#!/bin/bash
 set -e
 
 # waiting for mariadb
@@ -57,8 +56,8 @@ if [ ! -f /var/www/html/wordpress/wp-config.php ]; then
 fi
 
 # create the PID file(/run/php/php8.1-fpm.pid)
-service php8.1-fpm start
-service php8.1-fpm stop
+service php8.2-fpm start
+service php8.2-fpm stop
 
 echo "*****Starting Wordpress Container*****"
 
