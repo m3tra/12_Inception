@@ -99,6 +99,7 @@
 
 service mysql start
 
+chown -R mysql:mysql /var/log/mysql
 mysql_install_db
 
 echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE ;" > db-config.sql
