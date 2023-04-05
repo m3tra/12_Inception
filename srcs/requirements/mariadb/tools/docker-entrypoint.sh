@@ -99,6 +99,8 @@
 
 service mysql start
 
+mysql_install_db
+
 echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE ;" > db-config.sql
 echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ;" >> db-config.sql
 echo "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' ;" >> db-config.sql
@@ -107,7 +109,7 @@ echo "FLUSH PRIVILEGES;" >> db-config.sql
 
 mysql < db-config.sql
 
-kill $(cat /var/run/mysqld/mysqld.pid)
-# service mysql stop
+# kill $(cat /var/run/mysqld/mysqld.pid)
+service mysql stop
 
 mysqld

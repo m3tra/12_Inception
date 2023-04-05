@@ -222,9 +222,9 @@ COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
 # RUN /etc/init.d/mysqld start
 # RUN mariadb-install-db
-# RUN service mysql start
-# RUN mysql_install_db
-# RUN service mysql stop
+RUN service mysql start
+RUN mysql_install_db
+RUN service mysql stop
 # RUN /etc/init.d/mysqld stop
 
 # RUN /etc/init.d/mysqld setup
