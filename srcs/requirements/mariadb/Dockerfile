@@ -223,6 +223,8 @@ RUN mkdir -p /var/run/mysqld \
 # # COPY		./conf/mysqld.conf /etc/mysql/my.cnf
 # # COPY		./conf/mysqld.conf /etc/my.cnf
 
+COPY conf/custom.conf /etc/mysql/mariadb.conf.d/
+
 
 #Copy of the .sh and .sql in the /bin of the container to be able to run the program
 # Give the right to execute + launch the .sh
