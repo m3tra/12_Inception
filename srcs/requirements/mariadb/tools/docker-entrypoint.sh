@@ -107,7 +107,7 @@ echo "FLUSH PRIVILEGES;" >> db-config.sql
 
 mysql < db-config.sql
 
-# kill $(cat /var/run/mysqld/mysqld.pid)
-service mysql stop
+kill $(cat /var/run/mysqld/mysqld.pid)
+# service mysql stop
 
 mysqld
