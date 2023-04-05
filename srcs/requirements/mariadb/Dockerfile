@@ -229,9 +229,9 @@ COPY conf/custom.conf /etc/mysql/mariadb.conf.d/
 #Copy of the .sh and .sql in the /bin of the container to be able to run the program
 # Give the right to execute + launch the .sh
 COPY tools/docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
 # COPY conf/wordpress.sql /usr/local/bin/
 # ADD https://github.com/MariaDB/mariadb-docker/blob/master/docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
 # RUN chmod +x /usr/local/bin/wordpress.sql
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
