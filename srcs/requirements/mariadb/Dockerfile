@@ -221,6 +221,8 @@ RUN apk add --no-cache \
 
 # RUN /etc/init.d/mysqld start
 RUN mariadb-install-db
+RUN rc-update add mariadb \
+	&& rc-service mariadb start
 # RUN /etc/init.d/mysqld stop
 
 # RUN /etc/init.d/mysqld setup
@@ -231,11 +233,11 @@ RUN mariadb-install-db
 #Allow to run the daemon of mysql
 # Purge and re-create /var/lib/mysql with appropriate ownership
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
-RUN mkdir -p /var/run/mysqld \
-	&& touch /var/run/mysqld/mysqld.sock \
-	&& touch /var/run/mysqld/mysqld.pid \
-	&& chown -R mysql:mysql /var/run/mysqld \
-	&& chmod -R 777 /var/run/mysqld
+# RUN mkdir -p /var/run/mysqld \
+# 	&& touch /var/run/mysqld/mysqld.sock \
+# 	&& touch /var/run/mysqld/mysqld.pid \
+# 	&& chown -R mysql:mysql /var/run/mysqld \
+# 	&& chmod -R 777 /var/run/mysqld
 
 # # COPY		./conf/mysqld.conf ~/my.cnf
 # # COPY		./conf/mysqld.conf /etc/mysql/my.cnf
@@ -253,6 +255,7 @@ RUN chmod +x /docker-entrypoint.sh
 # RUN chmod +x /usr/local/bin/wordpress.sql
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
+# ENTRYPOINT [ "/usr/bin/dumb-init", "/tmp/entrypoint.sh" ]
 
 EXPOSE 3306
 
