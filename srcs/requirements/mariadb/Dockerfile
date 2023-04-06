@@ -251,11 +251,13 @@ COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 # Give the right to execute + launch the .sh
 COPY tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
+RUN bash /docker-entrypoint.sh
+
 # COPY conf/wordpress.sql /usr/local/bin/
 # ADD https://github.com/MariaDB/mariadb-docker/blob/master/docker-entrypoint.sh /
 # RUN chmod +x /usr/local/bin/wordpress.sql
 
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
+# ENTRYPOINT [ "/docker-entrypoint.sh" ]
 # ENTRYPOINT [ "/usr/bin/dumb-init", "/tmp/entrypoint.sh" ]
 
 EXPOSE 3306
