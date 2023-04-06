@@ -10,10 +10,10 @@ EXPOSE 3306
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY ./conf/debian.cnf /etc/mysql/
 COPY ./conf/db-config.sql /tmp/
-COPY ./tools/entrypoint.sh /tmp/
+COPY ./tools/docker-entrypoint.sh /tmp/
 
-RUN chmod +x /tmp/entrypoint.sh
+RUN chmod +x /tmp/docker-entrypoint.sh
 
-ENTRYPOINT [ "/usr/bin/dumb-init", "/tmp/entrypoint.sh" ]
+ENTRYPOINT [ "/usr/bin/dumb-init", "/tmp/docker-entrypoint.sh" ]
 
 CMD [ "mysqld" ]
