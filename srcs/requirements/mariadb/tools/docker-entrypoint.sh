@@ -1,8 +1,15 @@
-#!/bin/bash
+#!/bin/sh
+set -e
+
+sed -i s/'{$WP_DB_NAME}'/$WP_DB_NAME/g /tmp/db-config.sql
+sed -i s/'{$WP_ADMIN}'/$WP_ADMIN/g /tmp/db-config.sql
+sed -i s/'{$WP_ADMIN_PASSWORD}'/$WP_ADMIN_PASSWORD/g /tmp/db-config.sql
+sed -i s/'{$WP_ADMIN_PASSWORD}'/$WP_ADMIN_PASSWORD/g /etc/mysql/debian.cnf
 
 service mysql start
+mariadb -p$WP_ADMIN_PASSWORD < /tmp/db-config.sql && sleep 1
+service mysql stop
 
-mysql -u root -e "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-mysql -u root -e "CREATE DATABASE ${MYSQL_DATABASE};"
-mysql -u root -e "USE '${MYSQL_DATABASE}'; GRANT ALL PRIVILEGES ON * TO '${MYSQL_USER}'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
-mysql -u root -e "alter user 'root'@'localhost' identified by '${MYSQL_ROOT_PASSWORD}'";
+echo "*****Starting MariaDB Container*****"
+
+exec "$@"

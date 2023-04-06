@@ -1,22 +1,19 @@
 FROM debian:buster
 
+RUN apt-get update && \
+	apt-get install -y
+		mariadb-server \
+		dumb-init
+
 EXPOSE 3306
 
-ARG MYSQL_DATABASE=${MYSQL_DATABASE}
-ARG MYSQL_USER=${MYSQL_USER}
-ARG MYSQL_PASSWORD=${MYSQL_PASSWORD}
-ARG MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY ./conf/debian.cnf /etc/mysql/
+COPY ./conf/db-config.sql /tmp/
+COPY ./tools/entrypoint.sh /tmp/
 
-RUN apt-get update -y
-RUN apt full-upgrade -y
+RUN chmod +x /tmp/entrypoint.sh
 
-RUN apt install mariadb-server mariadb-client -y
+ENTRYPOINT [ "/usr/bin/dumb-init", "/tmp/entrypoint.sh" ]
 
-COPY tools/docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
-
-COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
-
-RUN bash /docker-entrypoint.sh
-
-CMD exec mysqld_safe
+CMD [ "mysqld" ]
