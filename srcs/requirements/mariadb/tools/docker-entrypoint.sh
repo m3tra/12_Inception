@@ -97,20 +97,30 @@
 # exec "$@"
 
 
+# service mysql start
+
+# chown -R mysql:mysql /var/log/mysql
+# mysql_install_db
+
+# echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE ;" > db-config.sql
+# echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ;" >> db-config.sql
+# echo "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' ;" >> db-config.sql
+# echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD' ;" >> db-config.sql
+# echo "FLUSH PRIVILEGES;" >> db-config.sql
+
+# mysql < db-config.sql
+
+# # kill $(cat /var/run/mysqld/mysqld.pid)
+# service mysql stop
+
+# mysqld
+
+
+
+
 service mysql start
 
-chown -R mysql:mysql /var/log/mysql
-mysql_install_db
-
-echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE ;" > db-config.sql
-echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ;" >> db-config.sql
-echo "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' ;" >> db-config.sql
-echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD' ;" >> db-config.sql
-echo "FLUSH PRIVILEGES;" >> db-config.sql
-
-mysql < db-config.sql
-
-# kill $(cat /var/run/mysqld/mysqld.pid)
-service mysql stop
-
-mysqld
+mysql -u root -e "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
+mysql -u root -e "CREATE DATABASE ${MYSQL_DATABASE};"
+mysql -u root -e "USE '${MYSQL_DATABASE}'; GRANT ALL PRIVILEGES ON * TO '${MYSQL_USER}'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
+mysql -u root -e "alter user 'root'@'localhost' identified by '${MYSQL_ROOT_PASSWORD}'";

@@ -261,4 +261,5 @@ ENTRYPOINT [ "/docker-entrypoint.sh" ]
 EXPOSE 3306
 
 #Command to launch mariadb and enable the database to listen globally - also can be put on mysqldump.cnf file
-CMD ["mysqld"]
+# CMD ["mysqld"]
+CMD ["mysqld-safe"]
