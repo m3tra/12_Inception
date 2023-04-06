@@ -12,7 +12,7 @@ RUN apt full-upgrade -y
 
 RUN apt install mariadb-server mariadb-client -y
 
-COPY conf/docker-entrypoint.sh /
+COPY tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
