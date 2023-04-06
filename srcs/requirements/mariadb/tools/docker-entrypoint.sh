@@ -120,7 +120,7 @@
 
 service mysql start
 
-mysql -u root -e "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
-mysql -u root -e "CREATE DATABASE $MYSQL_DATABASE;"
-mysql -u root -e "USE '$MYSQL_DATABASE'; GRANT ALL PRIVILEGES ON * TO '$MYSQL_USER'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;"
-mysql -u root -e "alter user 'root'@'localhost' identified by '$MYSQL_ROOT_PASSWORD'";
+echo "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" | mysql -u root
+echo "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;" | mysql -u root
+echo "USE '$MYSQL_DATABASE'; GRANT ALL PRIVILEGES ON * TO '$MYSQL_USER'@'%' WITH GRANT OPTION; FLUSH PRIVILEGES;" | mysql -u root
+echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';" | mysql -u root
