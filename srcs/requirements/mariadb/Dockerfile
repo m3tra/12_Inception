@@ -12,11 +12,11 @@ RUN apt full-upgrade -y
 
 RUN apt install mariadb-server mariadb-client -y
 
-COPY ./conf/script.sh /script.sh
-RUN chmod +x script.sh
+COPY conf/docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-RUN bash ./script.sh
+RUN bash /docker-entrypoint.sh
 
 CMD exec mysqld_safe
