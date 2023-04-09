@@ -1,15 +1,18 @@
 #!/bin/sh
-set -e
 
-sed -i s/'{$WP_DB_NAME}'/$WP_DB_NAME/g /tmp/db-config.sql
-sed -i s/'{$WP_ADMIN}'/$WP_ADMIN/g /tmp/db-config.sql
-sed -i s/'{$WP_ADMIN_PASSWORD}'/$WP_ADMIN_PASSWORD/g /tmp/db-config.sql
-sed -i s/'{$WP_ADMIN_PASSWORD}'/$WP_ADMIN_PASSWORD/g /etc/mysql/debian.cnf
+DATABASE_PATH=/var/lib/mysql/$MYSQL_DATABASE
 
-service mysql start
-mariadb -p$WP_ADMIN_PASSWORD < /tmp/db-config.sql && sleep 1
-service mysql stop
+if [ ! -d "$DATABASE_PATH" ]
+then
+	service mysql start;
+	mysql -u root --execute= \
+		"CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE; \
+		GRANT ALL ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;; \
+		ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD'; \
+		FLUSH PRIVILEGES;"
+	# mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < wordpress.sql ;
+	mysqladmin -uroot -p$MYSQL_ROOT_PASSWORD shutdown;
 
-echo "*****Starting MariaDB Container*****"
+fi
 
 exec "$@"

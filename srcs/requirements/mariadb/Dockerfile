@@ -1,9 +1,8 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt-get update && \
 	apt-get install -y \
-		mariadb-server \
-		dumb-init
+		mariadb-server
 
 EXPOSE 3306
 
