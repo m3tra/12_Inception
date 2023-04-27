@@ -182,13 +182,16 @@ systemctl enable ufw.service > /dev/null
 systemctl start ufw.service > /dev/null
 ufw enable 1>/dev/null
 
+# Disable setting rules for IPV6 automatically
+sed -i 's/IPV6=yes/IPV6=no/g' /etc/default/ufw
+
 printf "${GREEN}    DONE\n${WHITE}"
 
 
 # Add rules
 echo -n "    + Adding rules"
 
-ufw allow 80,443,8080,9443/tcp 1>/dev/null
+ufw allow 443/tcp 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 

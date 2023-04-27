@@ -45,7 +45,7 @@ services:
             - /home/fporto/data/website-root:/var/www/html:ro
             # - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:ro
         ports:
-            - "443:443"
+            - 443:443
         networks:
             - web-network
 
