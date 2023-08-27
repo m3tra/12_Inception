@@ -13,6 +13,8 @@ COPY ./conf/db-config.sql /tmp/
 RUN chmod -R 770 /var/lib/mysql && \
 	chgrp -R mysql /var/lib/mysql
 
+RUN service mysql start
+
 COPY tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
