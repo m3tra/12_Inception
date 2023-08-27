@@ -1,16 +1,16 @@
-FROM debian:bullseye
+# FROM debian:bullseye
 
-RUN apt-get update && \
-	apt-get install -y \
-		mariadb-server
+# RUN apt-get update && \
+# 	apt-get install -y \
+# 		mariadb-server
 
-# FROM alpine:3.17
+FROM alpine:3.17
 
-# RUN	apk update && \
-# 	apk upgrade && \
-# 	apk add --no-cache \
-# 		mariadb \
-# 		mariadb-client
+RUN	apk update && \
+	apk upgrade && \
+	apk add --no-cache \
+		mariadb \
+		mariadb-client
 
 EXPOSE 3306
 
