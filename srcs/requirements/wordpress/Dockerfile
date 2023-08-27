@@ -18,7 +18,7 @@ RUN apt-get update \
 RUN wget https://wordpress.org/latest.tar.gz \
 	&& tar -xzvf latest.tar.gz \
 	&& rm -r latest.tar.gz
-# RUN mv wordpress /
+RUN mv wordpress /var/www/html/
 
 # Generate ssl certificate for https
 RUN mkdir -p /etc/nginx/ssl/ \
