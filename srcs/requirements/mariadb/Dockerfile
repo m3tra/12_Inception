@@ -22,8 +22,9 @@ RUN chmod -R 777 /var/lib/mysql && \
 	chown -R mysql:mysql /var/lib/mysql && \
 	chgrp -R mysql /var/lib/mysql
 
-RUN service mysql start
-# RUN mkdir -p /run/mysqld/
+# RUN service mysql start
+RUN mkdir -p /run/mysqld/ && \
+	chown -R mysql:mysql /run/mysql
 # RUN touch /run/mysqld/mysqld.sock
 
 COPY tools/docker-entrypoint.sh /
