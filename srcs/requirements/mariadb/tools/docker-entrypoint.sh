@@ -13,4 +13,4 @@ if [ ! -d "$DATABASE_PATH" ]; then
 	mysqladmin -uroot -p$MYSQL_ROOT_PASSWORD shutdown;
 fi
 
-# exec "$@"
+exec "$@"
