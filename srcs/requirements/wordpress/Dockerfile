@@ -14,6 +14,8 @@ RUN apt-get update \
 		php7.4-gd \
 		php7.4-curl
 
+RUN mkdir -p /var/www/html
+
 # Download, extract and install wordpress
 RUN wget https://wordpress.org/latest.tar.gz \
 	&& tar -xzvf latest.tar.gz \
