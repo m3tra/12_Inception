@@ -4,6 +4,12 @@ RUN apt-get update && \
 	apt-get install -y \
 		mariadb-server
 
+RUN apt-get purge mysql-server mysql-common && \
+	apt-get purge mysql-client && \
+	apt-get autoremove mysql-server mysql-client mysql-common && \
+	apt-get autoclean mysql-server mysql-client mysql-common && \
+	apt-get install mysql-server mysql-common mysql-client
+
 EXPOSE 3306
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
