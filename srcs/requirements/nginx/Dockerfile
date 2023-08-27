@@ -109,15 +109,15 @@ FROM alpine:3.17
 # 	openssl
 
 RUN apk add --no-cache \
-	nginx \
-	openssl
+		nginx \
+		openssl
 
 # nginx SSL
-RUN mkdir -m 777 -p /etc/nginx/ssl
-RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
-	-out /etc/nginx/ssl/server.crt \
-	-keyout /etc/nginx/ssl/server.key \
-	-subj "/C=/ST=/L=/O=/OU=/CN=/"
+RUN mkdir -m 777 -p /etc/nginx/ssl && \
+	openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
+		-out /etc/nginx/ssl/server.crt \
+		-keyout /etc/nginx/ssl/server.key \
+		-subj "/C=/ST=/L=/O=/OU=/CN=/"
 
 COPY conf/nginx.conf /etc/nginx/conf.d
 
