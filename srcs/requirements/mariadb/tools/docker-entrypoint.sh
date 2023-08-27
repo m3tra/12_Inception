@@ -2,7 +2,7 @@
 
 DATABASE_PATH=/var/lib/mysql/$MYSQL_DATABASE
 
-if [ ! -d "$DATABASE_PATH" ] then
+if [ ! -d "$DATABASE_PATH" ]; then
 	service mysql start;
 	mysql -u root --execute= \
 		"CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE; \
