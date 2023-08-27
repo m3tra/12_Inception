@@ -13,6 +13,7 @@ COPY ./tools/docker-entrypoint.sh /tmp/
 
 RUN chmod +x /tmp/docker-entrypoint.sh
 
-ENTRYPOINT [ "/usr/bin/dumb-init", "/tmp/docker-entrypoint.sh" ]
+# ENTRYPOINT [ "/usr/bin/dumb-init", "/tmp/docker-entrypoint.sh" ]
+ENTRYPOINT [ "/tmp/docker-entrypoint.sh" ]
 
 CMD [ "mysqld" ]
