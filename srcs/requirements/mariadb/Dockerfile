@@ -17,4 +17,4 @@ RUN chmod +x /tmp/docker-entrypoint.sh
 ENTRYPOINT [ "/tmp/docker-entrypoint.sh" ]
 # ENTRYPOINT ["mysqld", "--user=mysql", "--init-file=/tmp/db-config.sql"]
 
-CMD [ "mysqld" ]
+CMD [ "mysqld", "--user=mysql" ]
