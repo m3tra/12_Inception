@@ -207,5 +207,15 @@ printf "${GREEN} DONE\n${WHITE}"
 printf "${GREEN}DONE\n${WHITE}"
 
 
+
+#######
+# SSH #
+#######
+
+apt-get install openssh-server
+ufw allow 22/tcp 1>/dev/null
+
+
+
 # Start containers
 make
