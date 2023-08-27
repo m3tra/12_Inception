@@ -212,7 +212,7 @@ printf "${GREEN}DONE\n${WHITE}"
 # SSH #
 #######
 
-apt-get install openssh-server
+apt-get install openssh-server -y
 ufw allow 22/tcp 1>/dev/null
 
 
