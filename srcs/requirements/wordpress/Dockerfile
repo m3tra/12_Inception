@@ -17,7 +17,7 @@ RUN apt-get update \
 # Download, extract and install wordpress
 RUN wget https://wordpress.org/latest.tar.gz \
 	&& tar -xzvf latest.tar.gz \
-	&& rm -r latest.tar.gz \
+	&& rm -r latest.tar.gz
 RUN mv wordpress /
 
 # Generate ssl certificate for https
