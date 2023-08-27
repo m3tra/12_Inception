@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DATABASE_PATH=/var/lib/mysql/$MYSQL_DATABASE
+DATABASE_PATH=/var/lib/mysqld/$MYSQL_DATABASE
 
 if [ ! -d "$DATABASE_PATH" ]; then
 	service mysql start;
