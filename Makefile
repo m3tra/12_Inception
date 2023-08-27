@@ -12,15 +12,15 @@ all: up
 
 up:
 	@printf $(GREEN)"Starting"$(WHITE)" containers\n"
-	@docker-compose -f srcs/docker-compose.yml up
+	@docker compose -f srcs/docker-compose.yml up
 
 down:
 	@printf $(YELLOW)"Stopping"$(WHITE)" containers\n"
-	@docker-compose -f srcs/docker-compose.yml down
+	@docker compose -f srcs/docker-compose.yml down
 
 re:
 	@printf $(GREEN)"Starting/Rebuilding"$(WHITE)" containers\n"
-	@docker-compose -f srcs/docker-compose.yml up -d --build
+	@docker compose -f srcs/docker-compose.yml up -d --build
 
 clean:
 	@printf $(YELLOW)"Stopping"$(WHITE)" containers\n"
