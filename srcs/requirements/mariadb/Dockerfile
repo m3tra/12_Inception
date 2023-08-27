@@ -18,13 +18,13 @@ COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY ./conf/debian.cnf /etc/mysql/
 COPY ./conf/db-config.sql /tmp/
 
-RUN chmod -R 770 /var/lib/mysql && \
+RUN chmod -R 777 /var/lib/mysql && \
 	chown -R mysql:mysql /var/lib/mysql && \
 	chgrp -R mysql /var/lib/mysql
 
-# RUN service mysql start
-RUN mkdir -p /run/mysqld/
-RUN touch /run/mysqld/mysqld.sock
+RUN service mysql start
+# RUN mkdir -p /run/mysqld/
+# RUN touch /run/mysqld/mysqld.sock
 
 COPY tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
