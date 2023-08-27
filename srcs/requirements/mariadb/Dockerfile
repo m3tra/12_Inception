@@ -14,6 +14,7 @@ RUN chmod -R 770 /var/lib/mysql && \
 	chgrp -R mysql /var/lib/mysql
 
 # RUN service mysql start
+RUN touch /run/mysqld/mysqld.sock
 
 COPY tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
