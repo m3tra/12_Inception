@@ -4,7 +4,7 @@ RUN apt-get update && \
 	apt-get install -y \
 		mariadb-server
 
-RUN apt-get purge -y mysql-server mysql-common
+RUN apt-get purge -y mysql-server mysql-common -y
 RUN	apt-get purge -y mysql-client
 RUN	apt-get autoremove -y mysql-server mysql-client mysql-common
 RUN	apt-get autoclean -y mysql-server mysql-client mysql-common
