@@ -12,7 +12,6 @@ then
 		FLUSH PRIVILEGES;"
 	# mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < wordpress.sql ;
 	mysqladmin -uroot -p$MYSQL_ROOT_PASSWORD shutdown;
-
 fi
 
 exec "$@"

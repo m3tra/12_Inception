@@ -8,7 +8,7 @@ YELLOW="\033[33m"
 PURPLE="\033[38;5;13m"
 
 if [[ $EUID -ne 0 ]]; then
-	echo "$0 requires sudo."
+	echo "$0 requires sudo privileges."
 	exit 2
 fi
 
