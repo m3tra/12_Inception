@@ -16,11 +16,13 @@ RUN apt-get update \
 
 RUN mkdir -p /var/www/html
 
+WORKDIR /var/www/html
+
 # Download, extract and install wordpress
 RUN wget https://wordpress.org/latest.tar.gz \
 	&& tar -xzvf latest.tar.gz \
 	&& rm -r latest.tar.gz
-RUN mv wordpress /var/www/html/
+# RUN mv wordpress /var/www/html/
 
 # Generate ssl certificate for https
 RUN mkdir -p /etc/nginx/ssl/ \
