@@ -1,5 +1,7 @@
 #!/bin/sh
 
+mysql_install_db
+
 DATABASE_PATH=/var/lib/mysqld/$MYSQL_DATABASE
 
 if [ ! -d "$DATABASE_PATH" ]; then
