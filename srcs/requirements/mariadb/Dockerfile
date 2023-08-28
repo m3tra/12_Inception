@@ -1,16 +1,16 @@
-# FROM debian:bullseye
+FROM debian:bullseye
 
-# RUN apt-get update && \
-# 	apt-get install -y \
-# 		mariadb-server
+RUN apt-get update && \
+	apt-get install -y \
+		mariadb-server
 
-FROM alpine:3.17
+# FROM alpine:3.17
 
-RUN	apk update && \
-	apk upgrade && \
-	apk add --no-cache \
-		mariadb \
-		mariadb-client
+# RUN	apk update && \
+# 	apk upgrade && \
+# 	apk add --no-cache \
+# 		mariadb \
+# 		mariadb-client
 
 EXPOSE 3306
 
@@ -18,13 +18,17 @@ COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY ./conf/debian.cnf /etc/mysql/
 COPY ./conf/db-config.sql /tmp/
 
-RUN chmod -R 777 /var/lib/mysql && \
-	chown -R mysql:mysql /var/lib/mysql && \
-	chgrp -R mysql /var/lib/mysql
+# RUN chmod -R 777 /var/lib/mysql && \
+# 	chown -R mysql:mysql /var/lib/mysql && \
+# 	chgrp -R mysql /var/lib/mysql
+
+RUN mkdir -p /var/run/mysqld && \
+	chmod -R 777 /var/run/mysqld && \
+	chown -R mysql:mysql /var/run/mysqld
 
 # RUN service mysql start
-RUN mkdir -p /run/mysqld/ && \
-	chown -R mysql:mysql /run/mysqld
+# RUN mkdir -p /run/mysqld/ && \
+# 	chown -R mysql:mysql /run/mysqld
 # RUN touch /run/mysqld/mysqld.sock
 
 COPY tools/docker-entrypoint.sh /
