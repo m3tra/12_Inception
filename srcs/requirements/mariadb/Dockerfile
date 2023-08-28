@@ -2,8 +2,7 @@ FROM debian:buster
 
 RUN apt-get update && \
 	apt-get install -y \
-		mariadb-server \
-		mariadb-client
+		mariadb-server
 
 # FROM alpine:3.17
 

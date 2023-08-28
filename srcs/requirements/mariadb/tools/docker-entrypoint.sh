@@ -39,6 +39,6 @@ mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < wordpress.sql
 
 fi
 
-/etc/init.d/mysql stop
+# /etc/init.d/mysql stop
 
 exec "$@"
