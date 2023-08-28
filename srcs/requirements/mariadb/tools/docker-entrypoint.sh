@@ -9,7 +9,7 @@
 # 		GRANT ALL ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' WITH GRANT OPTION;; \
 # 		ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD'; \
 # 		FLUSH PRIVILEGES;"
-# 	# mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < wordpress.sql ;
+# 	# mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < db-config.sql ;
 # 	mysqladmin -uroot -p$MYSQL_ROOT_PASSWORD shutdown;
 # fi
 
@@ -35,7 +35,7 @@ CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE; \
 GRANT ALL ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'; \
 FLUSH PRIVILEGES;" | mysql -u root
 
-mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < wordpress.sql
+mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < db-config.sql
 
 fi
 
