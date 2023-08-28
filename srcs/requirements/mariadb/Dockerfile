@@ -35,7 +35,8 @@ COPY tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
 # ENTRYPOINT [ "/usr/bin/dumb-init", "/tmp/docker-entrypoint.sh" ]
-ENTRYPOINT [ "/docker-entrypoint.sh" , "mysqld", "--user=mysql"]
+ENTRYPOINT [ "/docker-entrypoint.sh", "mysqld", "--bind-address=0.0.0.0"]
 # ENTRYPOINT ["mysqld", "--user=mysql", "--init-file=/tmp/db-config.sql"]
 
 # CMD [ "mysqld", "--user=mysql" ]
+# CMD ["mysqld", "--bind-address=0.0.0.0"]
