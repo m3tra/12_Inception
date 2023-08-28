@@ -26,7 +26,7 @@ RUN mkdir -p /var/run/mysqld && \
 	chmod -R 777 /var/run/mysqld && \
 	chown -R mysql:mysql /var/run/mysqld
 
-# RUN service mysql start
+RUN service mysql start
 # RUN mkdir -p /run/mysqld/ && \
 # 	chown -R mysql:mysql /run/mysqld
 # RUN touch /run/mysqld/mysqld.sock
