@@ -16,7 +16,8 @@ EXPOSE 3306
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY ./conf/debian.cnf /etc/mysql/
-COPY ./conf/db-config.sql /tmp/
+COPY ./conf/db-config.sql /
+COPY ./conf/wordpress2.sql /usr/local/bin/
 
 # RUN chmod -R 777 /var/lib/mysql && \
 # 	chown -R mysql:mysql /var/lib/mysql && \
