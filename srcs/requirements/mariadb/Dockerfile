@@ -1,14 +1,14 @@
-FROM debian:buster
+FROM debian:bullseye
 
-RUN apt-get update && \
-	apt-get install -y \
+RUN apt-get update
+RUN apt-get install -y \
 		mariadb-server
 
 # FROM alpine:3.17
 
-# RUN	apk update && \
-# 	apk upgrade && \
-# 	apk add --no-cache \
+# RUN	apk update \
+# &&	apk upgrade \
+# &&	apk add --no-cache \
 # 		mariadb \
 # 		mariadb-client
 
@@ -19,17 +19,17 @@ COPY ./conf/debian.cnf /etc/mysql/
 COPY ./conf/db-config.sql /
 COPY ./conf/wordpress2.sql /usr/local/bin/
 
-# RUN chmod -R 777 /var/lib/mysql && \
-# 	chown -R mysql:mysql /var/lib/mysql && \
-# 	chgrp -R mysql /var/lib/mysql
+# RUN chmod -R 777 /var/lib/mysql \
+# &&	chown -R mysql:mysql /var/lib/mysql \
+# &&	chgrp -R mysql /var/lib/mysql
 
-RUN mkdir -p /var/run/mysqld && \
-	chmod -R 777 /var/run/mysqld && \
-	chown -R mysql:mysql /var/run/mysqld
+RUN mkdir -p /var/run/mysqld \
+&&	chmod -R 777 /var/run/mysqld \
+&&	chown -R mysql:mysql /var/run/mysqld
 
 # RUN service mysql start
-# RUN mkdir -p /run/mysqld/ && \
-# 	chown -R mysql:mysql /run/mysqld
+# RUN mkdir -p /run/mysqld/ \
+# &&	chown -R mysql:mysql /run/mysqld
 # RUN touch /run/mysqld/mysqld.sock
 
 COPY tools/docker-entrypoint.sh /
