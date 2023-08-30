@@ -12,7 +12,15 @@ if [[ $EUID -ne 0 ]]; then
 	exit 2
 fi
 
-
+function cmd() {
+	$1
+	if [ $? -eq 0 ]; then
+		echo "Successfully created file"
+	else
+		echo "Could not create file" >&2
+		exit 1
+	fi
+}
 
 ########
 # User #
@@ -111,7 +119,7 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Test installation
-printf "    + ${YELLOW}Tesing${WHITE} hello-world container\n"
+printf "    + ${YELLOW}Testing${WHITE} hello-world container\n"
 
 docker run hello-world
 
@@ -176,7 +184,7 @@ printf "${GREEN} DONE\n${WHITE}"
 # Enable firewall
 echo "    + Enabling"
 
-systemctl unmask ufw.service > /dev/null
+# systemctl unmask ufw.service > /dev/null
 systemctl enable ufw.service > /dev/null
 systemctl start ufw.service > /dev/null
 ufw enable 1>/dev/null
@@ -252,4 +260,4 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Start containers
-make
+make re
