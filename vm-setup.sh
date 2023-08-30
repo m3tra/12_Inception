@@ -14,10 +14,21 @@ fi
 
 
 
+##########
+# System #
+##########
+printf "${GREEN}\nUpdating system...\n${WHITE}"
+
+apt-get update 1>/dev/null
+apt-get upgrade -y 1>/dev/null
+
+printf "${GREEN} DONE\n${WHITE}"
+
+
+
 ########
 # User #
 ########
-
 read -p "Choose user: " USER_NAME
 
 USER_EXISTS=$(cat /etc/passwd | grep $USER_NAME | wc -l)
@@ -31,26 +42,16 @@ fi
 ##########
 # Docker #
 ##########
-
 printf "${GREEN}\nSetting up Docker...\n${WHITE}"
-
-# Update
-echo -n "    + Updating system"
-
-apt-get update 1>/dev/null
-apt-get upgrade -y 1>/dev/null
-
-printf "${GREEN} DONE\n${WHITE}"
-
 
 # Install dependencies
 echo -n "    + Installing dependencies"
 
-apt-get install \
-		ca-certificates \
-		curl \
-		gnupg \
-		-y 1>/dev/null
+apt-get install -y \
+	ca-certificates \
+	curl \
+	gnupg \
+	1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -79,14 +80,14 @@ printf "${GREEN} DONE\n${WHITE}"
 echo -n "    + Installing docker"
 
 apt-get update 1>/dev/null
-apt-get install \
-		docker-ce \
-		docker-ce-cli \
-		containerd.io \
-		docker-buildx-plugin \
-		docker-compose \
-		docker-compose-plugin \
-		-y 1>/dev/null
+apt-get install -y \
+	docker-ce \
+	docker-ce-cli \
+	containerd.io \
+	docker-buildx-plugin \
+	docker-compose \
+	docker-compose-plugin \
+	1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -139,19 +140,18 @@ printf "${GREEN} DONE\n${WHITE}"
 #########
 # Utils #
 #########
-
 printf "${GREEN}\nSetting up utils (sudo, nano, htop)...${WHITE}"
 
 # Install nice-to-haves
-apt-get install \
-		sudo \
-		make \
-		nano \
-		htop \
-		-y 1>/dev/null
+apt-get install -y \
+	sudo \
+	make \
+	nano \
+	htop \
+	1>/dev/null
 
 
-# Grant user sudo
+# Grant user sudo privileges
 echo "$USER_NAME ALL=(ALL:ALL) ALL" >> /etc/sudoers
 
 printf "${GREEN} DONE\n${WHITE}"
@@ -161,14 +161,12 @@ printf "${GREEN} DONE\n${WHITE}"
 ############
 # Firewall #
 ############
-
 printf "${GREEN}\nSetting up UFW...\n${WHITE}"
 
 # Install UFW
 echo -n "    + Installing"
 
 apt-get install ufw -y 1>/dev/null
-
 export PATH=$PATH:/usr/sbin
 
 printf "${GREEN} DONE\n${WHITE}"
@@ -189,7 +187,7 @@ printf "${GREEN}    DONE\n${WHITE}"
 
 
 # Add rules
-echo -n "    + Adding rules"
+echo -n "    + Adding HTTPS rule"
 
 ufw allow 443/tcp 1>/dev/null
 
@@ -198,23 +196,58 @@ printf "${GREEN} DONE\n${WHITE}"
 
 # Reload firewall
 echo -n "    + Reloading"
-
 ufw reload 1>/dev/null
+printf "${GREEN} DONE\n${WHITE}"
+
+
+
+##############
+# SSH Server #
+##############
+printf "${GREEN}\nSetting up OpenSSH-Server...\n${WHITE}"
+
+# Install openssh-server
+echo -n "    + Installing"
+
+apt-get install openssh-server -y 1>/dev/null
+
+printf "${GREEN} DONE\n${WHITE}"
+
+# Add UFW rule
+echo -n "    + Adding UFW rule"
+
+ufw allow 22/tcp 1>/dev/null
 
 printf "${GREEN} DONE\n${WHITE}"
 
 
-printf "${GREEN}DONE\n${WHITE}"
+
+######################
+# VBox Shared Folder #
+######################
+printf "${GREEN}\nSetting up VBox Shared Folder...\n${WHITE}"
+
+# Install dependencies
+echo -n "    + Installing dependencies"
+
+apt-get install -y build-essential dkms linux-headers-$(uname -r) 1>/dev/null
+
+printf "${GREEN} DONE\n${WHITE}"
+
+# Install GuestAdditions CD Image
+echo -n "    + Installing VBox GuestAdditions"
 
 
 
-#######
-# SSH #
-#######
+printf "${GREEN} DONE\n${WHITE}"
 
-apt-get install openssh-server -y
-ufw allow 22/tcp 1>/dev/null
+# Set permissions
+echo -n "    + Setting folder permissions"
 
+usermod -aG vboxsf $USER_NAME
+chown -R $USER_NAME:users /media/
+
+printf "${GREEN} DONE\n${WHITE}"
 
 
 # Start containers
