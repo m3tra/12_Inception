@@ -30,7 +30,7 @@ fi
 ##########
 # System #
 ##########
-printf "${GREEN}\nUpdating system...${WHITE}"
+printf "${GREEN}Updating system...${WHITE}"
 
 apt-get update 1>/dev/null
 apt-get upgrade -y 1>/dev/null
