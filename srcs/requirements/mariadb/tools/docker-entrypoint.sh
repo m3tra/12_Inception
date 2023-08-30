@@ -17,6 +17,7 @@
 
 if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
 
+mysql_install_db
 service mariadb start
 
 # mysql_secure_installation << EOF
