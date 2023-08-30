@@ -176,6 +176,7 @@ printf "${GREEN} DONE\n${WHITE}"
 # Enable firewall
 echo "    + Enabling"
 
+systemctl unmask ufw.service > /dev/null
 systemctl enable ufw.service > /dev/null
 systemctl start ufw.service > /dev/null
 ufw enable 1>/dev/null
