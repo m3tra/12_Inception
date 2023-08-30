@@ -45,6 +45,17 @@ Volumes will be available in the ***/home/login/data*** folder of the host machi
 
 ## Additional
 
-- ### Portainer
+- ### Redis
 
-## ! Remove SSH
+- ### FTP server
+
+- ### Static website (i.e.: portfolio) **NO PHP**
+
+- ### Adminer
+
+- ### Service of choice (Portainer)
+
+## To remove before evaluation
+
+- SSH
+- ohmyzsh

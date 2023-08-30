@@ -14,8 +14,8 @@ RUN apt-get install -y \
 
 EXPOSE 3306
 
-COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
-COPY ./conf/debian.cnf /etc/mysql/
+COPY ./conf/50-server.conf /etc/mysql/mariadb.conf.d/
+COPY ./conf/debian.conf /etc/mysql/
 COPY ./conf/db-config.sql /
 COPY ./conf/wordpress2.sql /usr/local/bin/
 
@@ -31,6 +31,8 @@ RUN mkdir -p /var/run/mysqld \
 # RUN mkdir -p /run/mysqld/ \
 # &&	chown -R mysql:mysql /run/mysqld
 # RUN touch /run/mysqld/mysqld.sock
+
+RUN service mariadb start
 
 COPY tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
