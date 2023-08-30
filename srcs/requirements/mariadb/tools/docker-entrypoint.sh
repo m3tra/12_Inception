@@ -40,6 +40,6 @@ mariadb -u root -p $MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < wordpress2.sql
 fi
 
 # /etc/init.d/mysql stop
-service mariadb stop
+# service mariadb stop
 
 exec "$@"

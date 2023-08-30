@@ -33,8 +33,8 @@ RUN mkdir -p /var/run/mysqld \
 # RUN touch /run/mysqld/mysqld.sock
 
 RUN mysql_install_db \
-&& service mariadb start \
-&& service mariadb stop
+&& service mariadb start
+# && service mariadb stop
 
 COPY tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
