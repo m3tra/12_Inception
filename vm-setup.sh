@@ -14,18 +14,6 @@ fi
 
 
 
-##########
-# System #
-##########
-printf "${GREEN}\nUpdating system...\n${WHITE}"
-
-apt-get update 1>/dev/null
-apt-get upgrade -y 1>/dev/null
-
-printf "${GREEN} DONE\n${WHITE}"
-
-
-
 ########
 # User #
 ########
@@ -36,6 +24,18 @@ if [[ USER_EXISTS -eq 0 ]]; then
 	adduser $USER_NAME
 	su $USER_NAME
 fi
+
+
+
+##########
+# System #
+##########
+printf "${GREEN}\nUpdating system...${WHITE}"
+
+apt-get update 1>/dev/null
+apt-get upgrade -y 1>/dev/null
+
+printf "${GREEN} DONE\n${WHITE}"
 
 
 
