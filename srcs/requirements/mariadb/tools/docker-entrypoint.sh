@@ -19,16 +19,16 @@ if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]; then
 
 service mariadb start
 
-mysql_secure_installation << EOF
+# mysql_secure_installation << EOF
 
-y
-$MYSQL_ROOT_PASSWORD
-$MYSQL_ROOT_PASSWORD
-y
-n
-y
-y
-EOF
+# y
+# $MYSQL_ROOT_PASSWORD
+# $MYSQL_ROOT_PASSWORD
+# y
+# n
+# y
+# y
+# EOF
 
 echo "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD'; FLUSH PRIVILEGES;" | mysql -uroot
 
