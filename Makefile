@@ -32,8 +32,8 @@ clean:
 	@docker images -qa | xargs docker rmi -f
 #	@docker rmi -f $(docker images -qa) > /dev/null
 
-	@printf $(RED)"Removing"$(WHITE)" volumes\n"
-	@docker volume ls -q | xargs docker volume rm
+#	@printf $(RED)"Removing"$(WHITE)" volumes\n"
+#	@docker volume ls -q | xargs docker volume rm
 #	@docker volume rm $(docker volume ls -q) > /dev/null
 
 	@printf $(RED)"Removing"$(WHITE)" networks\n"
