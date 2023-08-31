@@ -99,20 +99,20 @@
 # COPY conf/nginx.conf /etc/nginx/conf.d/
 
 
-# FROM debian:bullseye
+FROM debian:bullseye
 
-#install all the program
-# RUN apt-get update \
-# &&	apt-get install -y \
-# 		nginx \
-# 		openssl
-
-
-FROM alpine:3.17
-
-RUN apk add --no-cache \
+# install all the program
+RUN apt-get update \
+&&	apt-get install -y \
 		nginx \
 		openssl
+
+
+# FROM alpine:3.17
+
+# RUN apk add --no-cache \
+# 		nginx \
+# 		openssl
 
 # nginx SSL
 RUN mkdir -m 777 -p /etc/nginx/ssl \
