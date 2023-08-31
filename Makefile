@@ -41,6 +41,7 @@ clean:
 #	@docker network rm $(docker network ls -q) > /dev/null
 
 fclean: clean
+	@docker prune images -af
 	@printf $(RED)"Removing"$(PURPLE)" ~/data"$(WHITE)" directory\n"
 	@rm -rf $HOME/data
 
