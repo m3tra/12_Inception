@@ -26,7 +26,11 @@ RUN mkdir -m 777 -p /etc/nginx/ssl \
 		-keyout /etc/nginx/ssl/server.key \
 		-subj "/C=/ST=/L=/O=/OU=/CN=/"
 
-COPY conf/nginx.conf /etc/nginx/conf.d
+# COPY conf/nginx.conf /etc/nginx/conf.d
+WORKDIR /etc/nginx/sites-available/
+RUN rm ./default
+COPY conf/nginx.conf .
+RUN mv ./nginx.conf ./default
 
 # nginx config
 RUN mkdir -p /run/nginx
