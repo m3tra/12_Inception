@@ -91,9 +91,9 @@ set -e
 
 
 
-wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-chmod +x wp-cli.phar
-mv wp-cli.phar /usr/local/bin/wp
+# wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+# chmod +x wp-cli.phar
+# mv wp-cli.phar /usr/local/bin/wp
 
 # wp core download \
 # 	--allow-root
@@ -129,8 +129,6 @@ mv wp-cli.phar /usr/local/bin/wp
 # 	--user_pass=$WP_USER_PASSWORD \
 # 	--role=author \
 # 	--allow-root
-
-# mkdir /run/php
 
 # # exec "$@"
 # /usr/sbin/php-fpm7.4 -F
