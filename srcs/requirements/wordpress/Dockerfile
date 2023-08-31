@@ -30,5 +30,5 @@ COPY conf/wp-config.php ./wordpress/
 # RUN chmod +x /docker-entrypoint.sh
 # ENTRYPOINT ["/docker-entrypoint.sh"]
 
-CMD ["php-fpm", "-F"]
+CMD ["/usr/bin/php-fpm", "-F"]
 # CMD ["tail", "-f", "/dev/null"]
