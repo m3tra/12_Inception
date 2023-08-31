@@ -91,19 +91,23 @@ set -e
 
 
 
-wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-chmod +x wp-cli.phar \
-mv wp-cli.phar /usr/local/bin/wp \
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+
 wp core download \
-	--allow-root \
+	--allow-root
+
 wp config create \
 	--dbname=$MYSQL_DATABASE \
 	--dbuser=$MYSQL_USER \
 	--dbpass=$MYSQL_ROOT_PASSWORD \
 	--dbhost=$MYSQL_HOSTNAME \
-	--allow-root \
+	--allow-root
+
 wp db create \
-	--allow-root\
+	--allow-root
+
 wp core install \
 	--url=$DOMAIN_NAME \
 	--title="$WP_TITLE" \
@@ -111,11 +115,14 @@ wp core install \
 	--admin_password=$MYSQL_USER_PASSWORD \
 	--admin_email=$WP_ADMIN_EMAIL \
 	--skip-email \
-	--allow-root \
+	--allow-root
+
 wp core update \
-	--allow-root \
+	--allow-root
+
 wp plugin update --all \
-	--allow-root \
+	--allow-root
+
 wp user create \
 	$WP_USER \
 	$WP_USER_EMAIL \
