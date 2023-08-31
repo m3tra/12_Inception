@@ -26,6 +26,9 @@ WORKDIR /var/www/html
 EXPOSE 9000
 
 COPY conf/wp-config.php ./wordpress/
+
+RUN mkdir /run/php
+
 # COPY tools/docker-entrypoint.sh /
 # RUN chmod +x /docker-entrypoint.sh
 # ENTRYPOINT ["/docker-entrypoint.sh"]
