@@ -1,13 +1,13 @@
 [client]
 host     = localhost
 user     = root
-password = {$WP_ADMIN_PASSWORD}
+password = {$MYSQL_USER_PASSWORD}
 socket   = /var/run/mysqld/mysqld.sock
 
 [mysql_upgrade]
 host     = localhost
 user     = root
-password = {$WP_ADMIN_PASSWORD}
+password = {$MYSQL_USER_PASSWORD}
 socket   = /var/run/mysqld/mysqld.sock
 basedir  = /usr
 
