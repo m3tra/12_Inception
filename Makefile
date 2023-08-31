@@ -24,7 +24,7 @@ re:
 
 clean:
 	@printf $(YELLOW)"Stopping"$(WHITE)" containers\n"
-	@docker ps -aq | xargs docker stop 2>/dev/null | xargs docker rm
+	@docker ps -aq | xargs docker stop 2>/dev/null | xargs docker rm 2>/dev/null
 #	@docker stop $(docker ps -qa) > /dev/null
 #	@docker rm $(docker ps -qa) > /dev/null
 
