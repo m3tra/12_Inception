@@ -19,15 +19,14 @@ RUN mkdir -p /var/www/html
 WORKDIR /var/www/html
 
 # Download, extract and install wordpress
-RUN wget https://wordpress.org/latest.tar.gz \
-&&	tar -xzvf latest.tar.gz \
-&&	rm -r latest.tar.gz
-# RUN mv wordpress /var/www/html/
+# RUN wget https://wordpress.org/latest.tar.gz \
+# &&	tar -xzvf latest.tar.gz \
+# &&	rm -r latest.tar.gz
 
 EXPOSE 9000
 
-COPY tools/docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# COPY tools/docker-entrypoint.sh /
+# RUN chmod +x /docker-entrypoint.sh
+# ENTRYPOINT ["/docker-entrypoint.sh"]
 
-CMD ["php-fpm"]
+# CMD ["php-fpm"]
