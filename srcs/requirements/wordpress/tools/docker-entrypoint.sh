@@ -117,8 +117,8 @@ wp core install \
 	--skip-email \
 	--allow-root
 
-wp core update \
-	--allow-root
+# wp core update \
+# 	--allow-root
 
 wp plugin update --all \
 	--allow-root
