@@ -32,6 +32,15 @@ set -e
 # 	sleep 2
 # done
 
+mkdir -p /var/www/html
+
+if [ ! -d "/var/www/html/wordpress" ]; then
+	echo "no folder"
+	wget https://wordpress.org/latest.tar.gz
+	tar -xzvf latest.tar.gz
+	rm -r latest.tar.gz
+fi
+
 cd /var/www/html/wordpress
 
 if [ ! -f /var/www/html/wordpress/index.php ]; then
