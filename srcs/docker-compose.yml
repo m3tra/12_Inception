@@ -80,27 +80,27 @@ services:
 
 
 
-    portainer:
-        # depends_on:
-        #     - certbot
-        build:
-            context: requirements/bonus/portainer
-            dockerfile: Dockerfile
-        container_name: portainer
-        restart: always
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-            - /home/fporto/data/portainer/data:/data
-            # - /home/fporto/data/nginx/tools/certbot/conf:/data/ssl:ro
-        # ports:
-            # - 8000:8000
-            # - 9000:9000
-            # - 9443:9443
-        networks:
-            - web-network
-        # command:
-        #     --sslcert /data/server.crt
-        #     --sslkey /data/server.key
+    # portainer:
+    #     # depends_on:
+    #     #     - certbot
+    #     build:
+    #         context: requirements/bonus/portainer
+    #         dockerfile: Dockerfile
+    #     container_name: portainer
+    #     restart: always
+    #     volumes:
+    #         - /var/run/docker.sock:/var/run/docker.sock
+    #         - /home/fporto/data/portainer/data:/data
+    #         # - /home/fporto/data/nginx/tools/certbot/conf:/data/ssl:ro
+    #     # ports:
+    #         # - 8000:8000
+    #         # - 9000:9000
+    #         # - 9443:9443
+    #     networks:
+    #         - web-network
+    #     # command:
+    #     #     --sslcert /data/server.crt
+    #     #     --sslkey /data/server.key
 
 
 
