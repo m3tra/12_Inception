@@ -24,12 +24,12 @@ re:
 
 clean:
 	@printf $(YELLOW)"Stopping"$(WHITE)" containers\n"
-	@docker ps -aq | xargs docker stop 2>/dev/null | xargs docker rm 2>/dev/null
+	-@docker ps -aq | xargs docker stop 2>/dev/null | xargs docker rm 2>/dev/null
 #	@docker stop $(docker ps -qa) > /dev/null
 #	@docker rm $(docker ps -qa) > /dev/null
 
 	@printf $(RED)"Removing"$(WHITE)" images\n"
-	@docker images -qa | xargs docker rmi -f 2>/dev/null
+	-@docker images -qa | xargs docker rmi -f 2>/dev/null
 #	@docker rmi -f $(docker images -qa) > /dev/null
 
 #	@printf $(RED)"Removing"$(WHITE)" volumes\n"
@@ -37,7 +37,7 @@ clean:
 #	@docker volume rm $(docker volume ls -q) > /dev/null
 
 	@printf $(RED)"Removing"$(WHITE)" networks\n"
-	@docker network ls -q | xargs docker network rm 2>/dev/null
+	-@docker network ls -q | xargs docker network rm 2>/dev/null
 #	@docker network rm $(docker network ls -q) > /dev/null
 
 fclean: clean
