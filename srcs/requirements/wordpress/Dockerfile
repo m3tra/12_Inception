@@ -25,9 +25,10 @@ WORKDIR /var/www/html
 
 EXPOSE 9000
 
+COPY conf/wp-config.php ./wordpress/
 # COPY tools/docker-entrypoint.sh /
 # RUN chmod +x /docker-entrypoint.sh
 # ENTRYPOINT ["/docker-entrypoint.sh"]
 
-# CMD ["php-fpm"]
-CMD ["tail", "-f", "/dev/null"]
+CMD ["php-fpm", "-F"]
+# CMD ["tail", "-f", "/dev/null"]

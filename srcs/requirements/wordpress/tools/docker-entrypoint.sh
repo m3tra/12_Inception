@@ -32,7 +32,7 @@ set -e
 # 	sleep 2
 # done
 
-mkdir -p /var/www/html
+# mkdir -p /var/www/html
 
 if [ ! -d "/var/www/html/wordpress" ]; then
 	echo "no folder"
