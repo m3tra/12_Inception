@@ -130,4 +130,5 @@ wp user create \
 	--role=author \
 	--allow-root
 
-exec "$@"
+# exec "$@"
+/usr/sbin/php-fpm7.4 -F
