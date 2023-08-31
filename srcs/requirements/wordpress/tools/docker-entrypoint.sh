@@ -95,42 +95,42 @@ wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
-wp core download \
-	--allow-root
-
-wp config create \
-	--dbname=$MYSQL_DATABASE \
-	--dbuser=$MYSQL_USER \
-	--dbpass=$MYSQL_ROOT_PASSWORD \
-	--dbhost=$MYSQL_HOSTNAME \
-	--allow-root
-
-wp db create \
-	--allow-root
-
-wp core install \
-	--url=$DOMAIN_NAME \
-	--title="$WP_TITLE" \
-	--admin_user=$MYSQL_USER \
-	--admin_password=$MYSQL_USER_PASSWORD \
-	--admin_email=$WP_ADMIN_EMAIL \
-	--skip-email \
-	--allow-root
-
-# wp core update \
+# wp core download \
 # 	--allow-root
 
-wp plugin update --all \
-	--allow-root
+# wp config create \
+# 	--dbname=$MYSQL_DATABASE \
+# 	--dbuser=$MYSQL_USER \
+# 	--dbpass=$MYSQL_ROOT_PASSWORD \
+# 	--dbhost=$MYSQL_HOSTNAME \
+# 	--allow-root
 
-wp user create \
-	$WP_USER \
-	$WP_USER_EMAIL \
-	--user_pass=$WP_USER_PASSWORD \
-	--role=author \
-	--allow-root
+# wp db create \
+# 	--allow-root
 
-mkdir /run/php
+# wp core install \
+# 	--url=$DOMAIN_NAME \
+# 	--title="$WP_TITLE" \
+# 	--admin_user=$MYSQL_USER \
+# 	--admin_password=$MYSQL_USER_PASSWORD \
+# 	--admin_email=$WP_ADMIN_EMAIL \
+# 	--skip-email \
+# 	--allow-root
 
-# exec "$@"
-/usr/sbin/php-fpm7.4 -F
+# # wp core update \
+# # 	--allow-root
+
+# wp plugin update --all \
+# 	--allow-root
+
+# wp user create \
+# 	$WP_USER \
+# 	$WP_USER_EMAIL \
+# 	--user_pass=$WP_USER_PASSWORD \
+# 	--role=author \
+# 	--allow-root
+
+# mkdir /run/php
+
+# # exec "$@"
+# /usr/sbin/php-fpm7.4 -F
