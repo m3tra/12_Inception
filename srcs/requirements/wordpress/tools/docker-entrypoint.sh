@@ -97,9 +97,11 @@ chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp.phar
 
 wp.phar core download \
+	--path=/var/www/html \
 	--allow-root
 
 wp.phar config create \
+	--path=/var/www/html \
 	--dbname=$WP_DB_HOST \
 	--dbuser=$MYSQL_USER \
 	--dbpass=$MYSQL_ROOT_PASSWORD \
@@ -107,9 +109,11 @@ wp.phar config create \
 	--allow-root
 
 wp.phar db create \
+	--path=/var/www/html \
 	--allow-root
 
 wp.phar core install \
+	--path=/var/www/html \
 	--url=$DOMAIN_NAME \
 	--title="$WP_TITLE" \
 	--admin_user=$MYSQL_USER \
