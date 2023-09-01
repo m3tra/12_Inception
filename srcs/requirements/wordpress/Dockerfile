@@ -57,7 +57,7 @@ RUN apt-get install -y \
 
 # COPY conf/wp-config.php ./wordpress/
 
-# RUN mkdir /run/php
+RUN mkdir /run/php
 
 EXPOSE 9000
 
