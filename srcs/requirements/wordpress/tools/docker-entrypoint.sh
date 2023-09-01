@@ -96,20 +96,20 @@ wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp.phar
 
-wp core download \
+wp.phar core download \
 	--allow-root
 
-wp config create \
+wp.phar config create \
 	--dbname=$MYSQL_DATABASE \
 	--dbuser=$MYSQL_USER \
 	--dbpass=$MYSQL_ROOT_PASSWORD \
 	--dbhost=$MYSQL_HOSTNAME \
 	--allow-root
 
-wp db create \
+wp.phar db create \
 	--allow-root
 
-wp core install \
+wp.phar core install \
 	--url=$DOMAIN_NAME \
 	--title="$WP_TITLE" \
 	--admin_user=$MYSQL_USER \
@@ -118,13 +118,13 @@ wp core install \
 	--skip-email \
 	--allow-root
 
-# wp core update \
+# wp.phar core update \
 # 	--allow-root
 
-wp plugin update --all \
+wp.phar plugin update --all \
 	--allow-root
 
-wp user create \
+wp.phar user create \
 	$WP_USER \
 	$WP_USER_EMAIL \
 	--user_pass=$WP_USER_PASSWORD \
