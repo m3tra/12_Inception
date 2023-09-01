@@ -46,9 +46,9 @@ RUN apt-get install -y \
 # 		--role=author \
 # 		--allow-root
 
-RUN mkdir -p /var/www/html
+# RUN mkdir -p /var/www/html
 
-WORKDIR /var/www/html
+# WORKDIR /var/www/html
 
 # Download, extract and install wordpress
 # RUN wget https://wordpress.org/latest.tar.gz \
@@ -57,7 +57,7 @@ WORKDIR /var/www/html
 
 # COPY conf/wp-config.php ./wordpress/
 
-RUN mkdir /run/php
+# RUN mkdir /run/php
 
 EXPOSE 9000
 
@@ -66,4 +66,4 @@ RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # CMD ["/usr/sbin/php-fpm7.4", "-F"]
-CMD ["tail", "-f", "/dev/null"]
+# CMD ["tail", "-f", "/dev/null"]
