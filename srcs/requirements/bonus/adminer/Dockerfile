@@ -81,5 +81,7 @@ RUN	export DEBIAN_FRONTEND="noninteractive" \
 # COPY	docker_entrypoint.sh /usr/local/bin/
 # ENTRYPOINT	[ "docker_entrypoint.sh" ]
 
+EXPOSE 9000
+
 USER	adminer
 CMD	[ "php-fpm7.4" ]
