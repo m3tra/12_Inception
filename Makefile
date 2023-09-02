@@ -31,7 +31,7 @@ clean:
 
 	@printf $(RED)"Removing"$(WHITE)" volumes\n"
 	-@docker volume ls -q | xargs docker volume rm 2>/dev/null
-	-@rm -rf /home/fporto/data/
+	-@sudo rm -rf /home/fporto/data/
 
 	@printf $(RED)"Removing"$(WHITE)" networks\n"
 	-@docker network ls -q | xargs docker network rm 2>/dev/null
