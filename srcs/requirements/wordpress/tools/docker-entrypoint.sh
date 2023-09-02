@@ -102,7 +102,7 @@ wp.phar core download \
 
 wp.phar config create \
 	--path=/var/www/html \
-	--dbname=$WP_DB_HOST \
+	--dbname=$MYSQL_HOSTNAME \
 	--dbuser=$MYSQL_USER \
 	--dbpass=$MYSQL_ROOT_PASSWORD \
 	--dbhost=$MYSQL_HOSTNAME \
