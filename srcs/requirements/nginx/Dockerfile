@@ -31,7 +31,7 @@ RUN sed -i 's/# server_tokens/server_tokens/g' /etc/nginx/nginx.conf
 
 WORKDIR /etc/nginx/sites-available/
 RUN rm ./default
-COPY conf/default ./default
+COPY conf/default default
 
 # nginx config
 RUN mkdir -p /run/nginx
