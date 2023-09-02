@@ -58,7 +58,10 @@ RUN apt-get install -y \
 
 # COPY conf/wp-config.php ./wordpress/
 
-RUN mkdir /run/php
+
+
+
+# RUN mkdir /run/php
 
 EXPOSE 9000
 
@@ -67,4 +70,4 @@ RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # CMD ["/usr/sbin/php-fpm7.4", "-F"]
-# CMD ["tail", "-f", "/dev/null"]
+CMD ["tail", "-f", "/dev/null"]
