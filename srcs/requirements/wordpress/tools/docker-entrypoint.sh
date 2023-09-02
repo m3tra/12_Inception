@@ -2,7 +2,7 @@
 
 # wp core download --allow-root
 
-# wp config create --dbname=$MYSQL_DATABASE --dbuser=$MYSQL_USER --dbpass=$MYSQL_ROOT_PASSWORD --dbhost=mariadb --allow-root
+# wp config create --dbname=$MYSQL_DB_NAME --dbuser=$MYSQL_USER --dbpass=$MYSQL_ROOT_PASSWORD --dbhost=mariadb --allow-root
 
 # # wp config set WP_REDIS_HOST redis --allow-root
 # # wp config set WP_REDIS_PORT 6379 --raw --allow-root
@@ -21,7 +21,7 @@
 set -e
 
 # # waiting for mariadb
-# while ! mariadb -hmariadb -u$MYSQL_USER -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE > /dev/null 2>&1; do
+# while ! mariadb -hmariadb -u$MYSQL_USER -p$MYSQL_ROOT_PASSWORD $MYSQL_DB_NAME > /dev/null 2>&1; do
 # 	echo "Waiting for MariaDB ..."
 # 	sleep 2
 # done
@@ -49,7 +49,7 @@ set -e
 
 # if [ ! -f /var/www/html/wordpress/wp-config.php ]; then
 # 	wp config create \
-# 		--dbname=$MYSQL_DATABASE \
+# 		--dbname=$MYSQL_DB_NAME \
 # 		--dbuser=$MYSQL_USER \
 # 		--dbpass=$MYSQL_ROOT_PASSWORD \
 # 		--dbhost=mariadb \
@@ -102,7 +102,7 @@ wp.phar core download \
 
 wp.phar config create \
 	--path=/var/www/html \
-	--dbname=$MYSQL_HOSTNAME \
+	--dbname=$MYSQL_DB_NAME \
 	--dbuser=$MYSQL_USER \
 	--dbpass=$MYSQL_ROOT_PASSWORD \
 	--dbhost=$MYSQL_HOSTNAME \

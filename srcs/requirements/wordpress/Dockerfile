@@ -12,7 +12,8 @@ RUN apt-get install -y \
 		php7.4-mbstring \
 		php7.4-xml \
 		php7.4-gd \
-		php7.4-curl
+		php7.4-curl \
+		mariadb-client
 
 # RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 # &&	chmod +x wp-cli.phar \
@@ -20,7 +21,7 @@ RUN apt-get install -y \
 # &&	wp core download \
 # 		--allow-root \
 # &&	wp config create \
-# 		--dbname=$MYSQL_DATABASE \
+# 		--dbname=$MYSQL_DB_NAME \
 # 		--dbuser=$MYSQL_USER \
 # 		--dbpass=$MYSQL_ROOT_PASSWORD \
 # 		--dbhost=$MYSQL_HOSTNAME \
