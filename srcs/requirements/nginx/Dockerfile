@@ -32,7 +32,7 @@ RUN mkdir -m 777 -p /etc/nginx/ssl \
 RUN mkdir -p /etc/nginx/sites-available/
 WORKDIR /etc/nginx/sites-available/
 RUN rm ./default
-COPY conf/default ./
+COPY ./conf/default /etc/nginx/sites-available/
 
 # nginx config
 RUN mkdir -p /run/nginx
