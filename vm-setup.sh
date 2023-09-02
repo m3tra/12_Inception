@@ -12,16 +12,6 @@ if [[ $EUID -ne 0 ]]; then
 	exit 2
 fi
 
-function cmd() {
-	$1
-	if [ $? -eq 0 ]; then
-		echo "Successfully created file"
-	else
-		echo "Could not create file" >&2
-		exit 1
-	fi
-}
-
 ########
 # User #
 ########
