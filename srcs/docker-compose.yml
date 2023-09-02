@@ -6,7 +6,7 @@ services:
             context: requirements/mariadb
             dockerfile: Dockerfile
         container_name: mariadb
-        restart: always
+        restart: unless-stopped
         env_file: .env
         volumes:
             - /home/fporto/data/mariadb/dbdata:/var/lib/mysql
@@ -72,7 +72,7 @@ services:
             context: requirements/bonus/adminer
             dockerfile: Dockerfile
         container_name: adminer
-        restart: always
+        restart: unless-stopped
         # ports:
         #     - 8080:8080
         networks:
@@ -87,7 +87,7 @@ services:
     #         context: requirements/bonus/portainer
     #         dockerfile: Dockerfile
     #     container_name: portainer
-    #     restart: always
+    #     restart: unless-stopped
     #     volumes:
     #         - /var/run/docker.sock:/var/run/docker.sock
     #         - /home/fporto/data/portainer/data:/data
