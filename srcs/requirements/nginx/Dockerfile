@@ -29,9 +29,10 @@ RUN mkdir -m 777 -p /etc/nginx/ssl \
 # hide nginx version (hardening)
 RUN sed -i 's/# server_tokens/server_tokens/g' /etc/nginx/nginx.conf
 
+RUN mkdir -p /etc/nginx/sites-available/
 WORKDIR /etc/nginx/sites-available/
 RUN rm ./default
-COPY conf/default default
+COPY conf/default .
 
 # nginx config
 RUN mkdir -p /run/nginx
