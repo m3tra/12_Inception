@@ -91,19 +91,17 @@ set -e
 
 
 if [ ! -f /usr/local/bin/wp.phar ]; then
-
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp.phar
 
 if [ ! -f /var/www/html/wp-config-sample.php ]; then
-
 wp.phar core download \
 	--path=/var/www/html \
 	--allow-root
-
 fi
 
+if [ ! -f /var/www/html/wp-config-sample.php ]; then
 wp.phar config create \
 	--path=/var/www/html \
 	--dbname=$MYSQL_DB_NAME \
@@ -111,6 +109,7 @@ wp.phar config create \
 	--dbpass=$MYSQL_PASS \
 	--dbhost=$MYSQL_HOSTNAME \
 	--allow-root
+fi
 
 wp.phar db create \
 	--path=/var/www/html \
@@ -136,6 +135,7 @@ wp.phar plugin update \
 	--allow-root
 
 wp.phar user create \
+	--path=/var/www/html \
 	$WP_USER \
 	$WP_USER_EMAIL \
 	--user_pass=$WP_USER_PASSWORD \
@@ -144,7 +144,6 @@ wp.phar user create \
 
 sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
 chown -R www-data:www-data /var/www/html/
-
 fi
 
 # exec "$@"
