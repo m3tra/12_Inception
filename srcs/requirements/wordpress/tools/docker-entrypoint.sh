@@ -18,7 +18,7 @@
 
 # chown -R www-data:www-data /var/www/html/wordpress
 
-set -e
+# set -e
 
 # # waiting for mariadb
 # while ! mariadb -hmariadb -u$MYSQL_USER -p$MYSQL_ROOT_PASS $MYSQL_DB_NAME > /dev/null 2>&1; do
@@ -111,8 +111,9 @@ fi
 
 wp.phar db create \
 	--path=/var/www/html \
-	--allow-root \
-|| true
+	--allow-root
+# 	--allow-root \
+# || true
 
 wp.phar core install \
 	--path=/var/www/html \
