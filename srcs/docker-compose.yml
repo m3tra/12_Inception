@@ -5,6 +5,10 @@ services:
         build:
             context: requirements/mariadb
             dockerfile: Dockerfile
+            args:
+              - MYSQL_DB_NAME
+              - MYSQL_USER
+              - MYSQL_PASS
         container_name: mariadb
         restart: unless-stopped
         env_file: .env

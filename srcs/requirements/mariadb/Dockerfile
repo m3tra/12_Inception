@@ -13,6 +13,10 @@ RUN apt-get install -y \
 # 		mariadb \
 # 		mariadb-client
 
+ARG MYSQL_DB_NAME
+ARG MYSQL_USER
+ARG MYSQL_PASS
+
 RUN mkdir -p /var/lib/mysql \
 &&	chmod -R 777 /var/lib/mysql \
 &&	chown -R mysql:mysql /var/lib/mysql
