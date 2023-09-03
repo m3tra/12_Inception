@@ -17,6 +17,9 @@ ARG MYSQL_DB_NAME
 ARG MYSQL_USER
 ARG MYSQL_PASS
 
+# ? remove?
+ARG MYSQL_ROOT_PASS
+
 RUN mkdir -p /var/lib/mysql \
 &&	chmod -R 777 /var/lib/mysql \
 &&	chown -R mysql:mysql /var/lib/mysql
@@ -58,10 +61,10 @@ RUN mkdir -p /run/mysqld \
 COPY conf/db-config.sql /
 RUN chmod 777 /db-config.sql \
 &&	chown mysql:mysql /db-config.sql \
-&&	sed -i "s/MYSQL_DB_NAME/{$MYSQL_DB_NAME}/g" /db-config.sql \
-&&	sed -i "s/MYSQL_USER/{$MYSQL_USER}/g" /db-config.sql \
-&&	sed -i "s/MYSQL_PASS/{$MYSQL_PASS}/g" /db-config.sql \
-&&	sed -i "s/MYSQL_ROOT_PASS/{$MYSQL_ROOT_PASS}/g" /db-config.sql
+&&	sed -i "s/MYSQL_DB_NAME/$MYSQL_DB_NAME/g" /db-config.sql \
+&&	sed -i "s/MYSQL_USER/$MYSQL_USER/g" /db-config.sql \
+&&	sed -i "s/MYSQL_PASS/$MYSQL_PASS/g" /db-config.sql \
+&&	sed -i "s/MYSQL_ROOT_PASS/$MYSQL_ROOT_PASS/g" /db-config.sql
 
 COPY tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
