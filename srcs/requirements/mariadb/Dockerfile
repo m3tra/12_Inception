@@ -15,7 +15,7 @@ RUN apt-get install -y \
 EXPOSE 3306
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.cnf.d/
-COPY conf/debian.cnf /etc/mysql/
+# COPY conf/debian.cnf /etc/mysql/
 COPY conf/db-config.sql /
 COPY conf/wordpress2.sql /
 
