@@ -31,7 +31,7 @@ y
 y
 EOF
 
-mariadb -u root -p $MYSQL_ROOT_PASS $MYSQL_DB_NAME < db-config.sql
+mariadb -u mysql -p $MYSQL_ROOT_PASS $MYSQL_DB_NAME < db-config.sql
 
 fi
 
