@@ -13,17 +13,17 @@ RUN apt-get install -y \
 # 		mariadb-client
 
 
-RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
+# RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 # COPY conf/debian.cnf /etc/mysql/
 COPY conf/db-config.sql /
-RUN chmod 777 /db-config.sql \
-&&	chown mysql:mysql /db-config.sql \
-&&	sed -i "s/MYSQL_DB_NAME/{$MYSQL_DB_NAME}/g" /db-config.sql \
-&&	sed -i "s/MYSQL_USER/{$MYSQL_USER}/g" /db-config.sql \
-&&	sed -i "s/MYSQL_USER_PASS/{$MYSQL_USER_PASS}/g" /db-config.sql \
-&&	sed -i "s/MYSQL_ROOT_PASS/{$MYSQL_ROOT_PASS}/g" /db-config.sql
+# RUN chmod 777 /db-config.sql \
+# &&	chown mysql:mysql /db-config.sql \
+# &&	sed -i "s/MYSQL_DB_NAME/{$MYSQL_DB_NAME}/g" /db-config.sql \
+# &&	sed -i "s/MYSQL_USER/{$MYSQL_USER}/g" /db-config.sql \
+# &&	sed -i "s/MYSQL_USER_PASS/{$MYSQL_USER_PASS}/g" /db-config.sql \
+# &&	sed -i "s/MYSQL_ROOT_PASS/{$MYSQL_ROOT_PASS}/g" /db-config.sql
 # COPY conf/wordpress2.sql /
 
 RUN mkdir -p /var/lib/mysql \

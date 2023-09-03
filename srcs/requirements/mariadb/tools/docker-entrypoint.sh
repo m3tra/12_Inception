@@ -17,32 +17,26 @@
 
 if [ ! -d "/var/lib/mysql/$MYSQL_DB_NAME" ]; then
 
-mysql_install_db --user=mysql
+mysql_install_db
 service mariadb start
 
-# mysql_secure_installation << EOF
+mysql_secure_installation << EOF
 
-# y
-# $MYSQL_ROOT_PASS
-# $MYSQL_ROOT_PASS
-# y
-# n
-# y
-# y
-# EOF
+y
+$MYSQL_ROOT_PASS
+$MYSQL_ROOT_PASS
+y
+n
+y
+y
+EOF
 
-# echo "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASS'; FLUSH PRIVILEGES;" | mysql -uroot
-
-# echo "\
-# CREATE DATABASE IF NOT EXISTS $MYSQL_DB_NAME; \
-# GRANT ALL ON $MYSQL_DB_NAME.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD'; \
-# FLUSH PRIVILEGES;" | mariadb -u root
-
-# mariadb -u root -p $MYSQL_ROOT_PASS $MYSQL_DB_NAME < wordpress2.sql
+mariadb -u root -p $MYSQL_ROOT_PASS $MYSQL_DB_NAME < db-config.sql
 
 fi
 
 # /etc/init.d/mysql stop
-# service mariadb stop
+service mariadb stop
 
 exec "$@"
+# mysqld --user=mysql --init-file=/db-config.sql
