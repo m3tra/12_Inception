@@ -17,12 +17,12 @@ RUN mysql_install_db --user=mysql
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.cnf.d/
 # COPY conf/debian.cnf /etc/mysql/
-COPY conf/db-config.sql /tmp
-RUN chown mysql:mysql /tmp/db-config.sql \
-&&	sed -i "s/MYSQL_DB_NAME/{$MYSQL_DB_NAME}/g" /tmp/db-config.sql \
-&&	sed -i "s/MYSQL_USER/{$MYSQL_USER}/g" /tmp/db-config.sql \
-&&	sed -i "s/MYSQL_USER_PASS/{$MYSQL_USER_PASS}/g" /tmp/db-config.sql \
-&&	sed -i "s/MYSQL_ROOT_PASS/{$MYSQL_ROOT_PASS}/g" /tmp/db-config.sql
+COPY conf/db-config.sql /
+RUN chown mysql:mysql /db-config.sql \
+&&	sed -i "s/MYSQL_DB_NAME/{$MYSQL_DB_NAME}/g" /db-config.sql \
+&&	sed -i "s/MYSQL_USER/{$MYSQL_USER}/g" /db-config.sql \
+&&	sed -i "s/MYSQL_USER_PASS/{$MYSQL_USER_PASS}/g" /db-config.sql \
+&&	sed -i "s/MYSQL_ROOT_PASS/{$MYSQL_ROOT_PASS}/g" /db-config.sql
 # COPY conf/wordpress2.sql /
 
 # RUN chmod -R 777 /var/lib/mysql \
@@ -49,5 +49,5 @@ EXPOSE 3306
 # ENTRYPOINT ["/docker-entrypoint.sh"]
 # ENTRYPOINT ["mysqld", "--user=mysql", "--init-file=/tmp/db-config.sql"]
 
-CMD ["mysqld", "--user=mysql", "--init-file=/tmp/db-config.sql"]
+CMD ["mysqld", "--user=mysql", "--init-file=/db-config.sql"]
 # CMD ["mysqld"]
