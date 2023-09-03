@@ -52,5 +52,6 @@ EXPOSE 3306
 # ENTRYPOINT ["/docker-entrypoint.sh"]
 # ENTRYPOINT ["mysqld", "--user=mysql", "--init-file=/tmp/db-config.sql"]
 
-CMD ["mysqld", "--user=mysql", "--init-file=/db-config.sql"]
+# CMD ["mysqld", "--user=mysql", "--init-file=/db-config.sql"]
+CMD ["tail", "-f", "/dev/null"]
 # CMD ["mysqld"]
