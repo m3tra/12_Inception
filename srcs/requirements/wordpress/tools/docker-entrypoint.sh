@@ -132,6 +132,7 @@ wp.phar core install \
 # 	--allow-root
 
 wp.phar plugin update \
+	--path=/var/www/html \
 	--all \
 	--allow-root
 
