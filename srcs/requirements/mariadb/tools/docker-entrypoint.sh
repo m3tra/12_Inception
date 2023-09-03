@@ -9,7 +9,7 @@ service mariadb start
 
 if [ ! -d "/var/lib/mysql/$MYSQL_DB_NAME" ]; then
 
-mysql_secure_installation << _EOF_
+mysql_secure_installation << EOF
 $MYSQL_ROOT_PASS
 y
 n
@@ -17,7 +17,7 @@ y
 y
 y
 y
-_EOF_
+EOF
 
 fi
 
