@@ -18,7 +18,8 @@ RUN mysql_install_db --user=mysql
 COPY conf/50-server.cnf /etc/mysql/mariadb.cnf.d/
 # COPY conf/debian.cnf /etc/mysql/
 COPY conf/db-config.sql /
-RUN chown mysql:mysql /db-config.sql \
+RUN chmod 777 /db-config.sql \
+&&	chown mysql:mysql /db-config.sql \
 &&	sed -i "s/MYSQL_DB_NAME/{$MYSQL_DB_NAME}/g" /db-config.sql \
 &&	sed -i "s/MYSQL_USER/{$MYSQL_USER}/g" /db-config.sql \
 &&	sed -i "s/MYSQL_USER_PASS/{$MYSQL_USER_PASS}/g" /db-config.sql \
