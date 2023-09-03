@@ -18,7 +18,7 @@ RUN mysql_install_db --user=mysql
 COPY conf/50-server.cnf /etc/mysql/mariadb.cnf.d/
 # COPY conf/debian.cnf /etc/mysql/
 COPY conf/db-config.sql /tmp
-RUN chown mysql:mysql /db-config.sql
+RUN chown mysql:mysql /tmp/db-config.sql
 # COPY conf/wordpress2.sql /
 
 # RUN chmod -R 777 /var/lib/mysql \
