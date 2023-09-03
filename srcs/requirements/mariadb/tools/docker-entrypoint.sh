@@ -11,7 +11,7 @@ if [ ! -d "/var/lib/mysql/$MYSQL_DB_NAME" ]; then
 
 mysql_secure_installation << _EOF_
 $MYSQL_ROOT_PASS
-n
+y
 n
 y
 y
