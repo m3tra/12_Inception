@@ -33,7 +33,7 @@ RUN mkdir -p /run/mysqld \
 # &&	chown mysql:mysql /db-config.sql \
 # &&	sed -i "s/MYSQL_DB_NAME/{$MYSQL_DB_NAME}/g" /db-config.sql \
 # &&	sed -i "s/MYSQL_USER/{$MYSQL_USER}/g" /db-config.sql \
-# &&	sed -i "s/MYSQL_USER_PASS/{$MYSQL_USER_PASS}/g" /db-config.sql \
+# &&	sed -i "s/MYSQL_PASS/{$MYSQL_PASS}/g" /db-config.sql \
 # &&	sed -i "s/MYSQL_ROOT_PASS/{$MYSQL_ROOT_PASS}/g" /db-config.sql
 # COPY conf/wordpress2.sql /
 
@@ -56,7 +56,7 @@ RUN chmod 777 /db-config.sql \
 &&	chown mysql:mysql /db-config.sql \
 &&	sed -i "s/MYSQL_DB_NAME/{$MYSQL_DB_NAME}/g" /db-config.sql \
 &&	sed -i "s/MYSQL_USER/{$MYSQL_USER}/g" /db-config.sql \
-&&	sed -i "s/MYSQL_USER_PASS/{$MYSQL_USER_PASS}/g" /db-config.sql \
+&&	sed -i "s/MYSQL_PASS/{$MYSQL_PASS}/g" /db-config.sql \
 &&	sed -i "s/MYSQL_ROOT_PASS/{$MYSQL_ROOT_PASS}/g" /db-config.sql
 
 COPY tools/docker-entrypoint.sh /

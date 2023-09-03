@@ -1,13 +1,13 @@
 [client]
 host     = localhost
 user     = root
-password = {$MYSQL_USER_PASS}
+password = {$MYSQL_PASS}
 socket   = /var/run/mysqld/mysqld.sock
 
 [mysql_upgrade]
 host     = localhost
 user     = root
-password = {$MYSQL_USER_PASS}
+password = {$MYSQL_PASS}
 socket   = /var/run/mysqld/mysqld.sock
 basedir  = /usr
 

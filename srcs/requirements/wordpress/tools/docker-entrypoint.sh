@@ -63,7 +63,7 @@ set -e
 # 		--url=$DOMAIN_NAME \
 # 		--title="$WP_TITLE" \
 # 		--admin_user=$MYSQL_USER \
-# 		--admin_password=$MYSQL_USER_PASS \
+# 		--admin_password=$MYSQL_PASS \
 # 		--admin_email=$WP_ADMIN_EMAIL \
 # 		--skip-email \
 # 		--allow-root
