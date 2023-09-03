@@ -31,6 +31,14 @@ y
 y
 EOF
 
+mkdir -p /var/lib/mysql
+chmod -R 777 /var/lib/mysql
+chown -R mysql:mysql /var/lib/mysql
+
+mkdir -p /run/mysqld
+chmod -R 777 /run/mysqld
+chown -R mysql:mysql /run/mysqld
+
 mariadb -u mysql -p $MYSQL_ROOT_PASS $MYSQL_DB_NAME < db-config.sql
 
 fi
