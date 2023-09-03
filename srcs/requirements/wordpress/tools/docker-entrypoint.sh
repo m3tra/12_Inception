@@ -113,7 +113,8 @@ fi
 
 wp.phar db create \
 	--path=/var/www/html \
-	--allow-root
+	--allow-root \
+|| true
 
 wp.phar core install \
 	--path=/var/www/html \
