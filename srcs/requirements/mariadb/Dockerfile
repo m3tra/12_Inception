@@ -12,12 +12,18 @@ RUN apt-get install -y \
 # 		mariadb \
 # 		mariadb-client
 
+RUN mkdir -p /run/mysqld \
+&&	chmod 777 /run/mysqld \
+&&	chown -R mysql:mysql /run/mysqld
+
+
+
 
 # RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
-COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+# COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+# COPY conf/db-config.sql /
 # COPY conf/debian.cnf /etc/mysql/
-COPY conf/db-config.sql /
 # RUN chmod 777 /db-config.sql \
 # &&	chown mysql:mysql /db-config.sql \
 # &&	sed -i "s/MYSQL_DB_NAME/{$MYSQL_DB_NAME}/g" /db-config.sql \
@@ -30,9 +36,7 @@ COPY conf/db-config.sql /
 # &&	chmod -R 777 /var/lib/mysql \
 # &&	chown -R mysql:mysql /var/lib/mysql
 
-# RUN mkdir -p /run/mysqld \
-# &&	chmod -R 777 /run/mysqld \
-# &&	chown -R mysql:mysql /run/mysqld
+
 
 # RUN service mysql start
 # RUN mkdir -p /run/mysqld/ \
@@ -43,14 +47,22 @@ COPY conf/db-config.sql /
 # && service mariadb stop
 
 
+
+COPY conf/db-config.sql /
+RUN chmod +x /db-config.sql
+
+COPY tools/docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+
 EXPOSE 3306
 
-# COPY tools/docker-entrypoint.sh /
-# RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
 # ENTRYPOINT ["/usr/bin/dumb-init", "/tmp/docker-entrypoint.sh"]
-# ENTRYPOINT ["/docker-entrypoint.sh"]
 # ENTRYPOINT ["mysqld", "--user=mysql", "--init-file=/tmp/db-config.sql"]
 
+CMD ["mysqld", "--bind-address=0.0.0.0"]
+
 # CMD ["mysqld", "--user=mysql", "--init-file=/db-config.sql"]
-CMD ["tail", "-f", "/dev/null"]
+# CMD ["tail", "-f", "/dev/null"]
 # CMD ["mysqld"]
