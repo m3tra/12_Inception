@@ -13,9 +13,9 @@ RUN apt-get install -y \
 # 		mariadb-client
 
 
-RUN mysql_install_db --user=mysql
+RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
-COPY conf/50-server.cnf /etc/mysql/mariadb.cnf.d/
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 # COPY conf/debian.cnf /etc/mysql/
 COPY conf/db-config.sql /
 RUN chmod 777 /db-config.sql \
