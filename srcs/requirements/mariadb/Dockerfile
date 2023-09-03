@@ -26,13 +26,13 @@ COPY conf/db-config.sql /
 # &&	sed -i "s/MYSQL_ROOT_PASS/{$MYSQL_ROOT_PASS}/g" /db-config.sql
 # COPY conf/wordpress2.sql /
 
-RUN mkdir -p /var/lib/mysql \
-&&	chmod -R 777 /var/lib/mysql \
-&&	chown -R mysql:mysql /var/lib/mysql
+# RUN mkdir -p /var/lib/mysql \
+# &&	chmod -R 777 /var/lib/mysql \
+# &&	chown -R mysql:mysql /var/lib/mysql
 
-RUN mkdir -p /run/mysqld \
-&&	chmod -R 777 /run/mysqld \
-&&	chown -R mysql:mysql /run/mysqld
+# RUN mkdir -p /run/mysqld \
+# &&	chmod -R 777 /run/mysqld \
+# &&	chown -R mysql:mysql /run/mysqld
 
 # RUN service mysql start
 # RUN mkdir -p /run/mysqld/ \
