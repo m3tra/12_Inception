@@ -18,6 +18,9 @@ down:
 	@printf $(YELLOW)"Stopping"$(WHITE)" containers\n"
 	@docker compose -f srcs/docker-compose.yml down
 
+logs:
+	@docker compose --env-file=srcs/.env -f=srcs/docker-compose.yml logs -f
+
 re:
 	@printf $(GREEN)"Starting/Rebuilding"$(WHITE)" containers\n"
 	@docker compose -f srcs/docker-compose.yml up -d --build
