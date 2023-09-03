@@ -43,4 +43,4 @@ ENTRYPOINT [ "/docker-entrypoint.sh"]
 # ENTRYPOINT ["mysqld", "--user=mysql", "--init-file=/tmp/db-config.sql"]
 
 # CMD [ "mysqld", "--user=mysql" ]
-CMD ["mysqld", "--bind-address=0.0.0.0"]
+CMD ["mysqld"]

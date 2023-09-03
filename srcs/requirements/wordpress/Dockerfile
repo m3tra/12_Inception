@@ -23,7 +23,7 @@ RUN apt-get install -y \
 # &&	wp config create \
 # 		--dbname=$MYSQL_DB_NAME \
 # 		--dbuser=$MYSQL_USER \
-# 		--dbpass=$MYSQL_ROOT_PASSWORD \
+# 		--dbpass=$MYSQL_ROOT_PASS \
 # 		--dbhost=$MYSQL_HOSTNAME \
 # 		--allow-root \
 # &&	wp db create \
@@ -32,7 +32,7 @@ RUN apt-get install -y \
 # 		--url=$DOMAIN_NAME \
 # 		--title="$WP_TITLE" \
 # 		--admin_user=$MYSQL_USER \
-# 		--admin_password=$MYSQL_USER_PASSWORD \
+# 		--admin_password=$MYSQL_USER_PASS \
 # 		--admin_email=$WP_ADMIN_EMAIL \
 # 		--skip-email \
 # 		--allow-root \
