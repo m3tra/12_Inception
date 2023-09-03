@@ -90,16 +90,14 @@ set -e
 
 
 
-if [ ! -f /usr/local/bin/wp.phar ]; then
+if [ ! -f /var/www/html/wp-config-sample.php ]; then
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp.phar
 
-if [ ! -f /var/www/html/wp-config-sample.php ]; then
 wp.phar core download \
 	--path=/var/www/html \
 	--allow-root
-fi
 
 if [ ! -f /var/www/html/wp-config.php ]; then
 wp.phar config create \
@@ -125,11 +123,6 @@ wp.phar core install \
 	--admin_email=$WP_ADMIN_EMAIL \
 	--skip-email \
 	--allow-root
-
-# TODO change env vars
-
-# wp.phar core update \
-# 	--allow-root
 
 wp.phar plugin update \
 	--path=/var/www/html \
