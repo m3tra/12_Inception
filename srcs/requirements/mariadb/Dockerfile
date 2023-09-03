@@ -56,13 +56,12 @@ RUN chmod +x /docker-entrypoint.sh
 
 EXPOSE 3306
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # ENTRYPOINT ["/usr/bin/dumb-init", "/tmp/docker-entrypoint.sh"]
 # ENTRYPOINT ["mysqld", "--user=mysql", "--init-file=/tmp/db-config.sql"]
 
-CMD ["mysqld", "--bind-address=0.0.0.0"]
+# CMD ["mysqld", "--bind-address=0.0.0.0"]
 
+CMD ["tail", "-f", "/dev/null"]
 # CMD ["mysqld", "--user=mysql", "--init-file=/db-config.sql"]
-# CMD ["tail", "-f", "/dev/null"]
-# CMD ["mysqld"]
