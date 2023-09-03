@@ -96,9 +96,13 @@ wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp.phar
 
+if [ ! -f /var/www/html/wp-config-sample.php ]; then
+
 wp.phar core download \
 	--path=/var/www/html \
 	--allow-root
+
+fi
 
 wp.phar config create \
 	--path=/var/www/html \
