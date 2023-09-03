@@ -12,7 +12,7 @@ all: up
 
 up:
 	@printf $(GREEN)"Starting"$(WHITE)" containers\n"
-	@docker compose -f srcs/docker-compose.yml up
+	@docker compose -f srcs/docker-compose.yml up -d
 
 down:
 	@printf $(YELLOW)"Stopping"$(WHITE)" containers\n"
