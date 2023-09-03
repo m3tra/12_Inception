@@ -101,7 +101,7 @@ wp.phar core download \
 	--allow-root
 fi
 
-if [ ! -f /var/www/html/wp-config-sample.php ]; then
+if [ ! -f /var/www/html/wp-config.php ]; then
 wp.phar config create \
 	--path=/var/www/html \
 	--dbname=$MYSQL_DB_NAME \
