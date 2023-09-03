@@ -33,7 +33,6 @@ RUN mkdir -p /var/lib/mysql \
 RUN mkdir -p /run/mysqld \
 &&	chmod -R 777 /run/mysqld \
 &&	chown -R mysql:mysql /run/mysqld
-# &&	chmod -R 777 /run/mysqld
 
 # RUN service mysql start
 # RUN mkdir -p /run/mysqld/ \
