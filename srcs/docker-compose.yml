@@ -13,12 +13,14 @@ services:
         restart: unless-stopped
         env_file: .env
         volumes: /home/fporto/data/mariadb/:/var/lib/mysql/
-        networks: web-network
+        networks:
+          - web-network
 
 
 
     wordpress:
-        depends_on: mariadb
+        depends_on:
+          - mariadb
         build:
             context: requirements/wordpress/
             dockerfile: Dockerfile
@@ -39,7 +41,8 @@ services:
         restart: unless-stopped
         env_file: .env
         volumes: /home/fporto/data/website-root:/var/www/html
-        networks: web-network
+        networks:
+          - web-network
 
 
 
@@ -57,7 +60,8 @@ services:
             - /home/fporto/data/website-root:/var/www/html
             # - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:ro
         ports: 443:443
-        networks: web-network
+        networks:
+          - web-network
 
     # certbot:
     #     depends_on:
