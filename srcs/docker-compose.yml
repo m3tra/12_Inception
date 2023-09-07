@@ -12,7 +12,8 @@ services:
         container_name: mariadb
         restart: unless-stopped
         env_file: .env
-        volumes: /home/fporto/data/mariadb/:/var/lib/mysql/
+        volumes:
+          - /home/fporto/data/mariadb/:/var/lib/mysql/
         networks:
           - web-network
 
@@ -40,7 +41,8 @@ services:
         container_name: wordpress
         restart: unless-stopped
         env_file: .env
-        volumes: /home/fporto/data/website-root:/var/www/html
+        volumes:
+          - /home/fporto/data/website-root:/var/www/html
         networks:
           - web-network
 
