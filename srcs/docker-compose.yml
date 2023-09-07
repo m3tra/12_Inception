@@ -61,7 +61,8 @@ services:
             # - /home/fporto/data/nginx/conf:/etc/nginx/conf.d
             - /home/fporto/data/website-root:/var/www/html
             # - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:ro
-        ports: 443:443
+        ports:
+          - 443:443
         networks:
           - web-network
 
