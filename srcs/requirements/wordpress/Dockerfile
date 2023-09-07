@@ -35,7 +35,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 &&	chmod +x wp-cli.phar \
 &&	mv wp-cli.phar /usr/local/bin/wp.phar
 
-RUN mkdir /var/www/html \
+RUN mkdir -p /var/www/html \
 &&	chown www-data:www-data /var/www/html/
 
 RUN wp.phar core download \
