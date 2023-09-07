@@ -76,7 +76,8 @@ services:
 
 
     adminer:
-        depends_on: mariadb
+        depends_on:
+          - mariadb
         build:
             context: requirements/bonus/adminer
             dockerfile: Dockerfile
