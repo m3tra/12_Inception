@@ -37,6 +37,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 
 RUN mkdir -p /var/www/html \
 &&	chown www-data:www-data /var/www/html/
+RUN mkdir /run/php
 
 RUN wp.phar core download \
 		--path=/var/www/html \
@@ -78,8 +79,6 @@ RUN wp.phar user create \
 		--role=author
 
 RUN sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
-
-RUN mkdir /run/php
 
 EXPOSE 9000
 
