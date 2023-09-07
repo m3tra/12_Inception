@@ -21,13 +21,18 @@ RUN	apt-get install -y \
 
 # nginx SSL
 RUN mkdir -m 777 -p /etc/nginx/ssl \
-&&	openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
+&&	openssl req \
+		-newkey rsa:4096 \
+		-x509 \
+		-sha256 \
+		-days 365 \
+		-nodes \
 		-out /etc/nginx/ssl/server.crt \
 		-keyout /etc/nginx/ssl/server.key \
 		-subj "/C=/ST=/L=/O=/OU=/CN=/"
 
 # hide nginx version (hardening)
-# RUN sed -i 's/# server_tokens/server_tokens/g' /etc/nginx/nginx.conf
+RUN sed -i 's/# server_tokens/server_tokens/g' /etc/nginx/nginx.conf
 
 RUN mkdir -p /etc/nginx/sites-available/
 WORKDIR /etc/nginx/sites-available/

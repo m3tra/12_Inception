@@ -11,10 +11,10 @@ wp.phar core download \
 
 wp.phar config create \
 	--path=/var/www/html \
+	--dbhost=$MYSQL_HOSTNAME \
 	--dbname=$MYSQL_DB_NAME \
 	--dbuser=$MYSQL_USER \
 	--dbpass=$MYSQL_PASS \
-	--dbhost=$MYSQL_HOSTNAME \
 	--allow-root
 
 wp.phar db create \
