@@ -4,7 +4,7 @@
 # chmod -R 777 /var/lib/mysql
 # chown -R mysql:mysql /var/lib/mysql
 
-mysql_install_db
+mysql_install_db --user=$ADMIN_USER
 service mariadb start
 
 if [ ! -d "/var/lib/mysql/$MYSQL_DB_NAME" ]; then
