@@ -47,6 +47,8 @@ wp.phar user create \
 
 sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
 chown -R www-data:www-data /var/www/html/
+else
+cat /etc/php/7.4/fpm/pool.d/www.conf | grep -v ";"
 fi
 
 exec "$@"
