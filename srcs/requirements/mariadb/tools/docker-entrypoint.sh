@@ -21,5 +21,5 @@ fi
 
 service mariadb stop
 
-mysqld --user=$MYSQL_USER --init-file=/db-config.sql --bind-address=0.0.0.0
+mysqld --user=$ADMIN_USER --init-file=/db-config.sql --bind-address=0.0.0.0
 # exec "$@"
