@@ -3,9 +3,9 @@
 mysql_install_db --user=mysql --datadir=/var/lib/mysql
 service mariadb start
 
-if [ ! -d "/var/lib/mysql/$MYSQL_DB_NAME" ]; then
+if [ ! -d "/var/lib/mysql/$WP_DB_NAME" ]; then
 mysql_secure_installation << EOF
-$MYSQL_ROOT_PASS
+$ADMIN_PASS
 y
 n
 y
