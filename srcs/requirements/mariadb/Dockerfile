@@ -16,10 +16,10 @@ RUN chmod 777 /db-config.sql \
 \
 && aduser ADMIN_USER \
 \
-&&	mkdir -p -m 777 /var/lib/mysql \
+&&	mkdir -m 777 -p /var/lib/mysql \
 &&	chown -R $ADMIN_USER:$ADMIN_USER /var/lib/mysql \
 \
-&&	mkdir -p -m 777 /run/mysqld \
+&&	mkdir -m 777 -p /run/mysqld \
 &&	chown -R $ADMIN_USER:$ADMIN_USER /run/mysqld
 
 EXPOSE 3306
