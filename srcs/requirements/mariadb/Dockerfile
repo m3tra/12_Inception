@@ -17,13 +17,11 @@ RUN chmod 777 /db-config.sql \
 &&	mkdir -m 777 -p /run/mysqld \
 &&	chown mysql:mysql /run/mysqld
 
-RUN	mysql_install_db --user=mysql --datadir=/var/lib/mysql
-
 EXPOSE 3306
 
-# COPY tools/docker-entrypoint.sh /
-# RUN chmod +x /docker-entrypoint.sh
-# ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY tools/docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
-CMD ["mysqld", "--user=mysql", "--init-file=/db-config.sql", "--bind-address=0.0.0.0"]
+# CMD ["mysqld", "--user=mysql", "--init-file=/db-config.sql", "--bind-address=0.0.0.0"]
 # CMD ["tail", "-f", "/dev/null"]
