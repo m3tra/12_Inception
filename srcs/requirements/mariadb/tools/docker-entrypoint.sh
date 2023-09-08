@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# mkdir -p /var/lib/mysql
-# chmod -R 777 /var/lib/mysql
-# chown -R mysql:mysql /var/lib/mysql
-
 mysql_install_db --user=mysql
 service mariadb start
 
