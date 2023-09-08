@@ -8,7 +8,7 @@ YELLOW="\033[33m"
 PURPLE="\033[38;5;13m"
 
 if [[ $EUID -ne 0 ]]; then
-	echo "$0 requires sudo privileges."
+	echo "$0 requires super-user privileges."
 	exit 2
 fi
 
@@ -150,7 +150,7 @@ apt-get install -y \
 
 
 # Grant user sudo privileges
-echo "$USER_NAME ALL=(ALL:ALL) ALL" >> /etc/sudoers
+echo "$USER_NAME ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/fporto
 
 printf "${GREEN} DONE\n${WHITE}"
 
