@@ -4,7 +4,7 @@
 # chmod -R 777 /var/lib/mysql
 # chown -R mysql:mysql /var/lib/mysql
 
-mysql_install_db --user=$ADMIN_USER
+mysql_install_db --user=mysql
 service mariadb start
 
 if [ ! -d "/var/lib/mysql/$MYSQL_DB_NAME" ]; then
@@ -21,5 +21,5 @@ fi
 
 service mariadb stop
 
-mysqld --user=$ADMIN_USER --init-file=/db-config.sql --bind-address=0.0.0.0
+mysqld --user=mysql --init-file=/db-config.sql --bind-address=0.0.0.0
 # exec "$@"

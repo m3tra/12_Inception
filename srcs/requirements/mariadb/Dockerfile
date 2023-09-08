@@ -14,18 +14,16 @@ RUN chmod 777 /db-config.sql \
 &&	sed -i "s/ADMIN_USER/$ADMIN_USER/g" /db-config.sql \
 &&	sed -i "s/ADMIN_PASS/$ADMIN_PASS/g" /db-config.sql \
 \
-&& adduser --no-create-home $ADMIN_USER $ADMIN_USER \
-\
-&&	mkdir -m 777 -p /var/lib/mysql \
-&&	chown -R $ADMIN_USER:$ADMIN_USER /var/lib/mysql \
-\
 &&	mkdir -m 777 -p /run/mysqld \
-&&	chown -R $ADMIN_USER:$ADMIN_USER /run/mysqld
+&&	chown -R mysql:mysql /run/mysqld \
+\
+&&	mysql_install_db --user=mysql
 
 EXPOSE 3306
 
-COPY tools/docker-entrypoint.sh /
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# COPY tools/docker-entrypoint.sh /
+# RUN chmod +x /docker-entrypoint.sh
+# ENTRYPOINT ["/docker-entrypoint.sh"]
 
+CMD ["mysqld", "--user=mysql", "--init-file=/db-config.sql", "--bind-address=0.0.0.0"]
 # CMD ["tail", "-f", "/dev/null"]
