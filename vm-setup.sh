@@ -119,17 +119,11 @@ printf "${GREEN}DONE\n${WHITE}"
 # Make sure non-root user doesn't require sudo to use docker
 echo -n "    + Adding $USER_NAME to docker group"
 
-# GROUP_EXISTS=$(groups | grep docker | wc -l)
-# if [[ GROUP_EXISTS -eq 0 ]]; then
-# 	adduser $USER_NAME
-# 	su $USER_NAME
-# fi
 groupadd docker 2>/dev/null
 usermod -aG docker $USER_NAME
 
 mkdir -m 770 -p /home/$USER_NAME/.docker
 chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/.docker
-# chmod -R g+rwx /home/$USER_NAME/.docker
 
 printf "${GREEN} DONE\n${WHITE}"
 
