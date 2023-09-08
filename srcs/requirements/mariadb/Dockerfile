@@ -14,6 +14,8 @@ RUN chmod 777 /db-config.sql \
 &&	sed -i "s/ADMIN_USER/$ADMIN_USER/g" /db-config.sql \
 &&	sed -i "s/ADMIN_PASS/$ADMIN_PASS/g" /db-config.sql \
 \
+&& aduser ADMIN_USER \
+\
 &&	mkdir -p -m 777 /var/lib/mysql \
 &&	chown -R $ADMIN_USER:$ADMIN_USER /var/lib/mysql \
 \
