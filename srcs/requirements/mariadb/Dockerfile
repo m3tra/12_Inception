@@ -14,9 +14,9 @@ RUN chmod 777 /db-config.sql \
 &&	sed -i "s/ADMIN_USER/$ADMIN_USER/g" /db-config.sql \
 &&	sed -i "s/ADMIN_PASS/$ADMIN_PASS/g" /db-config.sql \
 \
-&& adduser --no-create-home ADMIN_USER; \
+&& adduser --no-create-home $ADMIN_USER \
 \
-	mkdir -m 777 -p /var/lib/mysql \
+&&	mkdir -m 777 -p /var/lib/mysql \
 &&	chown -R $ADMIN_USER:$ADMIN_USER /var/lib/mysql \
 \
 &&	mkdir -m 777 -p /run/mysqld \
