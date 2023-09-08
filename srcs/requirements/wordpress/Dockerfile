@@ -81,6 +81,8 @@ RUN apt-get install -y \
 
 # RUN sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
 
+RUN mkdir /run/php
+
 EXPOSE 9000
 
 COPY tools/docker-entrypoint.sh /
