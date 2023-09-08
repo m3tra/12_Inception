@@ -14,7 +14,7 @@ if [ ! -f /var/www/html/wp-config-sample.php ]; then
 		--allow-root \
 		--dbhost=$MYSQL_HOSTNAME \
 		--dbname=$WP_DB_NAME \
-		--dbuser=mysql \
+		--dbuser=$ADMIN_USER \
 		--dbpass=$ADMIN_PASS
 
 	wp.phar db create \
