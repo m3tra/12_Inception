@@ -52,9 +52,9 @@ RUN wp.phar config create \
 		--dbpass=$MYSQL_PASS \
 		--skip-check
 
-RUN wp.phar db create \
-		--path=/var/www/html \
-		--allow-root
+# RUN wp.phar db create \
+# 		--path=/var/www/html \
+# 		--allow-root
 
 RUN wp.phar core install \
 		--path=/var/www/html \
