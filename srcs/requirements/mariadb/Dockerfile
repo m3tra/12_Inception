@@ -18,9 +18,9 @@ RUN chmod 777 /db-config.sql \
 &&	chown mysql:mysql /run/mysqld \
 \
 &&	mkdir -m 777 -p /var/lib/mysql \
-&&	chown mysql:mysql /var/lib/mysql \
-\
-&&	mysql_install_db --user=mysql
+&&	chown mysql:mysql /var/lib/mysql
+
+RUN	mysql_install_db --user=mysql
 
 EXPOSE 3306
 
