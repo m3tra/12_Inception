@@ -78,10 +78,7 @@ RUN	export DEBIAN_FRONTEND="noninteractive" \
 &&	rm -rf /tmp/adminer/ \
 &&	apt-get purge -y --auto-remove $buildDeps
 
-# COPY	docker_entrypoint.sh /usr/local/bin/
-# ENTRYPOINT	[ "docker_entrypoint.sh" ]
-
 EXPOSE 9000
 
 USER	adminer
-CMD	[ "php-fpm7.4" ]
+CMD	["php-fpm7.4"]

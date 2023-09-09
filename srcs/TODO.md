@@ -13,8 +13,9 @@ protocol.
 
 ## Containers
 
-- The latest tag is **prohibited**.
-- ~~Containers must **restart** in case of a crash.~~
+The latest tag is **prohibited**.
+
+Containers must **restart** in case of a crash.
 
 ### NGINX
 
@@ -22,12 +23,12 @@ protocol.
 
 ### Wordpress
 
-- A Docker WordPress + php-fpm container (it must be installed and configured) only without NGINX.
-- 2 users, one being the administrator(can't contain "admin", etc)
+- ~~A Docker WordPress + php-fpm container (it must be installed and configured) only without NGINX.~~
+- ~~2 users, one being the administrator(can't contain "admin", etc)~~
 
 ### MariaDB
 
-- A Docker MariaDB container only without NGINX.
+- ~~A Docker MariaDB container only without NGINX.~~
 - A volume for WordPress database.
 
 ## Volumes
@@ -37,7 +38,7 @@ Volumes will be available in the ***/home/login/data*** folder of the host machi
 ### WordPress
 
 - A volume for WordPress website files.
-- Domain name must be ***login.42.fr*** (replace "***login***")
+- ~~Domain name must be ***login.42.fr*** (replace "***login***")~~
 
 ## Networks
 
@@ -51,7 +52,7 @@ Volumes will be available in the ***/home/login/data*** folder of the host machi
 
 - ### Static website (i.e.: portfolio) **NO PHP**
 
-- ### Adminer
+- ### ~~Adminer~~
 
 - ### Service of choice (Portainer)
 

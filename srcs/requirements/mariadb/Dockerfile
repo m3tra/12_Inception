@@ -22,6 +22,3 @@ EXPOSE 3306
 COPY tools/docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
-
-# CMD ["mysqld", "--user=mysql", "--init-file=/db-config.sql", "--bind-address=0.0.0.0"]
-# CMD ["tail", "-f", "/dev/null"]
