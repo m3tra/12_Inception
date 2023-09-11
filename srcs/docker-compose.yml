@@ -29,7 +29,7 @@ services:
         restart: unless-stopped
         env_file: .env
         volumes:
-          - /home/fporto/data/website-root:/var/www/html
+          - /home/fporto/data/website-root/:/var/www/html/
         networks:
           - web-network
 
@@ -42,14 +42,18 @@ services:
         build:
             context: requirements/nginx/
             dockerfile: Dockerfile
+            args:
+              - DOMAIN_NAME
+              - ADMIN_USER
         container_name: nginx
         restart: unless-stopped
         volumes:
-            # - /home/fporto/data/nginx/conf:/etc/nginx/conf.d
-            - /home/fporto/data/website-root:/var/www/html
+            - /home/fporto/data/nginx/:/var/log/nginx/
+            - /home/fporto/data/ssl/:/ssl/
+            - /home/fporto/data/website-root/:/var/www/html/
             # - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:ro
         ports:
-          - 443:443
+          - "443:443"
         networks:
           - web-network
 
@@ -73,14 +77,34 @@ services:
         depends_on:
           - mariadb
         build:
-            context: requirements/bonus/adminer
+            context: bonus/adminer
             dockerfile: Dockerfile
         container_name: adminer
         restart: unless-stopped
-        # ports:
-        #     - 8080:8080
         networks:
           - web-network
+
+
+
+    vsftpd:
+        depends_on:
+          - wordpress
+        build:
+            context: bonus/vsftpd
+            dockerfile: Dockerfile
+            args:
+              - ADMIN_USER
+              - ADMIN_PASS
+        container_name: vsftpd
+        restart: unless-stopped
+        env_file: .env
+        volumes:
+          - /home/fporto/data/ssl/:/ssl/:ro
+          - /home/fporto/data/vsftpd/:/var/log/vsftpd/
+          - /home/fporto/data/website-root/:/ftp/wordpress/
+        ports:
+          - "21:21"
+          - "40000-40005:40000-40005"
 
 
 
@@ -88,7 +112,7 @@ services:
     #     # depends_on:
     #     #     - certbot
     #     build:
-    #         context: requirements/bonus/portainer
+    #         context: bonus/portainer
     #         dockerfile: Dockerfile
     #     container_name: portainer
     #     restart: unless-stopped
@@ -103,8 +127,8 @@ services:
     #     networks:
     #         - web-network
     #     # command:
-    #     #     --sslcert /data/server.crt
-    #     #     --sslkey /data/server.key
+    #     #     --sslcert /data/inception.crt
+    #     #     --sslkey /data/inception.key
 
 
 

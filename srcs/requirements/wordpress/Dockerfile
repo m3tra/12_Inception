@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bullseye-slim
 
 RUN apt-get update
 RUN apt-get install -y \
@@ -13,7 +13,9 @@ RUN apt-get install -y \
 		php7.4-xml \
 		php7.4-gd \
 		php7.4-curl \
-		mariadb-client
+		mariadb-client \
+&&	apt-get clean \
+&&	rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 RUN mkdir /run/php
 

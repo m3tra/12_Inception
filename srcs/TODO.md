@@ -7,9 +7,9 @@
 - ~~Also, it is strongly recommended to use a ***.env*** file to store
 ***environment variables***. The ***.env*** file should be located at the root
 of the srcs directory.~~
-- Your **NGINX** container must be the **only entrypoint** into your
+- ~~Your **NGINX** container must be the **only entrypoint** into your
 infrastructure via the **port 443 only**, using the TLSv1.2 or TLSv1.3
-protocol.
+protocol.~~
 
 ## Containers
 
@@ -29,15 +29,15 @@ Containers must **restart** in case of a crash.
 ### MariaDB
 
 - ~~A Docker MariaDB container only without NGINX.~~
-- A volume for WordPress database.
+- ~~A volume for WordPress database.~~
 
 ## Volumes
 
-Volumes will be available in the ***/home/login/data*** folder of the host machine using Docker (replace "***login***")
+~~Volumes will be available in the ***/home/login/data*** folder of the host machine using Docker (replace "***login***")~~
 
 ### WordPress
 
-- A volume for WordPress website files.
+- ~~A volume for WordPress website files.~~
 - ~~Domain name must be ***login.42.fr*** (replace "***login***")~~
 
 ## Networks
@@ -48,7 +48,8 @@ Volumes will be available in the ***/home/login/data*** folder of the host machi
 
 - ### Redis
 
-- ### FTP server
+- ### ~~FTP server~~
+  - ~~Working SSL~~
 
 - ### Static website (i.e.: portfolio) **NO PHP**
 

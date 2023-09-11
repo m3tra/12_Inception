@@ -21,8 +21,8 @@ FROM portainer/portainer-ce:alpine
 # RUN chown root:root /data/ssl
 
 # RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
-# 	-out /data/server.crt \
-# 	-keyout /data/server.key \
+# 	-out /data/inception.crt \
+# 	-keyout /data/inception.key \
 # 	-subj "/C=/ST=/L=/O=/OU=/CN=/"
 
 # 10-year valid self-signed certificate
@@ -31,8 +31,8 @@ FROM portainer/portainer-ce:alpine
 # 	-days 3650 \
 # 	-nodes \
 # 	-x509 \
-# 	-keyout /data/ssl/server.key \
-# 	-out /data/ssl/server.crt
+# 	-keyout /data/ssl/inception.key \
+# 	-out /data/ssl/inception.crt
 
 # VOLUME /data
 WORKDIR /
