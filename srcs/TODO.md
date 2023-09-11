@@ -49,6 +49,7 @@ Containers must **restart** in case of a crash.
 - ### Redis
 
 - ### ~~FTP server~~
+
   - ~~Working SSL~~
 
 - ### Static website (i.e.: portfolio) **NO PHP**
