@@ -1,3 +1,11 @@
+upstream static-website {
+	server static-website:4242;
+}
+
+upstream portainer {
+	server portainer:9000;
+}
+
 server {
 	listen 443 ssl http2;
 
@@ -40,11 +48,13 @@ server {
 		fastcgi_pass adminer:9000;
 	}
 
+	# Static Website
+	location /static/ {
+		proxy_pass http://static-website/;
+	}
+
 	# Portainer
-	# location ~ ^/portainer(/.*$|$) {
-	# 	fastcgi_index index.php;
-	# 	include /etc/nginx/fastcgi_params;
-	# 	fastcgi_param SCRIPT_FILENAME /var/www/html/index.php;
-	# 	fastcgi_pass portainer:9443;
-	# }
+	location /portainer/ {
+		proxy_pass http://portainer/;
+	}
 }

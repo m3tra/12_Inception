@@ -66,7 +66,7 @@ Optional:
 
 ### Static website (i.e.: portfolio) **NO PHP**
 
-- Node.js + Express
+- ~~Node.js + Express~~
 
 ### Adminer
 
@@ -74,7 +74,9 @@ Optional:
 
 - Test removing parts of the install process (pgsql, sqlite3, etc)
 
-### Service of choice (Portainer)
+### Service of choice
+
+- ~~Portainer~~
 
 ## To remove before evaluation
 
