@@ -76,9 +76,43 @@ Optional:
 
 ### Service of choice
 
-- ~~Portainer~~
+- ~~Uptime-Kuma~~
 
 ## To remove before evaluation
 
 - SSH
 - ohmyzsh
+
+## How to test
+
+### Mandatory
+
+#### NGINX
+
+- http://fporto.42.fr/
+
+#### Wordpress
+
+- https://fporto.42.fr/
+
+#### MariaDB
+
+
+
+### Bonus
+
+#### Redis
+
+- https://fporto.42.fr/wp-admin/options-general.php?page=redis-cache
+
+#### Static Website
+
+- https://fporto.42.fr/static/
+
+#### Adminer
+
+- https://fporto.42.fr/adminer
+
+#### Uptime-Kuma
+
+- https://uptime.fporto.42.fr/
