@@ -58,6 +58,8 @@ USER_EXISTS=$(cat /etc/passwd | grep $USER_NAME | wc -l)
 if [[ USER_EXISTS -eq 0 ]]; then
 	adduser $USER_NAME --shell /bin/zsh
 	su $USER_NAME
+
+	echo "$USER_NAME.42.fr" >> /etc/hosts
 fi
 
 
@@ -168,13 +170,13 @@ printf "${GREEN} DONE\n${WHITE}"
 ######################
 # printf "${GREEN}\nSetting up VBox Shared Folder...\n${WHITE}"
 
-echo -n "    + Installing dependencies"
-apt-get install -y \
-	build-essential \
-	dkms \
-	linux-headers-$(uname -r) \
-	1>/dev/null
-printf "${GREEN} DONE\n${WHITE}"
+# echo -n "    + Installing dependencies"
+# apt-get install -y \
+# 	build-essential \
+# 	dkms \
+# 	linux-headers-$(uname -r) \
+# 	1>/dev/null
+# printf "${GREEN} DONE\n${WHITE}"
 
 # echo -n "    + Installing VBox GuestAdditions"
 
@@ -188,4 +190,4 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 # Start containers
-make re
+# make re
