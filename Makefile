@@ -21,6 +21,12 @@ down:
 logs:
 	@docker compose --env-file=srcs/.env -f=srcs/docker-compose.yml logs -f
 
+backup:
+	@sudo cp -rT ~/data ~/data_bak
+
+restore:
+	@sudo cp -rT ~/data_bak ~/data
+
 re:
 	@printf $(GREEN)"Starting/Rebuilding"$(WHITE)" containers\n"
 	@docker compose -f srcs/docker-compose.yml up -d --build
