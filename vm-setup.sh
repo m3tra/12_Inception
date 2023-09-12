@@ -60,6 +60,7 @@ if [[ USER_EXISTS -eq 0 ]]; then
 	su $USER_NAME
 
 	echo "$USER_NAME.42.fr" >> /etc/hosts
+	echo "uptime.$USER_NAME.42.fr" >> /etc/hosts
 fi
 
 

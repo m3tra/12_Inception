@@ -15,7 +15,7 @@ services:
         volumes:
           - /home/fporto/data/mariadb/:/var/lib/mysql/
         networks:
-          - web-network
+          - inception
 
 
 
@@ -32,7 +32,7 @@ services:
         volumes:
           - /home/fporto/data/website-root/:/var/www/html/
         networks:
-          - web-network
+          - inception
 
 
 
@@ -41,7 +41,8 @@ services:
           - wordpress
           - static-website
           - adminer
-          - portainer
+          - uptime-kuma
+          # - portainer
         build:
             context: requirements/nginx/
             dockerfile: Dockerfile
@@ -58,7 +59,7 @@ services:
         ports:
           - "443:443"
         networks:
-          - web-network
+          - inception
 
 
 
@@ -72,7 +73,7 @@ services:
           - /home/fporto/data/redis/log/:/var/log/redis/
           - /home/fporto/data/redis/db/:/var/lib/redis/
         networks:
-          - web-network
+          - inception
 
 
 
@@ -105,7 +106,7 @@ services:
         container_name: static-website
         restart: unless-stopped
         networks:
-          - web-network
+          - inception
 
 
 
@@ -118,24 +119,38 @@ services:
         container_name: adminer
         restart: unless-stopped
         networks:
-          - web-network
+          - inception
 
 
 
-    portainer:
+    uptime-kuma:
         build:
-            context: bonus/portainer
+            context: bonus/uptime-kuma
             dockerfile: Dockerfile
-        container_name: portainer
+        container_name: uptime-kuma
         restart: unless-stopped
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
-          - /home/fporto/data/portainer/:/data/
+          - /home/fporto/data/uptime-kuma/:/uptime-kuma/data/
         networks:
-          - web-network
+          - inception
+
+
+
+    # portainer:
+    #     build:
+    #         context: bonus/portainer
+    #         dockerfile: Dockerfile
+    #     container_name: portainer
+    #     restart: unless-stopped
+    #     volumes:
+    #       - /var/run/docker.sock:/var/run/docker.sock
+    #       - /home/fporto/data/portainer/:/data/
+    #     networks:
+    #       - inception
 
 
 
 networks:
-    web-network:
+    inception:
         driver: bridge
