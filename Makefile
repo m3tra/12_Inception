@@ -22,7 +22,7 @@ logs:
 	@docker compose --env-file=srcs/.env -f=srcs/docker-compose.yml logs -f
 
 backup:
-	@sudo cp -rT ~/data ~/data_bak
+	@sudo cp -rfT ~/data ~/data_bak
 
 restore:
 	@sudo cp -rT ~/data_bak ~/data
