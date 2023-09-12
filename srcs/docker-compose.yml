@@ -22,6 +22,7 @@ services:
     wordpress:
         depends_on:
           - mariadb
+          - redis
         build:
             context: requirements/wordpress/
             dockerfile: Dockerfile
@@ -51,36 +52,22 @@ services:
             - /home/fporto/data/nginx/:/var/log/nginx/
             - /home/fporto/data/ssl/:/ssl/
             - /home/fporto/data/website-root/:/var/www/html/
-            # - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:ro
         ports:
           - "443:443"
         networks:
           - web-network
 
-    # certbot:
-    #     depends_on:
-    #         - nginx
-    #     build:
-    #         context: requirements/nginx/tools/certbot
-    #         dockerfile: Dockerfile
-    #     container_name: certbot
-    #     restart: unless-stopped
-    #     env_file: .env
-    #     volumes:
-    #         - /home/fporto/data/nginx/tools/certbot/conf:/etc/letsencrypt:rw
-    #         - /home/fporto/data/website-root:/var/www/html:rw
-    #     command: certonly --webroot --webroot-path=/var/www/html --email test@${DOMAIN_NAME} --agree-tos --no-eff-email --staging -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}
 
 
-
-    adminer:
-        depends_on:
-          - mariadb
+    redis:
         build:
-            context: bonus/adminer
+            context: bonus/redis
             dockerfile: Dockerfile
-        container_name: adminer
+        container_name: redis
         restart: unless-stopped
+        volumes:
+          - /home/fporto/data/redis/log/:/var/log/redis/
+          - /home/fporto/data/redis/db/:/var/lib/redis/
         networks:
           - web-network
 
@@ -108,6 +95,32 @@ services:
 
 
 
+    static-website:
+        depends_on:
+          - nginx
+        build:
+            context: bonus/static-website
+            dockerfile: Dockerfile
+        container_name: static-website
+        restart: unless-stopped
+        ports:
+          - "4242:4242"
+
+
+
+    adminer:
+        depends_on:
+          - mariadb
+        build:
+            context: bonus/adminer
+            dockerfile: Dockerfile
+        container_name: adminer
+        restart: unless-stopped
+        networks:
+          - web-network
+
+
+
     # portainer:
     #     # depends_on:
     #     #     - certbot
@@ -129,13 +142,6 @@ services:
     #     # command:
     #     #     --sslcert /data/inception.crt
     #     #     --sslkey /data/inception.key
-
-
-
-# volumes:
-#     :
-#     certbot-etc/:
-#     website-root:
 
 
 

@@ -5,44 +5,56 @@ if [ ! -f /var/www/html/wp-config-sample.php ]; then
 	chmod +x wp-cli.phar
 	mv wp-cli.phar /usr/local/bin/wp.phar
 
+	cd /var/www/html
+
 	wp.phar core download \
-		--path=/var/www/html \
 		--allow-root
 
 	wp.phar config create \
-		--path=/var/www/html \
-		--allow-root \
 		--dbhost=$MYSQL_HOSTNAME \
 		--dbname=$WP_DB_NAME \
 		--dbuser=$ADMIN_USER \
-		--dbpass=$ADMIN_PASS
+		--dbpass=$ADMIN_PASS \
+		--allow-root
 
 	wp.phar db create \
-		--path=/var/www/html \
 		--allow-root
 
 	wp.phar core install \
-		--path=/var/www/html \
-		--allow-root \
 		--url=$DOMAIN_NAME \
 		--title="$WP_TITLE" \
 		--admin_user=$ADMIN_USER \
 		--admin_password=$ADMIN_PASS \
 		--admin_email=$WP_ADMIN_EMAIL \
-		--skip-email
+		--skip-email \
+		--allow-root
 
-	wp.phar plugin update \
-		--path=/var/www/html \
-		--allow-root \
-		--all
+	wp.phar theme delete \
+		--all \
+		--allow-root
+
+	wp.phar plugin uninstall \
+		--all \
+		--allow-root
+
+	wp.phar config set \
+		WP_REDIS_HOST "redis" \
+		--allow-root
+
+	wp.phar plugin install \
+		redis-cache \
+		--activate \
+		--allow-root
+
+	wp.phar redis enable \
+		--allow-root
 
 	wp.phar user create \
-		--path=/var/www/html \
-		--allow-root \
 		$WP_USER \
 		$WP_USER_EMAIL \
 		--user_pass=$WP_USER_PASSWORD \
-		--role=author
+		--role=author \
+		--allow-root
 
 	chown -R www-data:www-data /var/www/html/
 fi
