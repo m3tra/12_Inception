@@ -13,6 +13,15 @@ all: up
 up:
 	@printf $(GREEN)"Starting"$(WHITE)" containers\n"
 	@docker compose -f srcs/docker-compose.yml up -d
+	@mkdir -p \
+		$HOME/data/mariadb \
+		$HOME/data/website-root \
+		$HOME/data/nginx \
+		$HOME/data/ssl \
+		$HOME/data/redis_log \
+		$HOME/data/redis_db \
+		$HOME/data/vsftpd \
+		$HOME/data/uptime-kuma
 
 down:
 	@printf $(YELLOW)"Stopping"$(WHITE)" containers\n"
@@ -48,6 +57,6 @@ clean:
 fclean: clean
 	@docker system prune -af
 	@printf $(RED)"Removing"$(PURPLE)" ~/data"$(WHITE)" directory\n"
-	@rm -rf $HOME/data
+	@rm -rf $HOME/data/*/*
 
 .PHONY: all up down re clean fclean
