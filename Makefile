@@ -21,6 +21,7 @@ up:
 	@mkdir ${HOME}/data/redis_db
 	@mkdir ${HOME}/data/vsftpd
 	@mkdir ${HOME}/data/uptime-kuma
+	@sudo chown -R root:root ${HOME}/data
 	@docker compose -f srcs/docker-compose.yml up -d
 
 down:
@@ -56,6 +57,6 @@ clean:
 fclean: clean
 	@docker system prune -af
 	@printf $(RED)"Removing"$(PURPLE)" ~/data"$(WHITE)" directory\n"
-	@rm -rf ${HOME}/data/
+	@sudo rm -rf ${HOME}/data/
 
 .PHONY: all up down re clean fclean
