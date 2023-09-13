@@ -10,10 +10,11 @@ services:
               - ADMIN_USER
               - ADMIN_PASS
         container_name: mariadb
+        image: mariadb
         restart: unless-stopped
         env_file: .env
         volumes:
-          - /home/fporto/data/mariadb/:/var/lib/mysql/
+          - mariadb:/var/lib/mysql/
         networks:
           - inception
 
@@ -27,10 +28,11 @@ services:
             context: requirements/wordpress/
             dockerfile: Dockerfile
         container_name: wordpress
+        image: wordpress
         restart: unless-stopped
         env_file: .env
         volumes:
-          - /home/fporto/data/website-root/:/var/www/html/
+          - website-root:/var/www/html/
         networks:
           - inception
 
@@ -50,12 +52,13 @@ services:
               - DOMAIN_NAME
               - ADMIN_USER
         container_name: nginx
+        image: nginx
         restart: unless-stopped
         env_file: .env
         volumes:
-          - /home/fporto/data/nginx/:/var/log/nginx/
-          - /home/fporto/data/ssl/:/ssl/
-          - /home/fporto/data/website-root/:/var/www/html/
+          - nginx:/var/log/nginx/
+          - ssl:/ssl/
+          - website-root:/var/www/html/
         ports:
           - "443:443"
         networks:
@@ -68,10 +71,11 @@ services:
             context: bonus/redis
             dockerfile: Dockerfile
         container_name: redis
+        image: redis
         restart: unless-stopped
         volumes:
-          - /home/fporto/data/redis/log/:/var/log/redis/
-          - /home/fporto/data/redis/db/:/var/lib/redis/
+          - redis_log:/var/log/redis/
+          - redis_db:/var/lib/redis/
         networks:
           - inception
 
@@ -87,12 +91,13 @@ services:
               - ADMIN_USER
               - ADMIN_PASS
         container_name: vsftpd
+        image: vsftpd
         restart: unless-stopped
         env_file: .env
         volumes:
-          - /home/fporto/data/ssl/:/ssl/:ro
-          - /home/fporto/data/vsftpd/:/var/log/vsftpd/
-          - /home/fporto/data/website-root/:/ftp/wordpress/
+          - ssl:/ssl:ro
+          - vsftpd:/var/log/vsftpd/
+          - website-root:/ftp/wordpress/
         ports:
           - "21:21"
           - "40000-40005:40000-40005"
@@ -104,6 +109,7 @@ services:
             context: bonus/static-website
             dockerfile: Dockerfile
         container_name: static-website
+        image: static-website
         restart: unless-stopped
         networks:
           - inception
@@ -117,6 +123,7 @@ services:
             context: bonus/adminer
             dockerfile: Dockerfile
         container_name: adminer
+        image: adminer
         restart: unless-stopped
         networks:
           - inception
@@ -128,10 +135,11 @@ services:
             context: bonus/uptime-kuma
             dockerfile: Dockerfile
         container_name: uptime-kuma
+        image: uptime-kuma
         restart: unless-stopped
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
-          - /home/fporto/data/uptime-kuma/:/uptime-kuma/data/
+          - uptime-kuma:/uptime-kuma/data/
         networks:
           - inception
 
@@ -142,12 +150,73 @@ services:
     #         context: bonus/portainer
     #         dockerfile: Dockerfile
     #     container_name: portainer
+    #     image: portainer
     #     restart: unless-stopped
     #     volumes:
     #       - /var/run/docker.sock:/var/run/docker.sock
-    #       - /home/fporto/data/portainer/:/data/
+    #       - portainer:/data/
     #     networks:
     #       - inception
+
+
+
+volumes:
+    mariadb:
+        name: mariadb
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: mariadb
+    website-root:
+        name: website-root
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: website-root
+    nginx:
+        name: nginx
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: nginx
+    ssl:
+        name: ssl
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: ssl
+    redis_log:
+        name: redis_log
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: redis_log
+    redis_db:
+        name: redis_db
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: redis_db
+    vsftpd:
+        name: vsftpd
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: vsftpd
+    uptime-kuma:
+        name: uptime-kuma
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: uptime-kuma
 
 
 
