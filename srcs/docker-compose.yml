@@ -167,56 +167,56 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: mariadb
+            device: /home/fporto/data/mariadb
     website-root:
         name: website-root
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: website-root
+            device: /home/fporto/data/website-root
     nginx:
         name: nginx
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: nginx
+            device: /home/fporto/data/nginx
     ssl:
         name: ssl
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: ssl
+            device: /home/fporto/data/ssl
     redis_log:
         name: redis_log
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: redis_log
+            device: /home/fporto/data/redis_log
     redis_db:
         name: redis_db
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: redis_db
+            device: /home/fporto/data/redis_db
     vsftpd:
         name: vsftpd
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: vsftpd
+            device: /home/fporto/data/vsftpd
     uptime-kuma:
         name: uptime-kuma
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: uptime-kuma
+            device: /home/fporto/data/uptime-kuma
 
 
 
