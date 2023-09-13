@@ -41,12 +41,14 @@ apt-get install -y \
 	zsh \
 	1>/dev/null
 echo "$USER_NAME ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USER_NAME
+su $USER_NAME
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" << EOF
 n
 EOF
 sed -e s/"robbyrussell"/"candy"/1 \
     -e s/"git"/"git colored-man-pages"/1 \
     -i /home/$USER_NAME/.zshrc
+exit
 printf "${GREEN} DONE\n${WHITE}"
 
 
@@ -161,7 +163,7 @@ apt-get install openssh-server -y 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "    + Adding UFW rule"
-ufw allow $SSH_PORT/tcp 1>/dev/null
+ufw allow 22/tcp 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 
