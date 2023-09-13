@@ -14,7 +14,7 @@ services:
         restart: unless-stopped
         env_file: .env
         volumes:
-          - mariadb:/var/lib/mysql/
+          - wp_db:/var/lib/mysql/
         networks:
           - inception
 
@@ -161,13 +161,13 @@ services:
 
 
 volumes:
-    mariadb:
-        name: mariadb
+    wp-db:
+        name: wp-db
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/fporto/data/mariadb
+            device: /home/fporto/data/wp-db
     website-root:
         name: website-root
         driver: local
