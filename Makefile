@@ -12,7 +12,6 @@ all: up
 
 up:
 	@printf $(GREEN)"Starting"$(WHITE)" containers\n"
-	@docker compose -f srcs/docker-compose.yml up -d
 	@mkdir -p \
 		$HOME/data/mariadb \
 		$HOME/data/website-root \
@@ -22,6 +21,7 @@ up:
 		$HOME/data/redis_db \
 		$HOME/data/vsftpd \
 		$HOME/data/uptime-kuma
+	@docker compose -f srcs/docker-compose.yml up -d
 
 down:
 	@printf $(YELLOW)"Stopping"$(WHITE)" containers\n"
