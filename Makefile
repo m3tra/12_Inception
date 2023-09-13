@@ -12,15 +12,15 @@ all: up
 
 up:
 	@printf $(GREEN)"Starting"$(WHITE)" containers\n"
-	@mkdir $HOME/data
-	@mkdir $HOME/data/mariadb
-	@mkdir $HOME/data/website-root
-	@mkdir $HOME/data/nginx
-	@mkdir $HOME/data/ssl
-	@mkdir $HOME/data/redis_log
-	@mkdir $HOME/data/redis_db
-	@mkdir $HOME/data/vsftpd
-	@mkdir $HOME/data/uptime-kuma
+	@mkdir ${HOME}/data
+	@mkdir ${HOME}/data/mariadb
+	@mkdir ${HOME}/data/website-root
+	@mkdir ${HOME}/data/nginx
+	@mkdir ${HOME}/data/ssl
+	@mkdir ${HOME}/data/redis_log
+	@mkdir ${HOME}/data/redis_db
+	@mkdir ${HOME}/data/vsftpd
+	@mkdir ${HOME}/data/uptime-kuma
 	@docker compose -f srcs/docker-compose.yml up -d
 
 down:
@@ -49,7 +49,6 @@ clean:
 
 	@printf $(RED)"Removing"$(WHITE)" volumes\n"
 	-@docker volume ls -q | xargs docker volume rm 2>/dev/null
-	-@sudo rm -rf /home/fporto/data/
 
 	@printf $(RED)"Removing"$(WHITE)" networks\n"
 	-@docker network ls -q | xargs docker network rm 2>/dev/null
@@ -57,6 +56,6 @@ clean:
 fclean: clean
 	@docker system prune -af
 	@printf $(RED)"Removing"$(PURPLE)" ~/data"$(WHITE)" directory\n"
-	@rm -rf $HOME/data/*/*
+	@rm -rf ${HOME}/data/
 
 .PHONY: all up down re clean fclean
