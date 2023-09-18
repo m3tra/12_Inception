@@ -46,7 +46,7 @@ printf "${GREEN} DONE\n${WHITE}"
 #########
 # Utils #
 #########
-printf "${GREEN}\nSetting up utils (sudo, nano, htop, zsh, etc)...${WHITE}"
+printf "${GREEN}\nSetting up utils (sudo, nano, htop, zsh, etc)...\n${WHITE}"
 echo -n "    + Installing utils"
 apt-get install -y \
 	curl \
@@ -68,8 +68,10 @@ export ZSH=/root/.oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended 1>/dev/null
 chsh -s $(which zsh) root
 chsh -s $(which zsh) $USER_NAME
-sudo ln -s /root/.oh-my-zsh /home/$USER_NAME/.oh-my-zsh
-sudo ln -s /root/.zshrc /home/$USER_NAME/.zshrc
+ln -s /root/.oh-my-zsh /home/$USER_NAME/.oh-my-zsh
+ln -s /root/.zshrc /home/$USER_NAME/.zshrc
+# cp -r /root/.oh-my-zsh /home/$USER_NAME/.oh-my-zsh
+# cp /root/.zshrc /home/$USER_NAME/.zshrc
 sed -e s/"robbyrussell"/"candy"/1 \
     -e s/"git"/"git colored-man-pages"/1 \
     -i /root/.zshrc
@@ -117,8 +119,8 @@ systemctl enable containerd.service
 printf "${GREEN}    DONE\n${WHITE}"
 
 echo -n "    + Starting docker service"
-systemctl start docker.service
-systemctl start containerd.service
+systemctl start docker.service 1>/dev/null
+systemctl start containerd.service 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 printf "    + ${YELLOW}Testing${WHITE} with hello-world container\n"
@@ -127,7 +129,7 @@ printf "${GREEN}DONE\n${WHITE}"
 
 echo -n "    + Adding $USER_NAME to docker group"
 groupadd docker 2>/dev/null
-usermod -aG docker $USER_NAME
+/usr/sbin/usermod -aG docker $USER_NAME
 mkdir -m 770 -p /home/$USER_NAME/.docker
 chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/.docker
 printf "${GREEN} DONE\n${WHITE}"
