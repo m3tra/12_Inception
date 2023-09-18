@@ -22,8 +22,7 @@ read -p "Choose user: " USER_NAME
 # System #
 ##########
 printf "${GREEN}Updating system...${WHITE}"
-apt-get update 1>/dev/null
-apt-get upgrade -y 1>/dev/null
+apt-get update && apt-get upgrade -y && apt-get clean1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 
@@ -91,7 +90,7 @@ echo \
 printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "    + Installing docker"
-apt-get update 1>/dev/null
+apt-get update && \
 apt-get install -y \
 	docker-ce \
 	docker-ce-cli \
@@ -124,35 +123,6 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 
-############
-# Firewall #
-############
-printf "${GREEN}\nSetting up UFW...\n${WHITE}"
-
-echo -n "    + Installing"
-apt-get install ufw -y 1>/dev/null
-export PATH=$PATH:/usr/sbin
-printf "${GREEN} DONE\n${WHITE}"
-
-echo "    + Enabling"
-# systemctl unmask ufw.service > /dev/null
-systemctl enable ufw.service > /dev/null
-systemctl start ufw.service > /dev/null
-ufw enable 1>/dev/null
-# Disable setting rules for IPV6 automatically
-sed -i 's/IPV6=yes/IPV6=no/g' /etc/default/ufw
-printf "${GREEN}    DONE\n${WHITE}"
-
-echo -n "    + Adding HTTPS rule"
-ufw allow 443/tcp 1>/dev/null
-printf "${GREEN} DONE\n${WHITE}"
-
-echo -n "    + Reloading"
-ufw reload 1>/dev/null
-printf "${GREEN} DONE\n${WHITE}"
-
-
-
 ##############
 # SSH Server #
 ##############
@@ -160,10 +130,6 @@ printf "${GREEN}\nSetting up OpenSSH-Server...\n${WHITE}"
 
 echo -n "    + Installing"
 apt-get install openssh-server -y 1>/dev/null
-printf "${GREEN} DONE\n${WHITE}"
-
-echo -n "    + Adding UFW rule"
-ufw allow 22/tcp 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 
