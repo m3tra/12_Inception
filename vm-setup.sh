@@ -41,6 +41,14 @@ apt-get update 1>/dev/null
 apt-get upgrade -y 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
+printf "${GREEN}Disabling IPv6...${WHITE}"
+echo "\
+net.ipv6.conf.all.disable_ipv6=1
+net.ipv6.conf.default.disable_ipv6=1
+net.ipv6.conf.lo.disable_ipv6=1" > /etc/sysctl.conf
+service procps restart 1>/dev/null
+printf "${GREEN} DONE\n${WHITE}"
+
 
 
 #########
