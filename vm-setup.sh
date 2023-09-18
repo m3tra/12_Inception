@@ -64,6 +64,7 @@ echo "$USER_NAME ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USER_NAME
 printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "    + Installing ohmyzsh"
+export ZSH=/root/.oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended 1>/dev/null
 chsh -s $(which zsh) root
 chsh -s $(which zsh) $USER_NAME
