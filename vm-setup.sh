@@ -7,22 +7,38 @@ BLUE="\033[38;5;14m"
 YELLOW="\033[33m"
 PURPLE="\033[38;5;13m"
 
-if [[ $EUID -ne 0 ]]; then
-	echo "$0 requires super-user privileges."
+if [[ $USER != "root" ]]; then
+	echo "$0 needs to be executed as root."
 	exit 2
 fi
 
 
+########
+# User #
+########
+USER_EXISTS=$(cat /etc/passwd | grep 1000 | cut -d ":" -f 1 | wc -l)
+if [[ $USER_EXISTS -ne 0 ]]; then
+	USER_NAME=$(cat /etc/passwd | grep 1000 | cut -d ":" -f 1)
+else
+	read -p "Choose non-root user to create: " USER_NAME
+	adduser $USER_NAME
+fi
 
-read -p "Choose user: " USER_NAME
+if [[ $(cat /etc/hosts | grep "127.0.0.1	$USER_NAME.42.fr" | wc -l) -eq 0 ]]
+	# Just in case the machine's hostname isn't already the subject's required domain
+	echo "127.0.0.1	$USER_NAME.42.fr" >> /etc/hosts
 
+	# Uptime-Kuma subdomain
+	echo "127.0.0.1	uptime.$USER_NAME.42.fr" >> /etc/hosts
+fi
 
 
 ##########
 # System #
 ##########
 printf "${GREEN}Updating system...${WHITE}"
-apt-get update && apt-get upgrade -y 1>/dev/null
+apt-get update 1>/dev/null
+apt-get upgrade -y 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 
@@ -30,39 +46,33 @@ printf "${GREEN} DONE\n${WHITE}"
 #########
 # Utils #
 #########
-printf "${GREEN}\nSetting up utils (sudo, nano, htop)...${WHITE}"
+printf "${GREEN}\nSetting up utils (sudo, nano, htop, zsh, etc)...${WHITE}"
+echo -n "    + Installing utils"
 apt-get install -y \
 	curl \
 	sudo \
 	make \
 	nano \
 	htop \
+	git \
 	zsh \
 	1>/dev/null
-echo "$USER_NAME ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USER_NAME
-su $USER_NAME
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" << EOF
-n
-EOF 1>/dev/null
-sed -e s/"robbyrussell"/"candy"/1 \
-    -e s/"git"/"git colored-man-pages"/1 \
-    -i /home/$USER_NAME/.zshrc
-exit
 printf "${GREEN} DONE\n${WHITE}"
 
+echo -n "    + Disabling $USER_NAME's need to enter sudo password"
+echo "$USER_NAME ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USER_NAME
+printf "${GREEN} DONE\n${WHITE}"
 
-
-########
-# User #
-########
-USER_EXISTS=$(cat /etc/passwd | grep $USER_NAME | wc -l)
-if [[ USER_EXISTS -eq 0 ]]; then
-	adduser $USER_NAME --shell /bin/zsh
-	su $USER_NAME
-
-	echo "$USER_NAME.42.fr" >> /etc/hosts
-	echo "uptime.$USER_NAME.42.fr" >> /etc/hosts
-fi
+echo -n "    + Installing ohmyzsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended 1>/dev/null
+chsh -s $(which zsh) root
+chsh -s $(which zsh) $USER_NAME
+sudo ln -s /root/.oh-my-zsh /home/$USER_NAME/.oh-my-zsh
+sudo ln -s /root/.zshrc /home/$USER_NAME/.zshrc
+sed -e s/"robbyrussell"/"candy"/1 \
+    -e s/"git"/"git colored-man-pages"/1 \
+    -i /root/.zshrc
+printf "${GREEN} DONE\n${WHITE}"
 
 
 
@@ -90,7 +100,7 @@ echo \
 printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "    + Installing docker"
-apt-get update && \
+apt-get update 1>/dev/null
 apt-get install -y \
 	docker-ce \
 	docker-ce-cli \
@@ -149,7 +159,7 @@ apt-get install -y \
 	xfce4-terminal \
 	1>/dev/null
 startxfce4
-apt-get install --no-install-recommends firefox-esr && \
+apt-get install --no-install-recommends firefox-esr 1>/dev/null
 apt-get install filezilla 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -179,4 +189,7 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 
-apt-get autoremove -y && apt-get clean 1>/dev/null
+printf "${GREEN}\nCleaning up...\n${WHITE}"
+apt-get autoremove -y 1>/dev/null
+apt-get clean 1>/dev/null
+printf "${GREEN} DONE\n${WHITE}"
