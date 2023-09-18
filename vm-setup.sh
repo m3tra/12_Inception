@@ -24,7 +24,7 @@ else
 	adduser $USER_NAME
 fi
 
-if [[ $(cat /etc/hosts | grep "127.0.0.1	$USER_NAME.42.fr" | wc -l) -eq 0 ]]
+if [[ $(cat /etc/hosts | grep "127.0.0.1	$USER_NAME.42.fr" | wc -l) -eq 0 ]]; then
 	# Just in case the machine's hostname isn't already the subject's required domain
 	echo "127.0.0.1	$USER_NAME.42.fr" >> /etc/hosts
 
