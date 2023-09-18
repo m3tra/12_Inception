@@ -22,7 +22,7 @@ read -p "Choose user: " USER_NAME
 # System #
 ##########
 printf "${GREEN}Updating system...${WHITE}"
-apt-get update && apt-get upgrade -y && apt-get clean1>/dev/null
+apt-get update && apt-get upgrade -y 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 
@@ -43,7 +43,7 @@ echo "$USER_NAME ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USER_NAME
 su $USER_NAME
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" << EOF
 n
-EOF
+EOF 1>/dev/null
 sed -e s/"robbyrussell"/"candy"/1 \
     -e s/"git"/"git colored-man-pages"/1 \
     -i /home/$USER_NAME/.zshrc
@@ -127,9 +127,30 @@ printf "${GREEN} DONE\n${WHITE}"
 # SSH Server #
 ##############
 printf "${GREEN}\nSetting up OpenSSH-Server...\n${WHITE}"
-
-echo -n "    + Installing"
 apt-get install openssh-server -y 1>/dev/null
+printf "${GREEN} DONE\n${WHITE}"
+
+
+
+#############################
+# Xfce minimal installation #
+#############################
+printf "${GREEN}\nSetting up XFCE...\n${WHITE}"
+apt-get install -y \
+	thunar \
+	xfdesktop4 \
+	xfwm4 \
+	xfce4-panel \
+	xfce4-settings \
+	xfce4-power-manager \
+	xfce4-session \
+	xfconf \
+	xfce4-notifyd \
+	xfce4-terminal \
+	1>/dev/null
+startxfce4
+apt-get install --no-install-recommends firefox-esr && \
+apt-get install filezilla 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 
@@ -158,5 +179,4 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 
-# Start containers
-# make re
+apt-get autoremove -y && apt-get clean 1>/dev/null
