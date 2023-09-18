@@ -7,7 +7,7 @@ BLUE="\033[38;5;14m"
 YELLOW="\033[33m"
 PURPLE="\033[38;5;13m"
 
-if [[ $USER != "root" ]]; then
+if [[ $EUID -ne 0 ]]; then
 	echo "$0 needs to be executed as root."
 	exit 2
 fi
