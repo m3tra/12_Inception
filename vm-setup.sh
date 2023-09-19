@@ -38,12 +38,13 @@ fi
 ##########
 # System #
 ##########
-printf "${GREEN}Updating system...${WHITE}"
+echo "Setting up system..."
+echo -n "    + Updating system"
 apt-get update 1>/dev/null
 apt-get upgrade -y 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
-printf "${GREEN}Disabling IPv6...${WHITE}"
+echo -n "    + Disabling IPv6"
 echo "\
 net.ipv6.conf.all.disable_ipv6=1
 net.ipv6.conf.default.disable_ipv6=1
@@ -56,7 +57,7 @@ printf "${GREEN} DONE\n${WHITE}"
 #########
 # Utils #
 #########
-printf "${GREEN}\nSetting up utils (sudo, nano, htop, zsh, etc)...\n${WHITE}"
+echo "Setting up utils (sudo, nano, htop, zsh, etc)..."
 echo -n "    + Installing utils"
 apt-get install -y \
 	curl \
@@ -66,7 +67,7 @@ apt-get install -y \
 	htop \
 	git \
 	zsh \
-	1>/dev/null
+	&>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "    + Disabling $USER_NAME's need to enter sudo password"
@@ -75,13 +76,14 @@ printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "    + Installing ohmyzsh"
 export ZSH=/root/.oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended 1>/dev/null
+wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh &>/dev/null
+sh install.sh --unattended &>/dev/null
 chsh -s $(which zsh) root
 chsh -s $(which zsh) $USER_NAME
-ln -s /root/.oh-my-zsh /home/$USER_NAME/.oh-my-zsh
-ln -s /root/.zshrc /home/$USER_NAME/.zshrc
-# cp -r /root/.oh-my-zsh /home/$USER_NAME/.oh-my-zsh
-# cp /root/.zshrc /home/$USER_NAME/.zshrc
+ln -s /root/.oh-my-zsh /home/$USER_NAME/.oh-my-zsh 2>/dev/null
+ln -s /root/.zshrc /home/$USER_NAME/.zshrc 2>/dev/null
+# cp -r /root/.oh-my-zsh /home/$USER_NAME/.oh-my-zsh 2>/dev/null
+# cp /root/.zshrc /home/$USER_NAME/.zshrc 2>/dev/null
 sed -e s/"robbyrussell"/"candy"/1 \
     -e s/"git"/"git colored-man-pages"/1 \
     -i /root/.zshrc
@@ -92,12 +94,12 @@ printf "${GREEN} DONE\n${WHITE}"
 ##########
 # Docker #
 ##########
-printf "${GREEN}\nSetting up Docker...\n${WHITE}"
+echo "Setting up Docker..."
 echo -n "    + Installing dependencies"
 apt-get install -y \
 	ca-certificates \
 	gnupg \
-	1>/dev/null
+	&>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "    + Adding gpg key to apt keyring"
@@ -120,22 +122,22 @@ apt-get install -y \
 	containerd.io \
 	docker-buildx-plugin \
 	docker-compose-plugin \
-	1>/dev/null
+	&>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
-echo "    + Enabling docker service"
-systemctl enable docker.service 1>/dev/null
-systemctl enable containerd.service 1>/dev/null
-printf "${GREEN}    DONE\n${WHITE}"
+echo -n "    + Enabling docker service"
+systemctl enable docker.service &>/dev/null
+systemctl enable containerd.service &>/dev/null
+printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "    + Starting docker service"
 systemctl start docker.service 1>/dev/null
 systemctl start containerd.service 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
-printf "    + ${YELLOW}Testing${WHITE} with hello-world container\n"
-docker run hello-world 1>/dev/null
-printf "${GREEN}DONE\n${WHITE}"
+echo -n "    + Testing with hello-world container"
+docker run hello-world &>/dev/null
+printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "    + Adding $USER_NAME to docker group"
 /usr/sbin/groupadd docker 2>/dev/null
@@ -146,19 +148,11 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 
-##############
-# SSH Server #
-##############
-printf "${GREEN}\nSetting up OpenSSH-Server...${WHITE}"
-apt-get install openssh-server -y 1>/dev/null
-printf "${GREEN} DONE\n${WHITE}"
-
-
-
 #############################
 # Xfce minimal installation #
 #############################
-printf "${GREEN}\nSetting up XFCE...${WHITE}"
+echo "Setting up XFCE..."
+echo -n "    + Installing desktop environment (be patient)"
 apt-get install -y \
 	thunar \
 	xfdesktop4 \
@@ -170,9 +164,15 @@ apt-get install -y \
 	xfconf \
 	xfce4-notifyd \
 	xfce4-terminal \
-	1>/dev/null
-apt-get install -y --no-install-recommends firefox-esr 1>/dev/null
-apt-get install -y filezilla 1>/dev/null
+	&>/dev/null
+printf "${GREEN} DONE\n${WHITE}"
+
+echo -n "    + Installing Firefox browser"
+apt-get install -y --no-install-recommends firefox-esr &>/dev/null
+printf "${GREEN} DONE\n${WHITE}"
+
+echo -n "    + Installing FileZilla FTP client"
+apt-get install -y filezilla &>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 
@@ -180,14 +180,13 @@ printf "${GREEN} DONE\n${WHITE}"
 ######################
 # VBox Shared Folder #
 ######################
-# printf "${GREEN}\nSetting up VBox Shared Folder...\n${WHITE}"
-
+#echo "Setting up VBox Shared Folder..."
 # echo -n "    + Installing dependencies"
 # apt-get install -y \
 # 	build-essential \
 # 	dkms \
 # 	linux-headers-$(uname -r) \
-# 	1>/dev/null
+# 	&>/dev/null
 # printf "${GREEN} DONE\n${WHITE}"
 
 # echo -n "    + Installing VBox GuestAdditions"
@@ -201,7 +200,17 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 
-printf "${GREEN}\nCleaning up...${WHITE}"
+echo -n "Cleaning up..."
 apt-get autoremove -y 1>/dev/null
 apt-get clean 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
+
+
+
+echo -n "Rebooting in 3"
+sleep 1
+echo -n " 2"
+sleep 1
+echo " 1"
+sleep 1
+/usr/sbin/reboot
