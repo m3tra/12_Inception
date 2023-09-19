@@ -13,6 +13,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 
+
 ########
 # User #
 ########
@@ -31,6 +32,7 @@ if [[ $(cat /etc/hosts | grep "127.0.0.1	$USER_NAME.42.fr" | wc -l) -eq 0 ]]; th
 	# Uptime-Kuma subdomain
 	echo "127.0.0.1	uptime.$USER_NAME.42.fr" >> /etc/hosts
 fi
+
 
 
 ##########
@@ -132,7 +134,7 @@ systemctl start containerd.service 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 printf "    + ${YELLOW}Testing${WHITE} with hello-world container\n"
-docker run hello-world
+docker run hello-world 1>/dev/null
 printf "${GREEN}DONE\n${WHITE}"
 
 echo -n "    + Adding $USER_NAME to docker group"
@@ -169,8 +171,8 @@ apt-get install -y \
 	xfce4-notifyd \
 	xfce4-terminal \
 	1>/dev/null
-apt-get install --no-install-recommends firefox-esr 1>/dev/null
-apt-get install filezilla 1>/dev/null
+apt-get install -y --no-install-recommends firefox-esr 1>/dev/null
+apt-get install -y filezilla 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 
