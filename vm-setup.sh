@@ -46,7 +46,7 @@ echo "\
 net.ipv6.conf.all.disable_ipv6=1
 net.ipv6.conf.default.disable_ipv6=1
 net.ipv6.conf.lo.disable_ipv6=1" > /etc/sysctl.conf
-service procps restart 1>/dev/null
+/etc/init.d/procps restart 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
 
@@ -122,8 +122,8 @@ apt-get install -y \
 printf "${GREEN} DONE\n${WHITE}"
 
 echo "    + Enabling docker service"
-systemctl enable docker.service
-systemctl enable containerd.service
+systemctl enable docker.service 1>/dev/null
+systemctl enable containerd.service 1>/dev/null
 printf "${GREEN}    DONE\n${WHITE}"
 
 echo -n "    + Starting docker service"
@@ -136,7 +136,7 @@ docker run hello-world
 printf "${GREEN}DONE\n${WHITE}"
 
 echo -n "    + Adding $USER_NAME to docker group"
-groupadd docker 2>/dev/null
+/usr/sbin/groupadd docker 2>/dev/null
 /usr/sbin/usermod -aG docker $USER_NAME
 mkdir -m 770 -p /home/$USER_NAME/.docker
 chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/.docker
@@ -147,7 +147,7 @@ printf "${GREEN} DONE\n${WHITE}"
 ##############
 # SSH Server #
 ##############
-printf "${GREEN}\nSetting up OpenSSH-Server...\n${WHITE}"
+printf "${GREEN}\nSetting up OpenSSH-Server...${WHITE}"
 apt-get install openssh-server -y 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
 
@@ -156,7 +156,7 @@ printf "${GREEN} DONE\n${WHITE}"
 #############################
 # Xfce minimal installation #
 #############################
-printf "${GREEN}\nSetting up XFCE...\n${WHITE}"
+printf "${GREEN}\nSetting up XFCE...${WHITE}"
 apt-get install -y \
 	thunar \
 	xfdesktop4 \
@@ -169,7 +169,6 @@ apt-get install -y \
 	xfce4-notifyd \
 	xfce4-terminal \
 	1>/dev/null
-startxfce4
 apt-get install --no-install-recommends firefox-esr 1>/dev/null
 apt-get install filezilla 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
@@ -200,7 +199,7 @@ printf "${GREEN} DONE\n${WHITE}"
 
 
 
-printf "${GREEN}\nCleaning up...\n${WHITE}"
+printf "${GREEN}\nCleaning up...${WHITE}"
 apt-get autoremove -y 1>/dev/null
 apt-get clean 1>/dev/null
 printf "${GREEN} DONE\n${WHITE}"
