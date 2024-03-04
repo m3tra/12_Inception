@@ -59,4 +59,4 @@ fclean: clean
 	@printf $(RED)"Removing"$(PURPLE)" ~/data"$(WHITE)" directory\n"
 	@sudo rm -rf ${HOME}/data/
 
-.PHONY: all up down re clean fclean
+.PHONY: all up down logs backup restore re clean fclean
