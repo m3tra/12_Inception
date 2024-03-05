@@ -12,15 +12,15 @@ all: up
 
 up:
 	@printf $(GREEN)"Starting"$(WHITE)" containers\n"
-	@mkdir ${HOME}/data
-	@mkdir ${HOME}/data/mariadb
-	@mkdir ${HOME}/data/website-root
-	@mkdir ${HOME}/data/nginx
-	@mkdir ${HOME}/data/ssl
-	@mkdir ${HOME}/data/redis_log
-	@mkdir ${HOME}/data/redis_db
-	@mkdir ${HOME}/data/vsftpd
-	@mkdir ${HOME}/data/uptime-kuma
+	@mkdir -p ${HOME}/data
+	@mkdir -p ${HOME}/data/mariadb
+	@mkdir -p ${HOME}/data/website-root
+	@mkdir -p ${HOME}/data/nginx
+	@mkdir -p ${HOME}/data/ssl
+	@mkdir -p ${HOME}/data/redis_log
+	@mkdir -p ${HOME}/data/redis_db
+	@mkdir -p ${HOME}/data/vsftpd
+	@mkdir -p ${HOME}/data/uptime-kuma
 	@sudo chown -R root:root ${HOME}/data
 	@docker compose -f srcs/docker-compose.yml up -d
 
