@@ -77,18 +77,19 @@ echo "$USER_NAME ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USER_NAME
 printf "${GREEN} DONE\n${WHITE}"
 
 echo -n "    + Installing ohmyzsh"
-export ZSH=/root/.oh-my-zsh
+export ZSH=/usr/local/share/ohmyzsh
 wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh &>/dev/null
 sh install.sh --unattended &>/dev/null
+mv /root/.zshrc $ZSH/.zshrc
+chmod 666 $ZSH/.zshrc
 chsh -s $(which zsh) root
 chsh -s $(which zsh) $USER_NAME
-ln -s /root/.oh-my-zsh /home/$USER_NAME/.oh-my-zsh 2>/dev/null
-ln -s /root/.zshrc /home/$USER_NAME/.zshrc 2>/dev/null
-# cp -r /root/.oh-my-zsh /home/$USER_NAME/.oh-my-zsh 2>/dev/null
-# cp /root/.zshrc /home/$USER_NAME/.zshrc 2>/dev/null
+ln -s $ZSH/.zshrc /root/.zshrc 2>/dev/null
+ln -s $ZSH/.zshrc /home/$USER_NAME/.zshrc 2>/dev/null
 sed -e s/"robbyrussell"/"candy"/1 \
     -e s/"git"/"git colored-man-pages"/1 \
-    -i /root/.zshrc
+    -i $ZSH/.zshrc
+rm ./install.sh
 printf "${GREEN} DONE\n${WHITE}"
 
 
